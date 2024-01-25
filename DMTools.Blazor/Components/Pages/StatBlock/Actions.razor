@@ -1,0 +1,18 @@
+﻿@if (actions.ActionDict.Count != 0)
+{
+	<div class="actions">
+		<h3>@actions.ActionName</h3>
+		@foreach (string s in actions.ActionDict.Keys)
+		{
+			<div class="property-block">
+				<h4>@s.</h4>
+				<p>@actions.ActionDict[s]</p>
+			</div> <!-- property block -->
+		}
+	</div> <!-- actions -->
+}
+
+@code {
+    [Parameter]
+    public MonsterActions actions { get; set; }
+}

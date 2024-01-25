@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMToolsLibrary", "DMToolsLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMToolsTest", "DMToolsTest\DMToolsTest.csproj", "{10BFEB88-0DC5-40DB-BDA4-40DC3DA435E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMTools.Blazor", "DMTools.Blazor\DMTools.Blazor.csproj", "{AD684E2E-197A-447C-A4A1-5FD72D285C58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.Blazor", "DMTools.Blazor\DMTools.Blazor.csproj", "{AD684E2E-197A-447C-A4A1-5FD72D285C58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

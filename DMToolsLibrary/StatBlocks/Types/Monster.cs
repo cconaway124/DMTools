@@ -1,82 +1,87 @@
 ﻿using DMToolsLibrary.DiceCalculator;
+using DMToolsLibrary.StatBlocks.StatBlockHelpers;
 using static DMToolsLibrary.Enums.LibraryEnums;
 
 namespace DMToolsLibrary.StatBlocks.Types
 {
-    internal class Monster : StatBlock
+    public class Monster : StatBlock
     {
         internal static string BlockType { get => "Monster"; }
 
-        private string tag;
+        public string Tag { get; set; }
 
-        private string cr;
+        public string Cr { get; set; }
 
-        private string customCr;
+        public string CustomCr { get; set; }
 
-        private string customProf;
+        public string CustomProf { get; set; }
 
-        private Dictionary<string, string> abilities;
+        public string Type { get; set; }
 
-        private Dictionary<string, string> actions;
+        public Dictionary<string, string> Abilities { get; set; }
 
-        private Dictionary<string, string> bonusActions;
+        public MonsterActions Actions { get; set; }
 
-        private Dictionary<string, string> reactions;
+        public MonsterActions BonusActions { get; set; }
 
-        private Dictionary<string, string> legendaries;
+        public MonsterActions Reactions { get; set; }
 
-        private Dictionary<string, string> mythics;
+        public MonsterActions Legendaries { get; set; }
 
-        private Dictionary<string, string> lairs;
+        public MonsterActions Mythics { get; set; }
 
-        private Dictionary<string, string> regionals;
+        public MonsterActions Lairs { get; set; }
 
-        private Dictionary<string, string> sthrows;
+        public MonsterActions Regionals { get; set; }
 
-        private Dictionary<string, string> skills;
+        public Dictionary<string, string> Sthrows { get; set; }
 
-        private Dictionary<string, string> damageTypes;
+        public Dictionary<string, string> Skills { get; set; }
 
-        private string armorName;
+        public Dictionary<string, string> DamageTypes { get; set; }
 
-        private int shieldBonus;
+        public Dictionary<string, string> ConditionImmunities { get; set; }
 
-        private string natArmorBonus;
+        public string ArmorName { get; set; }
 
-        private string otherArmorDesc;
+        public int ShieldBonus { get; set; }
 
-        private int customHp;
+        public string NatArmorBonus { get; set; }
 
-        private bool isLegendary;
+        public string OtherArmorDesc { get; set; }
 
-        private string legendariesDescription;
+        public int CustomHp { get; set; }
 
-        private bool isLair;
+        public bool IsLegendary { get; set; }
 
-        private string lairDescription;
+        public string LegendariesDescription { get; set; }
 
-        private bool isMythic;
+        public bool IsLair { get; set; }
 
-        private string mythicDescription;
+        public string LairDescription { get; set; }
 
-        private bool isRegional;
+        public bool IsMythic { get; set; }
 
-        private string regionalDescription;
+        public string MythicDescription { get; set; }
 
-        private string regionalDescriptionEnd;
+        public bool IsRegional { get; set; }
 
-        private string[] properties;
+        public string RegionalDescription { get; set; }
 
-        private string understandsBut;
+        public string RegionalDescriptionEnd { get; set; }
 
-        private string shortName;
+        public Properties Properties { get; set; }
 
-        private string pluralName;
+        public string UnderstandsBut { get; set; }
 
-        private bool doubleColumns;
+        public string ShortName { get; set; }
 
-        private int separationPoint;
+        public string PluralName { get; set; }
 
-        private object[] damage;
+        public bool DoubleColumns { get; set; }
+
+        public int SeparationPoint { get; set; }
+
+        public object[] Damage { get; set; }
     }
 }

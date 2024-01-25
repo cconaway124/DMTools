@@ -6,7 +6,36 @@ using System.Threading.Tasks;
 
 namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
 {
-    internal class Stats
+    public class Stats
     {
-    }
+        public string GetStr()
+        {
+            return "";
+        }
+
+		public string GetDex()
+		{
+			return "";
+		}
+
+		public string GetCon()
+		{
+			return "";
+		}
+
+		public string GetInt()
+		{
+			return "";
+		}
+
+		public string GetWis()
+		{
+			return "";
+		}
+
+		public string GetCha()
+		{
+			return "";
+		}
+	}
 }

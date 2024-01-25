@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
 {
-    internal class Senses
+    public class Senses
     {
     }
 }

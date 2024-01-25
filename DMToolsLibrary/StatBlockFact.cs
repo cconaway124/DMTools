@@ -15,7 +15,7 @@ namespace DMToolsLibrary
 
         public StatBlockFact(FromJsonStatBlock jsonStatBlock)
         {
-            this.sbFact.CreateStatBlock("Monster", jsonStatBlock);
+            this.sbFact.CreateStatBlock("Monster", "");
         }
     }
 }

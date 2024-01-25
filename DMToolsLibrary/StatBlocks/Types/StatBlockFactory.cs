@@ -9,17 +9,17 @@ namespace DMToolsLibrary.StatBlocks.Types
     /// <summary>
     /// The factory to create statblocks from using <see cref="FromJsonStatBlock"/>.
     /// </summary>
-    internal class StatBlockFactory
+    public class StatBlockFactory
     {
         /// <summary>
         /// The dictionary that holds the types of stat blocks.
         /// </summary>
         private Dictionary<string, Type> statBlockTypes = new Dictionary<string, Type>();
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="StatBlockFactory"/> class.
-        /// </summary>
-        internal StatBlockFactory()
+		/// <summary>
+		/// Initializes a new instance of the <see cref="StatBlockFactory"/> class.
+		/// </summary>
+		public StatBlockFactory()
         {
             this.TraverseAvailableBlocks((block, type) => this.statBlockTypes.Add(block, type));
         }
@@ -37,7 +37,7 @@ namespace DMToolsLibrary.StatBlocks.Types
         /// <param name="blockType"> The type of the block to create. </param>
         /// <param name="jsonStatBlock"> The json stat block to convert. </param>
         /// <returns> The stat block of the appropriate type. </returns>
-        internal StatBlock? CreateStatBlock(string blockType, FromJsonStatBlock jsonStatBlock)
+        internal StatBlock? CreateStatBlock(string blockType, string jsonStatBlock)
         {
             if (this.statBlockTypes.TryGetValue(blockType, out var type))
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DMToolsLibrary.DiceCalculator
 {
-    internal class HitDie
+    public class HitDie
     {
     }
 }

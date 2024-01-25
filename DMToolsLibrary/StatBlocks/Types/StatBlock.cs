@@ -11,26 +11,26 @@ namespace DMToolsLibrary.StatBlocks.Types
 {
     public abstract class StatBlock
     {
-        private string name;
+		public string Name { get; set; }
 
-        private SizeEnum size;
+		public SizeEnum Size { get; set;}
 
-        private int armorClass;
+        public int ArmorClass { get; set;}
 
-        private int hitPoints;
+        public int HitPoints { get; set;}
 
-        private HitDie hitDie;
+        public HitDie HitDie { get; set;}
 
-        private int speed;
+        public int Speed { get; set;}
 
-        private Stats stats;
+        public Stats Stats { get; set;}
 
-        private Senses senses;
+        public Senses Senses { get; set;}
 
-        private string alignment;
+        public string Alignment { get; set;}
 
-        private Speeds speeds;
+        public Speeds Speeds { get; set;}
 
-        private Languages languages;
+        public Languages Languages { get; set;}
     }
 }
