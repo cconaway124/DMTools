@@ -1,7 +1,4 @@
-﻿using DMToolsLibrary.DiceCalculator;
-using DMToolsLibrary.StatBlocks;
-
-namespace DMToolsLibrary
+﻿namespace DMToolsLibrary
 {
     public class FromJsonStatBlock
     {
