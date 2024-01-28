@@ -8,34 +8,34 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
 {
     public class Stats
     {
-        public string GetStr()
+        public int GetStr()
         {
-            return "";
+            return 0;
         }
 
-		public string GetDex()
+		public int GetDex()
 		{
-			return "";
+			return 0;
 		}
 
-		public string GetCon()
+		public int GetCon()
 		{
-			return "";
+			return 0;
 		}
 
-		public string GetInt()
+		public int GetInt()
 		{
-			return "";
+			return 0;
 		}
 
-		public string GetWis()
+		public int GetWis()
 		{
-			return "";
+			return 0;
 		}
 
-		public string GetCha()
+		public int GetCha()
 		{
-			return "";
+			return 0;
 		}
 	}
 }

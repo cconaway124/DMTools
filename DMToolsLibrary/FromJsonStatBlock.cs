@@ -8,9 +8,9 @@
 
         public string type { get; set; }
 
-        public int hitPoints { get; set; }
+        public string hpText { get; set; }
 
-        public string hitDice { get; set; }
+        public int hitDice { get; set; }
 
         public string strPoints { get; set; }
 

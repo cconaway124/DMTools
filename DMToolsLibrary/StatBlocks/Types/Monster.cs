@@ -15,7 +15,6 @@ namespace DMToolsLibrary.StatBlocks.Types
             this.Type = jsonStatBlock.type;
             this.Tag = jsonStatBlock.tag;
             this.Alignment = jsonStatBlock.alignment;
-            this.HitDie = this.StrDieToHitDice(jsonStatBlock.hitDice);
             this.ArmorName = jsonStatBlock.armorName;
             this.ShieldBonus = jsonStatBlock.shieldBonus;
             this.NatArmorBonus = jsonStatBlock.natArmorBonus;
@@ -36,6 +35,7 @@ namespace DMToolsLibrary.StatBlocks.Types
                 jsonStatBlock.intPoints,
                 jsonStatBlock.wisPoints,
                 jsonStatBlock.chaPoints);
+            this.HitDie = new HitDie(jsonStatBlock.hitDice, this.Size, this.Stats.GetCon());
             this.Senses = this.StrSensesToSenses(
                 jsonStatBlock.blindsight,
                 jsonStatBlock.blind,
@@ -101,11 +101,6 @@ namespace DMToolsLibrary.StatBlocks.Types
                 default:
                     return SizeEnum.None;
             }
-        }
-
-        private HitDie StrDieToHitDice(string hitDice)
-        {
-            return null;
         }
 
         private Speeds StrSpeedsToSpeeds(
