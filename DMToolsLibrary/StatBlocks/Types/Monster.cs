@@ -19,7 +19,7 @@ namespace DMToolsLibrary.StatBlocks.Types
             this.ShieldBonus = jsonStatBlock.shieldBonus;
             this.NatArmorBonus = jsonStatBlock.natArmorBonus;
             this.OtherArmorDesc = jsonStatBlock.otherArmorDesc;
-            this.Speeds = this.StrSpeedsToSpeeds(
+            this.Speeds = new Speeds(
                 jsonStatBlock.speed,
                 jsonStatBlock.burrowSpeed,
                 jsonStatBlock.climbSpeed,
