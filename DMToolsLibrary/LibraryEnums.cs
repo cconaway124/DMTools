@@ -18,5 +18,15 @@ namespace DMToolsLibrary.Enums
             Huge,
             Gargantuan
         }
+
+        public enum StatType
+        {
+            Str = 0,
+            Dex,
+            Con,
+            Int,
+            Wis,
+            Cha,
+        }
     }
 }

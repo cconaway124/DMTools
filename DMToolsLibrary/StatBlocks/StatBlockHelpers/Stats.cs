@@ -3,22 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DMToolsLibrary.Enums.LibraryEnums;
 
 namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
 {
     public class Stats
     {
 		private int[] statPoints;
-
-		private enum StatType
-		{
-			Str = 0,
-			Dex,
-			Con,
-			Int,
-			Wis,
-			Cha,
-		}
+        private int[] statMods;
 
 		public Stats(int str, int dex, int con, int inte, int wis, int cha)
 		{
@@ -26,36 +18,84 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
 			{
 				str, dex, con, inte, wis, cha,
 			};
+
+            this.statMods = new int[this.statPoints.Length];
+            
+            for (int i = 0; i < this.statPoints.Length; i++)
+            {
+                this.statMods[i] = this.CalculateAbilityMod(this.statPoints[i]);
+
+            }
 		}
 
-		public int Str
+		public int StrPoints
         {
             get => this.statPoints[(int)StatType.Str];
         }
 
-		public int Dex
-		{
+		public int DexPoints
+        {
             get => this.statPoints[(int)StatType.Dex];
         }
 
-		public int Con
+		public int ConPoints
 		{
             get => this.statPoints[(int)StatType.Con];
         }
 
-		public int Int
+		public int IntPoints
 		{
             get => this.statPoints[(int)StatType.Int];
         }
 
-		public int Wis
+		public int WisPoints
 		{
             get => this.statPoints[(int)StatType.Wis];
         }
 
-		public int Cha
+		public int ChaPoints
 		{
             get => this.statPoints[(int)StatType.Cha];
         }
-	}
+
+        public int Str
+        {
+            get => this.statMods[(int)StatType.Str];
+        }
+
+        public int Dex
+        {
+            get => this.statMods[(int)StatType.Str];
+        }
+
+        public int Con
+        {
+            get => this.statMods[(int)StatType.Str];
+        }
+
+        public int Int
+        {
+            get => this.statMods[(int)StatType.Str];
+        }
+
+        public int Wis
+        {
+            get => this.statMods[(int)StatType.Str];
+        }
+
+        public int Cha
+        {
+            get => this.statMods[(int)StatType.Str];
+        }
+
+        private int CalculateAbilityMod(int points)
+        {
+            return (int)Math.Floor(((double)points - 10) / 2);
+        }
+
+        public string ToString(StatType type)
+        {
+            return string.Format("{0} ({1})", this.statPoints[(int)type], this.statMods[(int)type]);
+        }
+    }
 }
