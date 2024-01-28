@@ -35,7 +35,7 @@ namespace DMToolsLibrary.StatBlocks.Types
                 jsonStatBlock.intPoints,
                 jsonStatBlock.wisPoints,
                 jsonStatBlock.chaPoints);
-            this.HitDie = new HitDie(jsonStatBlock.hitDice, this.Size, this.Stats.GetCon());
+            this.HitDie = new HitDie(jsonStatBlock.hitDice, this.Size, 0/*this.Stats.GetCon()*/);
             this.Senses = this.StrSensesToSenses(
                 jsonStatBlock.blindsight,
                 jsonStatBlock.blind,

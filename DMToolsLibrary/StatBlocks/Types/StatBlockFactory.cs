@@ -42,10 +42,9 @@ namespace DMToolsLibrary.StatBlocks.Types
         {
             if (this.statBlockTypes.TryGetValue(blockType, out var type))
             {
-                object statBlockObject = Activator.CreateInstance(type);
+                object statBlockObject = Activator.CreateInstance(type, new object[] { this.JsonToStatBlock(jsonStatBlock) });
                 if (statBlockObject is Monster monster)
                 {
-                    StatBlock statBlock = this.JsonToStatBlock(jsonStatBlock);
                     return monster;
                 }
             }
@@ -53,7 +52,7 @@ namespace DMToolsLibrary.StatBlocks.Types
             return null;
         }
 
-        private StatBlock? JsonToStatBlock(string json)
+        private FromJsonStatBlock? JsonToStatBlock(string json)
         {
             FromJsonStatBlock jsonStatBlock = JsonConvert.DeserializeObject<FromJsonStatBlock>(json);
             if (jsonStatBlock is null)
@@ -61,9 +60,7 @@ namespace DMToolsLibrary.StatBlocks.Types
                 return null;
             }
 
-            Monster monster = new Monster(jsonStatBlock);
-
-            return null;
+            return jsonStatBlock;
         }
 
         /// <summary>
