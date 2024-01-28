@@ -2,6 +2,7 @@
 // No Copyright yet
 // </copyright>
 
+using Newtonsoft.Json;
 using System.Reflection;
 
 namespace DMToolsLibrary.StatBlocks.Types
@@ -37,16 +38,30 @@ namespace DMToolsLibrary.StatBlocks.Types
         /// <param name="blockType"> The type of the block to create. </param>
         /// <param name="jsonStatBlock"> The json stat block to convert. </param>
         /// <returns> The stat block of the appropriate type. </returns>
-        internal StatBlock? CreateStatBlock(string blockType, string jsonStatBlock)
+        public StatBlock? CreateStatBlock(string blockType, string jsonStatBlock)
         {
             if (this.statBlockTypes.TryGetValue(blockType, out var type))
             {
                 object statBlockObject = Activator.CreateInstance(type);
                 if (statBlockObject is Monster monster)
                 {
+                    StatBlock statBlock = this.JsonToStatBlock(jsonStatBlock);
                     return monster;
                 }
             }
+
+            return null;
+        }
+
+        private StatBlock? JsonToStatBlock(string json)
+        {
+            FromJsonStatBlock jsonStatBlock = JsonConvert.DeserializeObject<FromJsonStatBlock>(json);
+            if (jsonStatBlock is null)
+            {
+                return null;
+            }
+
+            Monster monster = new Monster(jsonStatBlock);
 
             return null;
         }

@@ -52,7 +52,7 @@
 
         public string swimSpeed { get; set; }
 
-        public string hover { get; set; }
+        public bool hover { get; set; }
 
         public Dictionary<string, string>[] languages { get; set; }
         public string tag { get; set; }
@@ -99,6 +99,8 @@
 
         public bool customHp { get; set; }
 
+        public bool customSpeed { get; set; }
+
         public bool isLegendary { get; set; }
 
         public string legendariesDescription { get; set; }
@@ -106,6 +108,8 @@
         public bool isLair { get; set; }
 
         public string lairDescription { get; set; }
+
+        public string lairDescriptionEnd { get; set; }
 
         public bool isMythic { get; set; }
 

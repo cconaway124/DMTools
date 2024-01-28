@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DMToolsLibrary.StatBlocks.StatBlockHelpers;
 
-public class Skills
+public class SavingThrows
 {
+    public SavingThrows() { }
 }

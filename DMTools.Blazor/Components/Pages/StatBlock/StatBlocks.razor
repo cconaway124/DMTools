@@ -4,11 +4,58 @@
 <PageTitle>Stat Blocks</PageTitle>
 
 <link rel="stylesheet" href="stat_block.css"/>
-
+<InputFile OnChange="@LoadFiles" />
 <div class="row">
-        
+    @foreach(Monster monster in monsters)
+    {
+        <StatBlock monster="monster"></StatBlock>
+    }
 </div>
 
 @code {
+    List<DMToolsLibrary.StatBlocks.Types.StatBlock> monsters = new List<DMToolsLibrary.StatBlocks.Types.StatBlock>();
 
+    StatBlockFactory statBlockFactory = new StatBlockFactory();
+
+    private List<IBrowserFile> loadedFiles = new();
+    private long maxFileSize = 1024 * 15;
+    private int maxAllowedFiles = 3;
+    private bool isLoading;
+
+    private async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        this.isLoading = true;
+
+        foreach (IBrowserFile file in e.GetMultipleFiles())
+        {
+            try
+            {
+                loadedFiles.Add(file);
+                // technically NOT recommended, but these JSON files are ~4 KB in size, so it
+                // *really* shouldn't matter that much...
+                // https://learn.microsoft.com/en-us/aspnet/core/blazor/file-uploads?view=aspnetcore-8.0
+                var reader =
+                    await new StreamReader(file.OpenReadStream()).ReadToEndAsync();
+
+                DMToolsLibrary.StatBlocks.Types.StatBlock statBlock = this.statBlockFactory.CreateStatBlock("Monster", reader);
+
+                // did statBlock actually get created?
+                if (statBlock is null)
+                {
+                    throw new ArgumentException("Statblock could not be created.");
+                }
+
+                UploadedBlocks(statBlock);
+            }
+            catch (Exception)
+            {
+                // do somethiing
+            }
+        }       
+    }
+
+    public void UploadedBlocks(DMToolsLibrary.StatBlocks.Types.StatBlock monster)
+    {
+        monsters.Add(monster);
+    }
 }

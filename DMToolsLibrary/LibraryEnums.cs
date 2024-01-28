@@ -10,6 +10,7 @@ namespace DMToolsLibrary.Enums
     {
         public enum SizeEnum
         {
+            None = -1,
             Tiny = 1,
             Small,
             Medium,

@@ -16,7 +16,7 @@ namespace DMToolsTest
                 {
                     string json = sr.ReadToEnd();
                     FromJsonStatBlock sb = JsonConvert.DeserializeObject<FromJsonStatBlock>(json);
-                    StatBlockFact sbFact = new StatBlockFact(sb);
+                    StatBlockFact sbFact = new StatBlockFact(json);
                     int temp = 0;
                 }
             }
