@@ -74,6 +74,7 @@ namespace DMToolsLibrary.StatBlocks.Types
             this.DoubleColumns = jsonStatBlock.doubleColumns;
             this.SeparationPoint = jsonStatBlock.separationPoint;
             this.Damage = jsonStatBlock.damage;
+            this.DamageTypes = jsonStatBlock.damageTypes;
         }
 
         private SizeEnum SizeStrToEnum(string size)
