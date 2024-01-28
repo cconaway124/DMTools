@@ -8,34 +8,54 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
 {
     public class Stats
     {
-        public int GetStr()
+		private int[] statPoints;
+
+		private enum StatType
+		{
+			Str = 0,
+			Dex,
+			Con,
+			Int,
+			Wis,
+			Cha,
+		}
+
+		public Stats(int str, int dex, int con, int inte, int wis, int cha)
+		{
+			this.statPoints = new int[]
+			{
+				str, dex, con, inte, wis, cha,
+			};
+		}
+
+		public int Str
         {
-            return 0;
+            get => this.statPoints[(int)StatType.Str];
         }
 
-		public int GetDex()
+		public int Dex
 		{
-			return 0;
-		}
+            get => this.statPoints[(int)StatType.Dex];
+        }
 
-		public int GetCon()
+		public int Con
 		{
-			return 0;
-		}
+            get => this.statPoints[(int)StatType.Con];
+        }
 
-		public int GetInt()
+		public int Int
 		{
-			return 0;
-		}
+            get => this.statPoints[(int)StatType.Int];
+        }
 
-		public int GetWis()
+		public int Wis
 		{
-			return 0;
-		}
+            get => this.statPoints[(int)StatType.Wis];
+        }
 
-		public int GetCha()
+		public int Cha
 		{
-			return 0;
-		}
+            get => this.statPoints[(int)StatType.Cha];
+        }
 	}
 }
