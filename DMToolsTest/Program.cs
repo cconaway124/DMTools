@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using DMToolsLibrary;
 using DMToolsLibrary.StatBlocks;
+using DMToolsLibrary.StatBlocks.StatBlockHelpers;
 
 namespace DMToolsTest
 {
@@ -8,6 +9,8 @@ namespace DMToolsTest
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine(new Speeds("30", "30", "30", "30", "30", true).ToString());
+
             string input = Console.ReadLine();
 
             using (FileStream file = File.Open(@input, FileMode.Open))
