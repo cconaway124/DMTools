@@ -17,6 +17,8 @@ namespace DMToolsTest
                 Console.WriteLine(stats.ToString((StatType)i));
             }
 
+            Console.WriteLine(new Senses("5", true, "0", "0", "0", "0", "13").ToString());
+
             string input = Console.ReadLine();
 
             using (FileStream file = File.Open(@input, FileMode.Open))

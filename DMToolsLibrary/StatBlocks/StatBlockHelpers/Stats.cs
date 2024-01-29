@@ -12,7 +12,12 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
 		private int[] statPoints;
         private int[] statMods;
 
-		public Stats(int str, int dex, int con, int inte, int wis, int cha)
+        public Stats(string str, string dex, string con, string inte, string wis, string cha) 
+            : this(ParseInt(str), ParseInt(dex), ParseInt(con), ParseInt(inte), ParseInt(wis), ParseInt(cha))
+        {
+        }
+
+        public Stats(int str, int dex, int con, int inte, int wis, int cha)
 		{
 			this.statPoints = new int[]
 			{
@@ -96,6 +101,21 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
         public string ToString(StatType type)
         {
             return string.Format("{0} ({1})", this.statPoints[(int)type], this.statMods[(int)type]);
+        }
+
+        private static int ParseInt(string num)
+        {
+            if (num == null)
+            {
+                return 0;
+            }
+
+            if (int.TryParse(num, out int val))
+            {
+                return val;
+            }
+
+            return 0;
         }
     }
 }

@@ -28,7 +28,7 @@ namespace DMToolsLibrary.StatBlocks.Types
                 jsonStatBlock.hover);
             this.CustomHp = jsonStatBlock.customHp;
             this.CustomSpeed = jsonStatBlock.customSpeed;
-            this.Stats = this.StrStatsToStats(
+            this.Stats = new Stats(
                 jsonStatBlock.strPoints,
                 jsonStatBlock.dexPoints,
                 jsonStatBlock.conPoints,
@@ -36,13 +36,14 @@ namespace DMToolsLibrary.StatBlocks.Types
                 jsonStatBlock.wisPoints,
                 jsonStatBlock.chaPoints);
             this.HitDie = new HitDie(jsonStatBlock.hitDice, this.Size, 0/*this.Stats.GetCon()*/);
-            this.Senses = this.StrSensesToSenses(
+            this.Senses = new Senses(
                 jsonStatBlock.blindsight,
                 jsonStatBlock.blind,
                 jsonStatBlock.darkvision,
                 jsonStatBlock.tremorsense,
                 jsonStatBlock.truesight,
-                jsonStatBlock.telepathy);
+                jsonStatBlock.telepathy, 
+                (10 + this.Stats.Wis).ToString());
             this.Cr = jsonStatBlock.cr;
             this.CustomCr = jsonStatBlock.customCr;
             this.CustomProf = jsonStatBlock.customProf;
@@ -102,28 +103,6 @@ namespace DMToolsLibrary.StatBlocks.Types
                 default:
                     return SizeEnum.None;
             }
-        }
-
-        private Speeds StrSpeedsToSpeeds(
-            string speed, 
-            string burrowSpeed,
-            string climbSpeed,
-            string flySpeed,
-            string swimSpeed,
-            bool hover)
-        {
-            return null;
-        }
-
-        private Stats StrStatsToStats(
-            string str,
-            string dex,
-            string con,
-            string inte,
-            string wis,
-            string cha)
-        {
-            return null;
         }
 
         private Senses StrSensesToSenses(
