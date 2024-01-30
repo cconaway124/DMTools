@@ -103,6 +103,11 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
             return string.Format("{0} ({1})", this.statPoints[(int)type], this.statMods[(int)type]);
         }
 
+        public int GetAbilityMod(StatType type)
+        {
+            return this.statMods[(int)type];
+        }
+
         private static int ParseInt(string num)
         {
             if (num == null)

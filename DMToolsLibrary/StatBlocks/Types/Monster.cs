@@ -46,7 +46,7 @@ namespace DMToolsLibrary.StatBlocks.Types
                 (10 + this.Stats.Wis).ToString());
             this.Cr = jsonStatBlock.cr;
             this.CustomCr = jsonStatBlock.customCr;
-            this.CustomProf = jsonStatBlock.customProf;
+            this.ProfBonus = this.CrToProfBonus(jsonStatBlock.cr, jsonStatBlock.customProf);
             this.IsLegendary = jsonStatBlock.isLegendary; 
             this.LegendariesDescription = jsonStatBlock.legendariesDescription;
             this.IsLair = jsonStatBlock.isLair;
@@ -65,7 +65,7 @@ namespace DMToolsLibrary.StatBlocks.Types
             this.Mythics = this.CreateActions(jsonStatBlock.mythics, "Mythic Actions", AddActionDescription(jsonStatBlock.isMythic, jsonStatBlock.mythicDescription));
             this.Lairs = this.CreateActions(jsonStatBlock.lairs, "Lair Actions", AddActionDescription(jsonStatBlock.isLair, jsonStatBlock.lairDescription));
             this.Regionals = this.CreateActions(jsonStatBlock.regionals, "Reional Effects", AddActionDescription(jsonStatBlock.isRegional, jsonStatBlock.regionalDescription + "\n\n" + jsonStatBlock.regionalDescriptionEnd));
-            this.Sthrows = this.CreateSavingThrows(jsonStatBlock.sthrows);
+            this.Sthrows = new SavingThrows(jsonStatBlock.sthrows, this.Stats, this.ProfBonus);
             this.Mskills = this.CreateSkills(jsonStatBlock.skills);
             this.ConditionImmunities = jsonStatBlock.conditions;
             this.Languages = this.CreateLanguages(jsonStatBlock.languages);
@@ -155,15 +155,47 @@ namespace DMToolsLibrary.StatBlocks.Types
             return null;
         }
 
+        private int CrToProfBonus(string cr, int customProf)
+        {
+            if (!double.TryParse(cr, out double dCr))
+            {
+                this.IsCustomCr = true;
+                return customProf;
+            }
+
+            // fuck me this is ugly. Probably a better way to implement
+            // TODO: git gud
+            if (dCr >= 0 && dCr <= 4)
+                return 2;
+            else if (dCr >= 5 && dCr <= 8)
+                return 3;
+            else if (dCr >= 9 && dCr <= 12)
+                return 4;
+            else if (dCr >= 13 && dCr <= 16)
+                return 5;
+            else if (dCr >= 17 && dCr <= 20)
+                return 6;
+            else if (dCr >= 21 && dCr <= 24)
+                return 7;
+            else if (dCr >= 25 && dCr <= 28)
+                return 3;
+            else if (dCr >= 29)
+                return 9;
+            else
+                return 0;
+        }
+
         internal static string BlockType { get => "Monster"; }
 
         public string Tag { get; set; }
 
         public string Cr { get; set; }
 
+        public bool IsCustomCr { get; set; }
+
         public string CustomCr { get; set; }
 
-        public int CustomProf { get; set; }
+        public int ProfBonus { get; set; }
 
         public string Type { get; set; }
 
