@@ -10,6 +10,7 @@ public class MonsterActions
 {
     private string actionName;
     private string actionDescription;
+    private Dictionary<string, string> actions;
 
     /// <summary>
     /// This is your "Legendary Action", "Action", etc.
@@ -26,29 +27,41 @@ public class MonsterActions
         set => this.actionDescription = value;
     }
 
-    public Dictionary<string, string> ActionDict { get; set; }
+    public Dictionary<string, string> Actions
+    {
+        get => this.actions;
+    }
 
     public MonsterActions(Dictionary<string, string>[] actions, string actionName, string actionDescription)
     {
         this.actionName = actionName;
         this.actionDescription = actionDescription;
-        this.ConvertToDict(actions);
+        this.actions = this.ConvertToDict(actions);
     }
 
+    // need to rethink this, but oh well
     private Dictionary<string, string> ConvertToDict(Dictionary<string, string>[] dicts)
     {
         Dictionary<string, string> joinedDict = new Dictionary<string, string>();
         foreach(Dictionary<string, string> dict in dicts)
         {
             // dicts should only have 2 keys "name" and "desc"
-            if (dict.Keys.Count() != 2) continue;
+            if (dict.Keys.Count() % 2 != 0) continue;
 
-            string key, value;
-            foreach (string val in dict.Keys)
+            string key = string.Empty, value = string.Empty;
+            int count = 0;
+            foreach (string val in dict.Values )
             {
-                
+                if (count == 0) 
+                    key = val;
+                else if (count == 1)
+                    value = val;
+
+                count++;
             }
+
+            joinedDict[key] = value;
         }
-        return null;
+        return joinedDict;
     }
 }

@@ -57,14 +57,14 @@ namespace DMToolsLibrary.StatBlocks.Types
             this.IsRegional = jsonStatBlock.isRegional;
             this.RegionalDescription = jsonStatBlock.regionalDescription;
             this.RegionalDescriptionEnd = jsonStatBlock.regionalDescriptionEnd;
-            this.Abilities = this.CreateActions(jsonStatBlock.abilities);
-            this.Actions = this.CreateActions(jsonStatBlock.actions);
-            this.BonusActions = this.CreateActions(jsonStatBlock.bonusActions);
-            this.Reactions = this.CreateActions(jsonStatBlock.reactions);
-            this.Legendaries = this.CreateActions(jsonStatBlock.legendaries);
-            this.Mythics = this.CreateActions(jsonStatBlock.mythics);
-            this.Lairs = this.CreateActions(jsonStatBlock.lairs);
-            this.Regionals = this.CreateActions(jsonStatBlock.regionals);
+            this.Abilities = this.CreateActions(jsonStatBlock.abilities, "Abilities");
+            this.Actions = this.CreateActions(jsonStatBlock.actions, "Actions");
+            this.BonusActions = this.CreateActions(jsonStatBlock.bonusActions, "Bonus Actions");
+            this.Reactions = this.CreateActions(jsonStatBlock.reactions, "Reactions");
+            this.Legendaries = this.CreateActions(jsonStatBlock.legendaries, "Legendary Actions", AddActionDescription(jsonStatBlock.isLegendary, jsonStatBlock.legendariesDescription));
+            this.Mythics = this.CreateActions(jsonStatBlock.mythics, "Mythic Actions", AddActionDescription(jsonStatBlock.isMythic, jsonStatBlock.mythicDescription));
+            this.Lairs = this.CreateActions(jsonStatBlock.lairs, "Lair Actions", AddActionDescription(jsonStatBlock.isLair, jsonStatBlock.lairDescription));
+            this.Regionals = this.CreateActions(jsonStatBlock.regionals, "Reional Effects", AddActionDescription(jsonStatBlock.isRegional, jsonStatBlock.regionalDescription + "\n\n" + jsonStatBlock.regionalDescriptionEnd));
             this.Sthrows = this.CreateSavingThrows(jsonStatBlock.sthrows);
             this.Mskills = this.CreateSkills(jsonStatBlock.skills);
             this.ConditionImmunities = jsonStatBlock.conditions;
@@ -76,6 +76,11 @@ namespace DMToolsLibrary.StatBlocks.Types
             this.SeparationPoint = jsonStatBlock.separationPoint;
             this.Damage = jsonStatBlock.damage;
             this.DamageTypes = jsonStatBlock.damageTypes;
+        }
+
+        private string AddActionDescription(bool isType, string desc)
+        {
+            return (isType) ? desc : string.Empty;
         }
 
         private SizeEnum SizeStrToEnum(string size)
@@ -120,9 +125,9 @@ namespace DMToolsLibrary.StatBlocks.Types
             return null;
         }
 
-        private MonsterActions CreateActions(Dictionary<string, string>[] actions)
+        private MonsterActions CreateActions(Dictionary<string, string>[] actions, string actionName, string actionDescription = "")
         {
-            return null;
+            return new MonsterActions(actions, actionName, actionDescription);
         }
 
         private Skills CreateSkills(Dictionary<string, string>[] skills)
