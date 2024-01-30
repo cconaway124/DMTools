@@ -57,7 +57,7 @@ namespace DMToolsLibrary.StatBlocks.Types
             this.IsRegional = jsonStatBlock.isRegional;
             this.RegionalDescription = jsonStatBlock.regionalDescription;
             this.RegionalDescriptionEnd = jsonStatBlock.regionalDescriptionEnd;
-            this.Abilities = jsonStatBlock.abilities;
+            this.Abilities = this.CreateActions(jsonStatBlock.abilities);
             this.Actions = this.CreateActions(jsonStatBlock.actions);
             this.BonusActions = this.CreateActions(jsonStatBlock.bonusActions);
             this.Reactions = this.CreateActions(jsonStatBlock.reactions);
@@ -162,7 +162,7 @@ namespace DMToolsLibrary.StatBlocks.Types
 
         public string Type { get; set; }
 
-        public Dictionary<string, string>[] Abilities { get; set; }
+        public MonsterActions Abilities { get; set; }
 
         public MonsterActions Actions { get; set; }
 
