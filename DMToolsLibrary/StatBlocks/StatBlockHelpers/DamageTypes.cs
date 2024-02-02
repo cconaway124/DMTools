@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
+namespace DMToolsLibrary.StatBlocks.StatBlockHelpers;
+
+public class DamageTypes
 {
-    internal class DamageTypes
-    {
-    }
 }

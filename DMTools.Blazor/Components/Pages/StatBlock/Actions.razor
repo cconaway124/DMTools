@@ -1,12 +1,12 @@
-﻿@if (actions.ActionDict.Count != 0)
+﻿@if (actions.Actions.Count != 0)
 {
 	<div class="actions">
 		<h3>@actions.ActionName</h3>
-		@foreach (string s in actions.ActionDict.Keys)
+		@foreach (string s in actions.Actions.Keys)
 		{
 			<div class="property-block">
 				<h4>@s.</h4>
-				<p>@actions.ActionDict[s]</p>
+				<p>@actions.Actions[s]</p>
 			</div> <!-- property block -->
 		}
 	</div> <!-- actions -->
