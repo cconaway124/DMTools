@@ -47,6 +47,9 @@ public class Languages
 
 	public override string ToString()
 	{
+		if (this.languages.Count == 0)
+			return "-";
+
 		StringBuilder sb = new StringBuilder();
 
 		// seperate out the speaks and understands

@@ -1,18 +1,18 @@
 ﻿using System.ComponentModel;
+using static DMToolsLibrary.Enums.LibraryEnums;
 
 namespace DMToolsLibrary.StatBlocks.StatBlockHelpers;
 
 public class DamageTypes
 {
-	private List<string> immuneTo;
-	private List<string> resistantTo;
-	private List<string> vulnerableTo;
+	Dictionary<DamageType, List<string>> damageTypes;
 
 	public DamageTypes(Dictionary<string, string>[] dTypes)
 	{
-		immuneTo = new List<string>();
-		resistantTo = new List<string>();
-		vulnerableTo = new List<string>();
+        this.damageTypes = new Dictionary<DamageType, List<string>>();
+		this.damageTypes[DamageType.Immune] = new List<string>();
+		this.damageTypes[DamageType.Resistant] = new List<string>();
+		this.damageTypes[DamageType.Vulnerable] = new List<string>();
 
 		foreach (Dictionary<string, string> dType in dTypes)
 		{
@@ -22,50 +22,40 @@ public class DamageTypes
 			if (name == null || type == null)
 				continue;
 
-			if (type.ToLower() == DamageType.Immune.GetDescription())
+			if (type.ToLower() == "i")
 			{
-				immuneTo.Add(name);
+				damageTypes[DamageType.Immune].Add(name);
 			}
-			else if (type.ToLower() == DamageType.Resistant.GetDescription())
+			else if (type.ToLower() == "r")
 			{
-				resistantTo.Add(name);
+				damageTypes[DamageType.Resistant].Add(name);
 			}
-			else if (type.ToLower() == DamageType.Vulnerable.GetDescription())
+			else if (type.ToLower() == "v")
 			{
-				vulnerableTo.Add(name);
+				damageTypes[DamageType.Vulnerable].Add(name);
 			}
 			else
 				continue;
 		}
 	}
 
-	public int ImmuneCount
+	public Dictionary<DamageType, List<string>> Dtypes
 	{
-		get => this.immuneTo.Count;
-	}
-
-	public int ResistantCount
-	{
-		get => this.resistantTo.Count;
-	}
-
-	public int VulnerableCount
-	{
-		get => this.vulnerableTo.Count;
+		get => this.damageTypes;
 	}
 
 	public string Immune
 	{
-		get => string.Join(", ", this.immuneTo);
+		get => string.Join(", ", this.damageTypes[DamageType.Immune]);
 	}
 
 	public string Resistant
 	{
-		get => string.Join(", ", this.resistantTo);
+		get => string.Join(", ", this.damageTypes[DamageType.Resistant]);
 	}
 
 	public string Vulnerable
 	{
-		get => string.Join(", ", this.vulnerableTo);
+		get => string.Join(", ", this.damageTypes[DamageType.Vulnerable]);
 	}
 }

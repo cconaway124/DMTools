@@ -56,21 +56,10 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
                 string speed = this.speed[i];
                 if (speed != "0")
                 {
-                    string appendTo = string.Empty;
-                    if (i == (int)SpeedType.speed)
-                    {
-                        appendTo = "<b>Speed</b> " + speed + " ft., ";
-                    }
-                    else if (i == (int)SpeedType.swim)
-                    {
-                        appendTo = (SpeedType)i + " " + speed + " ft.";
-                    }
-                    else
-                    {
-                        appendTo = (SpeedType)i + speed + " ft., ";
-                    }
+                    if (i != 0)
+                        movementStr.Append(", ");
 
-                    movementStr.Append(appendTo);
+                    movementStr.Append($"{(SpeedType)i} {speed} ft.");
                 }
             }
 

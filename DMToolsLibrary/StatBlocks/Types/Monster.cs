@@ -35,7 +35,7 @@ public class Monster : StatBlock
             jsonStatBlock.intPoints,
             jsonStatBlock.wisPoints,
             jsonStatBlock.chaPoints);
-        this.HitDie = new HitDie(jsonStatBlock.hitDice, this.Size, 0/*this.Stats.GetCon()*/);
+        this.HitDie = new HitDie(jsonStatBlock.hitDice, this.Size, this.Stats.Con);
         this.Senses = new Senses(
             jsonStatBlock.blindsight,
             jsonStatBlock.blind,
@@ -67,7 +67,7 @@ public class Monster : StatBlock
         this.Regionals = this.CreateActions(jsonStatBlock.regionals, "Reional Effects", AddActionDescription(jsonStatBlock.isRegional, jsonStatBlock.regionalDescription + "\n\n" + jsonStatBlock.regionalDescriptionEnd));
         this.Sthrows = new SavingThrows(jsonStatBlock.sthrows, this.Stats, this.ProfBonus);
         this.Mskills = new Skills(jsonStatBlock.skills, this.Stats, this.ProfBonus);
-        this.ConditionImmunities = jsonStatBlock.conditions;
+        this.ConditionImmunities = new ConditionImmunities(jsonStatBlock.conditions);
         this.Languages = new Languages(jsonStatBlock.languages, jsonStatBlock.understandsBut);
         this.ShortName = jsonStatBlock.shortName;
         this.PluralName = jsonStatBlock.pluralName;
@@ -93,7 +93,7 @@ public class Monster : StatBlock
             case "Small":
                 return SizeEnum.Small;
 
-            case "Medium":
+            case "medium":
                 return SizeEnum.Medium;
 
             case "large":
@@ -169,7 +169,7 @@ public class Monster : StatBlock
 
     public DamageTypes DamageTypes { get; set; }
 
-    public Dictionary<string, string>[] ConditionImmunities { get; set; }
+    public ConditionImmunities ConditionImmunities { get; set; }
 
     public string ArmorName { get; set; }
 

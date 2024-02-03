@@ -33,13 +33,13 @@ public static class LibraryEnums
 
 	public enum DamageType
 	{
-		[Description("i")]
+		[Description("Damage Immunities")]
 		Immune = 0,
 
-		[Description("r")]
+		[Description("Damage Resistances")]
 		Resistant = 1,
 
-		[Description("v")]
+		[Description("Damage Vulnerabilities")]
 		Vulnerable = 2,
 	}
 

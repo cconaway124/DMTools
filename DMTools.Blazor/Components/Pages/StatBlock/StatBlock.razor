@@ -1,4 +1,4 @@
-﻿<div class="stat-block wide">
+﻿<div class="stat-block @(this.monster.DoubleColumns) ? wide : ">
 	<hr class="orange-border" />
 	<div class="section-left">
 		<div class="creature-heading">
@@ -15,11 +15,11 @@
 			</div> <!-- property line -->
 			<div class="property-line">
 				<h4>Hit Points</h4>
-				<p>@monster.HitPoints (@monster.HitDie.ToString())</p>
+				<p>@monster.HitDie.ToString()</p>
 			</div> <!-- property line -->
 			<div class="property-line last">
 				<h4>Speed</h4>
-				<p>@monster.Speeds.ToString().</p>
+				<p>@monster.Speeds.ToString()</p>
 			</div> <!-- property line -->
 			<svg height="5" width="100%" class="tapered-rule">
 				<polyline points="0,0 400,2.5 0,5"></polyline>
@@ -53,10 +53,7 @@
 			<svg height="5" width="100%" class="tapered-rule">
 				<polyline points="0,0 400,2.5 0,5"></polyline>
 			</svg>
-			<div class="property-line first">
-				<h4>Damage Immunities</h4>
-				<p>@monster.DamageTypes.ToString()</p>
-			</div> <!-- property line -->
+			<DamageType dTypes="@monster.DamageTypes"/>
 			<div class="property-line">
 				<h4>Condition Immunities</h4>
 				<p>
@@ -79,7 +76,7 @@
 		<svg height="5" width="100%" class="tapered-rule">
 			<polyline points="0,0 400,2.5 0,5"></polyline>
 		</svg>
-		<StatBlockProperties properties="@monster.Properties"/>
+		<StatBlockProperties properties="@monster.Abilities"/>
 	<div class="section-right">
 		<Actions actions="@monster.Actions" />
 		<Actions actions="@monster.Reactions" />

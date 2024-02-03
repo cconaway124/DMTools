@@ -1,13 +1,13 @@
-﻿@foreach (string str in properties.properties.Keys) {
+﻿@foreach (string str in properties.Actions.Keys) {
 	<div class="property-block">
-		<h4>@str</h4>
+		<h4>@str.</h4>
 		<p>
-			@properties.properties[str]
+			@properties.Actions[str]
 		</p>
 	</div> <!-- property block -->
 }
 
 @code {
 	[Parameter]
-	public Properties properties { get; set; }
+	public MonsterActions properties { get; set; }
 }

@@ -1,0 +1,15 @@
+﻿@foreach (KeyValuePair<DMToolsLibrary.Enums.LibraryEnums.DamageType, List<string>> keyVal in dTypes.Dtypes)
+{
+    if (dTypes.Dtypes[keyVal.Key].Count == 0)
+        continue;
+    <div class="property-line first">
+        <h4>@keyVal.Key.GetDescription()</h4>
+        <p>@string.Join(", ", keyVal.Value)</p>
+    </div> <!-- property line -->
+}
+
+
+@code {
+    [Parameter]
+    public DamageTypes dTypes { get; set; }
+}
