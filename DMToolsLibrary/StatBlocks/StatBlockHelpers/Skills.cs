@@ -46,6 +46,7 @@ public class Skills
 			mod = Math.Abs(mod);
 
 			sb.Append($"{key} {sign}{mod}");
+			count++;
 		}
 
 		return sb.ToString();

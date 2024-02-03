@@ -31,7 +31,19 @@ public static class LibraryEnums
         Cha,
     }
 
-    public static StatType StrToStatType(string type)
+	public enum DamageType
+	{
+		[Description("i")]
+		Immune = 0,
+
+		[Description("r")]
+		Resistant = 1,
+
+		[Description("v")]
+		Vulnerable = 2,
+	}
+
+	public static StatType StrToStatType(string type)
     {
         switch (type.ToLower())
         {

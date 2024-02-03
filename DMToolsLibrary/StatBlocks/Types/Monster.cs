@@ -68,14 +68,13 @@ public class Monster : StatBlock
         this.Sthrows = new SavingThrows(jsonStatBlock.sthrows, this.Stats, this.ProfBonus);
         this.Mskills = new Skills(jsonStatBlock.skills, this.Stats, this.ProfBonus);
         this.ConditionImmunities = jsonStatBlock.conditions;
-        this.Languages = this.CreateLanguages(jsonStatBlock.languages); 
-        this.UnderstandsBut = jsonStatBlock.understandsBut;
+        this.Languages = new Languages(jsonStatBlock.languages, jsonStatBlock.understandsBut);
         this.ShortName = jsonStatBlock.shortName;
         this.PluralName = jsonStatBlock.pluralName;
         this.DoubleColumns = jsonStatBlock.doubleColumns;
         this.SeparationPoint = jsonStatBlock.separationPoint;
         this.Damage = jsonStatBlock.damage;
-        this.DamageTypes = jsonStatBlock.damageTypes;
+        this.DamageTypes = new DamageTypes(jsonStatBlock.damageTypes);
     }
 
     private string AddActionDescription(bool isType, string desc)
@@ -110,49 +109,9 @@ public class Monster : StatBlock
         }
     }
 
-    private Senses StrSensesToSenses(
-        string blindsight,
-        bool blind,
-        string darkvision,
-        string tremorsense,
-        string truesight,
-        string telepathy)
-    {
-        return null;
-    }
-
-    private MonsterActions StrActionToActions(string str) {
-        return null;
-    }
-
     private MonsterActions CreateActions(Dictionary<string, string>[] actions, string actionName, string actionDescription = "")
     {
         return new MonsterActions(actions, actionName, actionDescription);
-    }
-
-    private Skills CreateSkills(Dictionary<string, string>[] skills)
-    {
-        return null;
-    }
-
-    private DamageTypes CreateDamageTypes(Dictionary<string, string>[] dTypes)
-    {
-        return null;
-    }
-
-    private DamageTypes CreateSpecialDTypes(Dictionary<string, string>[] dTypes)
-    {
-        return null;
-    }
-
-    private Languages CreateLanguages(Dictionary<string, string>[] languages)
-    {
-        return null;
-    }
-
-    private SavingThrows CreateSavingThrows(Dictionary<string, string>[] sThrows)
-    {
-        return null;
     }
 
     private int CrToProfBonus(string cr, int customProf)
@@ -163,26 +122,15 @@ public class Monster : StatBlock
             return customProf;
         }
 
+        if (dCr < 0)
+            return 0;
+
         // fuck me this is ugly. Probably a better way to implement
         // TODO: git gud
-        if (dCr >= 0 && dCr <= 4)
-            return 2;
-        else if (dCr >= 5 && dCr <= 8)
-            return 3;
-        else if (dCr >= 9 && dCr <= 12)
-            return 4;
-        else if (dCr >= 13 && dCr <= 16)
-            return 5;
-        else if (dCr >= 17 && dCr <= 20)
-            return 6;
-        else if (dCr >= 21 && dCr <= 24)
-            return 7;
-        else if (dCr >= 25 && dCr <= 28)
-            return 3;
-        else if (dCr >= 29)
-            return 9;
-        else
-            return 0;
+        // DONE: Got gud
+
+        int intCr = ((int)dCr - 1) / 4;
+        return intCr + 2;
     }
 
     internal static string BlockType { get => "Monster"; }
@@ -219,7 +167,7 @@ public class Monster : StatBlock
 
     public Skills Mskills { get; set; }
 
-    public Dictionary<string, string>[] DamageTypes { get; set; }
+    public DamageTypes DamageTypes { get; set; }
 
     public Dictionary<string, string>[] ConditionImmunities { get; set; }
 
@@ -256,8 +204,6 @@ public class Monster : StatBlock
     public string RegionalDescriptionEnd { get; set; }
 
     public Properties Properties { get; set; }
-
-    public string UnderstandsBut { get; set; }
 
     public string ShortName { get; set; }
 
