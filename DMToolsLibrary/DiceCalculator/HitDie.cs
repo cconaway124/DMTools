@@ -53,7 +53,7 @@ namespace DMToolsLibrary.DiceCalculator
 
         private int CalculateAvgHp(int numHitDie, int dieSize, int conMod)
         {
-            return (int)Math.Ceiling(numHitDie * ((double)(dieSize + 1) / 2.0) + (numHitDie * conMod));
+            return (int)Math.Floor(numHitDie * ((double)(dieSize + 1) / 2.0) + (numHitDie * conMod));
         }
 
         public override string ToString()

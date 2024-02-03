@@ -118,6 +118,7 @@ body {
 }
 
 .property-line h4 {
+    font-weight: bold;
     color: #7A200D;
 }
 
@@ -171,6 +172,7 @@ body {
 }
 
 .property-block h4 {
+    font-weight: bold;
     font-style: italic;
 }
 

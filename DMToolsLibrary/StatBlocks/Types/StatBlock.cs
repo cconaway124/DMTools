@@ -15,7 +15,7 @@ namespace DMToolsLibrary.StatBlocks.Types
 
 		public SizeEnum Size { get; set;}
 
-        public int ArmorClass { get; set;}
+        public AC ArmorClass { get; set;}
 
         public int HitPoints { get; set;}
 

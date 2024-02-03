@@ -93,7 +93,7 @@
 
         public int shieldBonus { get; set; }
 
-        public string natArmorBonus { get; set; }
+        public int natArmorBonus { get; set; }
 
         public string otherArmorDesc { get; set; }
 

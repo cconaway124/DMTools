@@ -15,10 +15,6 @@ public class Monster : StatBlock
         this.Type = jsonStatBlock.type;
         this.Tag = jsonStatBlock.tag;
         this.Alignment = jsonStatBlock.alignment;
-        this.ArmorName = jsonStatBlock.armorName;
-        this.ShieldBonus = jsonStatBlock.shieldBonus;
-        this.NatArmorBonus = jsonStatBlock.natArmorBonus;
-        this.OtherArmorDesc = jsonStatBlock.otherArmorDesc;
         this.Speeds = new Speeds(
             jsonStatBlock.speed,
             jsonStatBlock.burrowSpeed,
@@ -35,7 +31,8 @@ public class Monster : StatBlock
             jsonStatBlock.intPoints,
             jsonStatBlock.wisPoints,
             jsonStatBlock.chaPoints);
-        this.HitDie = new HitDie(jsonStatBlock.hitDice, this.Size, this.Stats.Con);
+		this.ArmorClass = new AC(jsonStatBlock.otherArmorDesc, jsonStatBlock.shieldBonus, jsonStatBlock.armorName, this.Stats.Dex, jsonStatBlock.natArmorBonus);
+		this.HitDie = new HitDie(jsonStatBlock.hitDice, this.Size, this.Stats.Con);
         this.Senses = new Senses(
             jsonStatBlock.blindsight,
             jsonStatBlock.blind,
@@ -170,14 +167,6 @@ public class Monster : StatBlock
     public DamageTypes DamageTypes { get; set; }
 
     public ConditionImmunities ConditionImmunities { get; set; }
-
-    public string ArmorName { get; set; }
-
-    public int ShieldBonus { get; set; }
-
-    public string NatArmorBonus { get; set; }
-
-    public string OtherArmorDesc { get; set; }
 
     public bool CustomHp { get; set; }
 

@@ -70,27 +70,27 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
 
         public int Dex
         {
-            get => this.statMods[(int)StatType.Str];
+            get => this.statMods[(int)StatType.Dex];
         }
 
         public int Con
         {
-            get => this.statMods[(int)StatType.Str];
+            get => this.statMods[(int)StatType.Con];
         }
 
         public int Int
         {
-            get => this.statMods[(int)StatType.Str];
+            get => this.statMods[(int)StatType.Int];
         }
 
         public int Wis
         {
-            get => this.statMods[(int)StatType.Str];
+            get => this.statMods[(int)StatType.Wis];
         }
 
         public int Cha
         {
-            get => this.statMods[(int)StatType.Str];
+            get => this.statMods[(int)StatType.Cha];
         }
 
         private int CalculateAbilityMod(int points)

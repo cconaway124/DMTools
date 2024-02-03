@@ -51,15 +51,21 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
         public override string ToString()
         {
             StringBuilder movementStr = new StringBuilder();
+            int count = 0;
             for (int i = 0; i < this.speed.Length; i++)
             {
                 string speed = this.speed[i];
                 if (speed != "0")
                 {
-                    if (i != 0)
+                    if (count != 0)
                         movementStr.Append(", ");
 
-                    movementStr.Append($"{(SpeedType)i} {speed} ft.");
+                    if ((SpeedType)i == SpeedType.speed)
+						movementStr.Append($"{speed} ft.");
+                    else
+					    movementStr.Append($"{(SpeedType)i} {speed} ft.");
+                    
+                    count++;
                 }
             }
 
