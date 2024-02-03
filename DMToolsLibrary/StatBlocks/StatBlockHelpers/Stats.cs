@@ -100,7 +100,9 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
 
         public string ToString(StatType type)
         {
-            return string.Format("{0} ({1})", this.statPoints[(int)type], this.statMods[(int)type]);
+            int stat = this.statMods[(int)type];
+            string sign = (stat >= 0) ? "+" : "-";
+            return string.Format("{0} ({1}{2})", this.statPoints[(int)type], sign, Math.Abs(stat));
         }
 
         public int GetAbilityMod(StatType type)

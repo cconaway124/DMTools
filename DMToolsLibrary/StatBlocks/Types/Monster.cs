@@ -41,7 +41,7 @@ public class Monster : StatBlock
             jsonStatBlock.truesight,
             jsonStatBlock.telepathy, 
             (10 + this.Stats.Wis).ToString());
-        this.Cr = jsonStatBlock.cr;
+        this.Cr = new ChallengeRating(jsonStatBlock.cr, jsonStatBlock.customCr);
         this.CustomCr = jsonStatBlock.customCr;
         this.ProfBonus = this.CrToProfBonus(jsonStatBlock.cr, jsonStatBlock.customProf);
         this.IsLegendary = jsonStatBlock.isLegendary; 
@@ -87,7 +87,7 @@ public class Monster : StatBlock
             case "tiny":
                 return SizeEnum.Tiny;
 
-            case "Small":
+            case "small":
                 return SizeEnum.Small;
 
             case "medium":
@@ -134,7 +134,7 @@ public class Monster : StatBlock
 
     public string Tag { get; set; }
 
-    public string Cr { get; set; }
+    public ChallengeRating Cr { get; set; }
 
     public bool IsCustomCr { get; set; }
 

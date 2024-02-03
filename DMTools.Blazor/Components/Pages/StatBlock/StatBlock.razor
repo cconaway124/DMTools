@@ -54,29 +54,16 @@
 				<polyline points="0,0 400,2.5 0,5"></polyline>
 			</svg>
 			<DamageType dTypes="@monster.DamageTypes"/>
-			<div class="property-line">
-				<h4>Condition Immunities</h4>
-				<p>
-					@monster.ConditionImmunities.ToString()
-				</p>
-			</div> <!-- property line -->
-			<div class="property-line">
-				<h4>Senses</h4>
-				<p>@monster.Senses.ToString()</p>
-			</div> <!-- property line -->
-			<div class="property-line">
-				<h4>Languages</h4>
-				<p>@monster.Languages.ToString();</p>
-			</div> <!-- property line -->
-			<div class="property-line last">
-				<h4>Challenge</h4>
-				<p>@monster.Cr</p>
-			</div> <!-- property line -->
+			<ConditionImmunity conditionImmunities="@monster.ConditionImmunities"/>
+			<Senses senses="monster.Senses" />
+			<Languages languages="monster.Languages" />
+			<Cr CR="@monster.Cr" />
 		</div> <!-- top stats -->
 		<svg height="5" width="100%" class="tapered-rule">
 			<polyline points="0,0 400,2.5 0,5"></polyline>
 		</svg>
 		<StatBlockProperties properties="@monster.Abilities"/>
+	</div>
 	<div class="section-right">
 		<Actions actions="@monster.Actions" />
 		<Actions actions="@monster.Reactions" />
@@ -85,8 +72,7 @@
 		<Actions actions="@monster.Regionals" />
 	</div> <!-- section right -->
 	<hr class="orange-border bottom" />
-	</div> <!-- stat block -->
-</div>
+</div> <!-- stat block -->
 @code {
 	[Parameter]
 	public Monster monster { get; set; }

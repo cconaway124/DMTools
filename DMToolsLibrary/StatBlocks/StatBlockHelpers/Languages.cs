@@ -45,6 +45,11 @@ public class Languages
 		}
 	}
 
+	public int LanguageCount
+	{
+		get => this.languages.Count;
+	}
+
 	public override string ToString()
 	{
 		if (this.languages.Count == 0)
@@ -64,7 +69,7 @@ public class Languages
 		sb.Append(" understands ");
 
 		sb.Append(string.Join(", ", understands));
-		sb.Append(this.understandsBut);
+		sb.Append("but " + this.understandsBut);
 		
 		return sb.ToString();
 	}
