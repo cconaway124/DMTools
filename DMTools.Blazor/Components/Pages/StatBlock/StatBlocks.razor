@@ -5,7 +5,7 @@
 
 <link rel="stylesheet" href="stat_block.css"/>
 <InputFile OnChange="@LoadFiles" />
-<input class="" @bind-value="SearchText" @bind-value:event="oninput" placeholder="Search by name" />>
+<input class="" @bind-value="SearchText" @bind-value:event="oninput" placeholder="Search by name" />
 
 <div class="row">
     @foreach(Monster monster in monsters.Where(mon => mon.Name.ToLower().Contains(SearchText.ToLower())))
