@@ -2,12 +2,11 @@
 // Copyright (c) Chase. All rights reserved.
 // </copyright>
 
-namespace DMToolsLibrary.StatBlocks.Types
+namespace DMToolsLibrary.StatBlocks.Types;
+
+/// <summary>
+/// The stat block for (N)PC's.
+/// </summary>
+public class PcStatBlock
 {
-    /// <summary>
-    /// The stat block for (N)PC's.
-    /// </summary>
-    internal class PcStatBlock
-    {
-    }
 }
