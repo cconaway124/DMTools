@@ -5,8 +5,10 @@
 
 <link rel="stylesheet" href="stat_block.css"/>
 <InputFile OnChange="@LoadFiles" />
+<input class="" @bind-value="SearchText" @bind-value:event="oninput" placeholder="Search by name" />>
+
 <div class="row">
-    @foreach(Monster monster in monsters)
+    @foreach(Monster monster in monsters.Where(mon => mon.Name.ToLower().Contains(SearchText.ToLower())))
     {
         <StatBlock monster="monster"></StatBlock>
     }
@@ -14,6 +16,8 @@
 
 @code {
     List<DMToolsLibrary.StatBlocks.Types.StatBlock> monsters = new List<DMToolsLibrary.StatBlocks.Types.StatBlock>();
+
+    public string SearchText { get; set; } = "";
 
     StatBlockFactory statBlockFactory = new StatBlockFactory();
 
