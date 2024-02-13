@@ -38,7 +38,7 @@ public class Dice
         else if (mod < 0) 
             sign = " - ";
         
-        return string.Format("{0} ({1}d{2}{3}{4})", avgDieRoll, this.numDie, this.sides, sign, (mod == 0) ? "" : mod);
+        return string.Format("{0} ({1}d{2}{3}{4})", avgDieRoll, this.numDie, this.sides, sign, (mod == 0) ? "" : Math.Abs(mod));
     }
 
     public int GetAverageRoll(int mod)
