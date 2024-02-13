@@ -53,21 +53,21 @@ public class Monster : StatBlock
         this.MythicDescription = jsonStatBlock.mythicDescription;
         this.IsRegional = jsonStatBlock.isRegional;
         this.RegionalDescription = jsonStatBlock.regionalDescription;
+        this.ShortName = jsonStatBlock.shortName;
+        this.PluralName = jsonStatBlock.pluralName;
         this.RegionalDescriptionEnd = jsonStatBlock.regionalDescriptionEnd;
-        this.Abilities = this.CreateActions(jsonStatBlock.abilities, "Abilities");
-        this.Actions = this.CreateActions(jsonStatBlock.actions, "Actions");
-        this.BonusActions = this.CreateActions(jsonStatBlock.bonusActions, "Bonus Actions");
-        this.Reactions = this.CreateActions(jsonStatBlock.reactions, "Reactions");
-        this.Legendaries = this.CreateActions(jsonStatBlock.legendaries, "Legendary Actions", AddActionDescription(jsonStatBlock.isLegendary, jsonStatBlock.legendariesDescription));
-        this.Mythics = this.CreateActions(jsonStatBlock.mythics, "Mythic Actions", AddActionDescription(jsonStatBlock.isMythic, jsonStatBlock.mythicDescription));
-        this.Lairs = this.CreateActions(jsonStatBlock.lairs, "Lair Actions", AddActionDescription(jsonStatBlock.isLair, jsonStatBlock.lairDescription));
-        this.Regionals = this.CreateActions(jsonStatBlock.regionals, "Reional Effects", AddActionDescription(jsonStatBlock.isRegional, jsonStatBlock.regionalDescription + "\n\n" + jsonStatBlock.regionalDescriptionEnd));
+        this.Abilities = this.CreateActions(jsonStatBlock.abilities, "Abilities", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
+        this.Actions = this.CreateActions(jsonStatBlock.actions, "Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
+        this.BonusActions = this.CreateActions(jsonStatBlock.bonusActions, "Bonus Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
+        this.Reactions = this.CreateActions(jsonStatBlock.reactions, "Reactions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
+        this.Legendaries = this.CreateActions(jsonStatBlock.legendaries, "Legendary Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isLegendary, jsonStatBlock.legendariesDescription));
+        this.Mythics = this.CreateActions(jsonStatBlock.mythics, "Mythic Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isMythic, jsonStatBlock.mythicDescription));
+        this.Lairs = this.CreateActions(jsonStatBlock.lairs, "Lair Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isLair, jsonStatBlock.lairDescription));
+        this.Regionals = this.CreateActions(jsonStatBlock.regionals, "Reional Effects", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isRegional, jsonStatBlock.regionalDescription + "\n\n" + jsonStatBlock.regionalDescriptionEnd));
         this.Sthrows = new SavingThrows(jsonStatBlock.sthrows, this.Stats, this.ProfBonus);
         this.Mskills = new Skills(jsonStatBlock.skills, this.Stats, this.ProfBonus);
         this.ConditionImmunities = new ConditionImmunities(jsonStatBlock.conditions);
         this.Languages = new Languages(jsonStatBlock.languages, jsonStatBlock.understandsBut);
-        this.ShortName = jsonStatBlock.shortName;
-        this.PluralName = jsonStatBlock.pluralName;
         this.DoubleColumns = jsonStatBlock.doubleColumns;
         this.SeparationPoint = jsonStatBlock.separationPoint;
         this.Damage = jsonStatBlock.damage;
@@ -106,9 +106,16 @@ public class Monster : StatBlock
         }
     }
 
-    private MonsterActions CreateActions(Dictionary<string, string>[] actions, string actionName, string actionDescription = "")
+    private MonsterActions CreateActions(Dictionary<string, string>[] actions,
+        string actionName,
+        Stats stats,
+        int profBonus,
+        string shortenedName,
+        string pluralName,
+        string actionDescription = ""
+        )
     {
-        return new MonsterActions(actions, actionName, actionDescription);
+        return new MonsterActions(actions, actionName, actionDescription, stats, profBonus, shortenedName, pluralName);
     }
 
     private int CrToProfBonus(string cr, int customProf)

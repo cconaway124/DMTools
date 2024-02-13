@@ -68,7 +68,7 @@ public static class StatBlockStringReplacer
                 total = GetValue(stats, value, profBonus, true);
             }
             // check for raw throw
-            else if (value.Contains("d"))
+            else if (value.Contains("d") && !value.Contains("e"))
             {
                 string[] roll = value.Split(" ");
                 int dieIndex = 0;

@@ -32,11 +32,22 @@ public class MonsterActions
         get => this.actions;
     }
 
-    public MonsterActions(Dictionary<string, string>[] actions, string actionName, string actionDescription)
+    public MonsterActions(Dictionary<string, string>[] actions,
+        string actionName,
+        string actionDescription,
+        Stats stats,
+        int profBonus,
+        string shortenedName,
+        string pluralName)
     {
         this.actionName = actionName;
         this.actionDescription = actionDescription;
         this.actions = this.ConvertToDict(actions);
+        
+        foreach (KeyValuePair<string, string> pair in this.actions)
+        {
+            this.actions[pair.Key] = StatBlockStringReplacer.ReplaceBracketModifiers(pair.Value, stats, profBonus, shortenedName, pluralName);
+        }
     }
 
     // need to rethink this, but oh well

@@ -49,3 +49,18 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+
+.page-footer {
+    border-top: 1px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    border-radius: 5px 5px 0px 0px;
+    position: fixed;
+    bottom: 0;
+    color: black;
+    width: 100%;
+    font-size: smaller;
+}
+
+    .page-footer :hover {
+        font-size: larger;
+    }
