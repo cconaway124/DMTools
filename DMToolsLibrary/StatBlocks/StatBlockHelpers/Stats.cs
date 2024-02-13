@@ -12,6 +12,8 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
 		private int[] statPoints;
         private int[] statMods;
 
+        public Stats() { }
+
         public Stats(string str, string dex, string con, string inte, string wis, string cha) 
             : this(ParseInt(str), ParseInt(dex), ParseInt(con), ParseInt(inte), ParseInt(wis), ParseInt(cha))
         {
@@ -107,7 +109,14 @@ namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
 
         public int GetAbilityMod(StatType type)
         {
+            if (type == StatType.None) return 0;
             return this.statMods[(int)type];
+        }
+
+        public int GetAbilityMod(string type)
+        {
+            StatType stat = StrToStatType(type.ToLower());
+            return GetAbilityMod(stat);
         }
 
         private static int ParseInt(string num)

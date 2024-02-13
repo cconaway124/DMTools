@@ -19,7 +19,7 @@ public class Dice
         }
 
         if (!int.TryParse(die[0], out int numDie))
-            throw new ArgumentNullException("The number of die could not be parsed out of the string.");
+            numDie = 1;
 
         this.numDie = numDie;
 
@@ -32,6 +32,17 @@ public class Dice
     public string GetDiceString(int mod)
     {
         int avgDieRoll = DiceFunctions.CalculateAverage(this.numDie, this.sides, mod);
-        return string.Format("{0} ({1}d{2} + {3})", avgDieRoll, this.numDie, this.sides, mod);
+        string sign = string.Empty;
+        if (mod > 0)
+            sign = " + ";
+        else if (mod < 0) 
+            sign = " - ";
+        
+        return string.Format("{0} ({1}d{2}{3}{4})", avgDieRoll, this.numDie, this.sides, sign, (mod == 0) ? "" : mod);
+    }
+
+    public int GetAverageRoll(int mod)
+    {
+        return DiceFunctions.CalculateAverage(this.numDie, this.sides, mod);
     }
 }

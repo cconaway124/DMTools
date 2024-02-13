@@ -10,6 +10,6 @@ public static class DiceFunctions
 {
     public static int CalculateAverage(int numDie, int sides, int mod)
     {
-        return (int)Math.Floor(numDie * ((double)(sides + 1) / 2.0) + mod);
+        return (int)Math.Ceiling(numDie * ((double)(sides + 1) / 2.0) + mod);
     }
 }
