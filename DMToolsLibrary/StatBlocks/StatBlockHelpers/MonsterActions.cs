@@ -47,6 +47,7 @@ public class MonsterActions
         foreach (KeyValuePair<string, string> pair in this.actions)
         {
             this.actions[pair.Key] = StatBlockStringReplacer.ReplaceBracketModifiers(pair.Value, stats, profBonus, shortenedName, pluralName);
+            this.actions[pair.Key] = StatBlockStringReplacer.ReplaceAngleBrackets(pair.Value);
         }
     }
 

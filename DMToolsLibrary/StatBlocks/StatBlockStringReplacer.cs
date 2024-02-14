@@ -164,4 +164,9 @@ public static class StatBlockStringReplacer
 
         return mod * ((sign == "+") ? 1 : -1);
     }
+
+    public static string ReplaceAngleBrackets(string original)
+    {
+        return original.Replace(">", "#");
+    }
 }

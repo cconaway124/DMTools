@@ -6,13 +6,26 @@
 		{
 			<div class="property-block">
 				<h4>@s.</h4>
-				<p>@actions.Actions[s]</p>
+				<p>@MarkupExtensions.MarkupString(actions.Actions[s])</p>
 			</div> <!-- property block -->
 		}
 	</div> <!-- actions -->
 }
 
 @code {
-    [Parameter]
-    public MonsterActions actions { get; set; }
+	[Parameter]
+	public MonsterActions actions { get; set; }
+
+	public MarkupString Italicize(string original)
+	{
+		Regex regex = new Regex(@"_([^_]*)_");
+		foreach (Match match in regex.Matches(original))
+		{
+			// get rid of the stuffs
+			string value = match.Groups[1].Value;
+			value = "<i>" + value + "</i>";
+			original = original.Replace(match.Value, value);
+		}
+		return new MarkupString(original);
+	} 
 }
