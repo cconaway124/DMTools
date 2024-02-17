@@ -15,6 +15,7 @@ public static class MarkupExtensions
 	/// <returns></returns>
 	public static MarkupString MarkupString(string original)
 	{
+		original = AddNewLines(@original);
 		// matches italics and then bold. Need to add in list support (">")
 		Regex[] regexes = [new Regex(@"_([^_]*)_"), new Regex(@"\*\*([^\*\*]*)\*\*"), new Regex(@"\#([^\#]*)")];
 		int count = 0;
@@ -46,13 +47,16 @@ public static class MarkupExtensions
 				// get rid of the stuffs
 				string value = match.Groups[1].Value;
 				value = start + value + end;
-				if (count != 2)
-					original = original.Replace(match.Value, value);
-				else
-					original = original.Replace(match.Value, value);
+				original = original.Replace(match.Value, value);
 			}
+
 			count++;
 		}
 		return new MarkupString(original);
+	}
+
+	public static string AddNewLines(string original)
+	{
+		return Regex.Replace(original, @"\r\n?|\n", "<br />"); ;
 	}
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -19,6 +20,8 @@ public static class StatBlockStringReplacer
     {
         if (original == null)
             return string.Empty;
+
+        original = ReplaceAngleBrackets(original);
 
         // general pattern
         // [MON] [MONS] is shorthand for the shortened/ plural names [done]
