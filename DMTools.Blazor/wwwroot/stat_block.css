@@ -68,11 +68,16 @@ body {
 .orange-border {
     display: block;
     background: #E69A28;
+    background-position: center;
+    background-image: url('images/statblockbar.jpg') !important;
+    border: 0;
+    height: 5px !important;
     border: 1px solid #000;
-    height: 5px;
     padding: 0 10px 0;
     margin: -10px -10px 0;
     box-sizing: initial;
+    overflow: visible;
+    opacity: 1 !important;
 }
 
     .orange-border.bottom {
