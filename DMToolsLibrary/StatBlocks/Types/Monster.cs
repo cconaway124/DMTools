@@ -139,6 +139,8 @@ public class Monster : StatBlock
 
     internal static string BlockType { get => "Monster"; }
 
+    public string MonsterId { get; set; }
+
     public string Tag { get; set; }
 
     public ChallengeRating Cr { get; set; }

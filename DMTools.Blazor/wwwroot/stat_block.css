@@ -25,6 +25,11 @@ body {
     margin: 20px;
 }
 
+.colored-bg {
+    background: #FDF1DC;
+    box-shadow: 0 0 1.5em #867453;
+}
+
 .stat-block {
     text-align: left;
     /*margin: 20px;*/
