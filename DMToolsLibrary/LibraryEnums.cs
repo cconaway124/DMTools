@@ -43,6 +43,22 @@ public static class LibraryEnums
 		Vulnerable = 2,
 	}
 
+    public enum UserLoginType
+    {
+        [Description("User was found in the database.")]
+        Found = 0,
+
+        [Description("User was not found in the database.")]
+        NotFound,
+
+        [Description("Password was successfully entered.")]
+        Success,
+
+        [Description("Wrong password for user.")]
+        WrongPassword,
+
+    }
+
 	public static StatType StrToStatType(string type)
     {
         switch (type.ToLower())

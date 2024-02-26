@@ -1,0 +1,34 @@
+﻿@page "/login"
+@rendermode InteractiveServer
+
+<h3>Login</h3>
+
+
+
+<form @formname="login-form">
+    
+    <div>
+        <label>
+            Username or email
+            <InputText @bind-Value="User.UserName"/>
+        </label>
+        <label>
+            Password
+            <input type="password" placeholder="Enter your password" @bind-value="User.Password" />
+        </label>
+    </div>
+    <div>
+        <button type="button" @onclick="Submit">Submit</button>
+    </div>
+
+</form>
+
+
+@code {
+    public User User { get; set; } = new();
+
+    public void Submit(MouseEventArgs e)
+    {
+        this.User = 
+    }
+}

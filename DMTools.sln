@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMToolsTest", "DMToolsTest\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.Blazor", "DMTools.Blazor\DMTools.Blazor.csproj", "{AD684E2E-197A-447C-A4A1-5FD72D285C58}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.Database", "DMTools.Database\DMTools.Database.csproj", "{4CBA827B-DA69-4809-922D-7CB1E6464297}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AD684E2E-197A-447C-A4A1-5FD72D285C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD684E2E-197A-447C-A4A1-5FD72D285C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD684E2E-197A-447C-A4A1-5FD72D285C58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CBA827B-DA69-4809-922D-7CB1E6464297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CBA827B-DA69-4809-922D-7CB1E6464297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CBA827B-DA69-4809-922D-7CB1E6464297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CBA827B-DA69-4809-922D-7CB1E6464297}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

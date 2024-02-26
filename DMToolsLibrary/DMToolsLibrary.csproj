@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Names\" />
-    <Folder Include="Database\" />
     <Folder Include="EncounterGenerator\" />
     <Folder Include="ScriptTracker\" />
   </ItemGroup>
@@ -18,7 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DMTools.Database\DMTools.Database.csproj" />
   </ItemGroup>
 
 </Project>
