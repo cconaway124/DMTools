@@ -12,10 +12,10 @@ public class User
     [Key]
     public int UserId { get; set; }
     [MaxLength(50)]
-    public string UserName { get; set; }
+    public string UserName { get; set; } = string.Empty;
     [MaxLength(150)]
-    public string UserEmail { get; set; }
-    [MaxLength(50)]
-    public string Password { get; set; }
+    public string UserEmail { get; set; } = string.Empty;
+    [MaxLength(500)]
+    public string Password { get; set; } = string.Empty;
     public Guid UserGuid { get; set; }
 }

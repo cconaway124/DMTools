@@ -1,6 +1,7 @@
 using DMTools.Blazor.Components;
 using Microsoft.EntityFrameworkCore;
 using DMTools.Database;
+using DMToolsLibrary.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddDbContext<DmtoolsContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IAuthenticator, Authenticator>();
+builder.Services.AddScoped<IUserFunctions, UserFunctions>();
 
 var app = builder.Build();
 

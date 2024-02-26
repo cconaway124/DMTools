@@ -12,7 +12,7 @@ namespace DMToolsLibrary.Security;
 /// <summary>
 /// Handles authentication of the user.
 /// </summary>
-public class Authenticator
+public class Authenticator : IAuthenticator
 {
     /// <summary>
     /// The database.
@@ -52,7 +52,7 @@ public class Authenticator
         {
             return UserLoginType.WrongPassword;
         }
-        
+
         // if not null, we found an out of date hash alg, so update hashed pass
         if (foundUser != null)
         {

@@ -1,6 +1,6 @@
 ﻿@page "/login"
 @rendermode InteractiveServer
-
+@inject IAuthenticator authenticator
 <h3>Login</h3>
 
 
@@ -29,6 +29,6 @@
 
     public void Submit(MouseEventArgs e)
     {
-        this.User = 
+        authenticator.Authorize(this.User);
     }
 }
