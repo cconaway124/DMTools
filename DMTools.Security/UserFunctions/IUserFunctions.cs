@@ -1,6 +1,6 @@
 ﻿using DMTools.Database.Entities;
 
-namespace DMToolsLibrary.Security;
+namespace DMTools.Security;
 
 public interface IUserFunctions
 {

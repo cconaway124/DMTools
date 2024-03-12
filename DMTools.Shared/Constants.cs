@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMToolsLibrary;
+namespace DMTools.Shared;
 
-internal class Constants
+public class Constants
 {
-	internal static Dictionary<string, string> crToXp = new Dictionary<string, string>
+	public static Dictionary<string, string> crToXp = new Dictionary<string, string>
 	{
 		{ "0", "10" },
 		{ "1/8", "25" },

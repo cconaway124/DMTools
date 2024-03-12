@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
-using static DMToolsLibrary.Enums.LibraryEnums;
+using static DMTools.Shared.Enums.LibraryEnums;
 
-namespace DMToolsLibrary.StatBlocks.StatBlockHelpers;
+namespace DMTools.StatBlocks.StatBlockHelpers;
 
 public class DamageTypes
 {

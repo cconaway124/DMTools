@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMToolsLibrary.Security;
+namespace DMTools.Security;
 
 public class UserFunctions : IUserFunctions
 {

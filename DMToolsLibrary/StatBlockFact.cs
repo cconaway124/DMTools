@@ -2,9 +2,9 @@
 // No Copyright yet
 // </copyright>
 
-using DMToolsLibrary.StatBlocks.Types;
+using DMTools.StatBlocks.Types;
 
-namespace DMToolsLibrary
+namespace DMTools
 {
     /// <summary>
     /// The class for testing the statblock creator.

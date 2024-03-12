@@ -29,7 +29,7 @@
 </footer>
 
 @code {
-    List<DMToolsLibrary.StatBlocks.Types.StatBlock> monsters = new List<DMToolsLibrary.StatBlocks.Types.StatBlock>();
+    List<DMTools.StatBlocks.Types.StatBlock> monsters = new List<DMTools.StatBlocks.Types.StatBlock>();
 
     public string SearchText { get; set; } = "";
 
@@ -55,7 +55,7 @@
                 var reader =
                     await new StreamReader(file.OpenReadStream()).ReadToEndAsync();
 
-                DMToolsLibrary.StatBlocks.Types.StatBlock statBlock = this.statBlockFactory.CreateStatBlock("Monster", reader);
+                DMTools.StatBlocks.Types.StatBlock statBlock = this.statBlockFactory.CreateStatBlock("Monster", reader);
 
                 // did statBlock actually get created?
                 if (statBlock is null)
@@ -73,7 +73,7 @@
         this.isLoading = false;
     }
 
-    public void UploadedBlocks(DMToolsLibrary.StatBlocks.Types.StatBlock monster)
+    public void UploadedBlocks(DMTools.StatBlocks.Types.StatBlock monster)
     {
         monsters.Add(monster);
     }

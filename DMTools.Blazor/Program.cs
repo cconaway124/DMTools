@@ -1,7 +1,7 @@
 using DMTools.Blazor.Components;
 using Microsoft.EntityFrameworkCore;
 using DMTools.Database;
-using DMToolsLibrary.Security;
+using DMTools.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMToolsLibrary.StatBlocks.StatBlockHelpers;
+namespace DMTools.StatBlocks.StatBlockHelpers;
 
 public class ConditionImmunities
 {

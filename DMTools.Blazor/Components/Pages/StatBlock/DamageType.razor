@@ -2,7 +2,7 @@
     int count = 0; 
 }
 
-@foreach (KeyValuePair<DMToolsLibrary.Enums.LibraryEnums.DamageType, List<string>> keyVal in dTypes.Dtypes)
+@foreach (KeyValuePair<DMTools.Shared.Enums.LibraryEnums.DamageType, List<string>> keyVal in dTypes.Dtypes)
 {
     if (dTypes.Dtypes[keyVal.Key].Count == 0)
         continue;

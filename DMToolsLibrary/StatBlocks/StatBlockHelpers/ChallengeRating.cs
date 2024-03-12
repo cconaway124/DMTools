@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DMTools.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMToolsLibrary.StatBlocks.StatBlockHelpers;
+namespace DMTools.StatBlocks.StatBlockHelpers;
 
 public class ChallengeRating
 {

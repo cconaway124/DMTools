@@ -1,4 +1,4 @@
-﻿namespace DMToolsLibrary
+﻿namespace DMTools
 {
     public class FromJsonStatBlock
     {

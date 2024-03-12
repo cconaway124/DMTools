@@ -1,12 +1,11 @@
-﻿using DMToolsLibrary.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DMToolsLibrary.Enums.LibraryEnums;
+using static DMTools.Shared.Enums.LibraryEnums;
 
-namespace DMToolsLibrary.StatBlocks.StatBlockHelpers;
+namespace DMTools.StatBlocks.StatBlockHelpers;
 
 public class Skills
 {
@@ -25,7 +24,7 @@ public class Skills
 				continue; // probably should throw error here
 			}
 
-			StatType type = LibraryEnums.StrToStatType(stat);
+			StatType type = StrToStatType(stat);
 			int mod = stats.GetAbilityMod(type);
 
 			skills[name] = mod + profBonus;

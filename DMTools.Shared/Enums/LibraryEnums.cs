@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMToolsLibrary.Enums;
+namespace DMTools.Shared.Enums;
 
 public static class LibraryEnums
 {

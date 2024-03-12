@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMToolsLibrary.Security;
+namespace DMTools.Security;
 
 /// <summary>
 /// Hashes and verifies passwords.

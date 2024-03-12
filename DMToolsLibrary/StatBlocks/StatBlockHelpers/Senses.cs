@@ -5,8 +5,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using DMTools.Shared.Enums;
 
-namespace DMToolsLibrary.StatBlocks.StatBlockHelpers;
+namespace DMTools.StatBlocks.StatBlockHelpers;
 
 public class Senses
 {

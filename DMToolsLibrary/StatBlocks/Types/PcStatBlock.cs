@@ -2,7 +2,7 @@
 // Copyright (c) Chase. All rights reserved.
 // </copyright>
 
-namespace DMToolsLibrary.StatBlocks.Types;
+namespace DMTools.StatBlocks.Types;
 
 /// <summary>
 /// The stat block for (N)PC's.

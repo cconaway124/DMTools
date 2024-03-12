@@ -5,7 +5,7 @@
 using Newtonsoft.Json;
 using System.Reflection;
 
-namespace DMToolsLibrary.StatBlocks.Types
+namespace DMTools.StatBlocks.Types
 {
     /// <summary>
     /// The factory to create statblocks from using <see cref="FromJsonStatBlock"/>.

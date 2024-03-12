@@ -1,13 +1,9 @@
 ﻿using DMTools.Database.Entities;
 using DMTools.Database;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static DMToolsLibrary.Enums.LibraryEnums;
+using static DMTools.Shared.Enums.LibraryEnums;
+using Microsoft.AspNetCore.Identity;
 
-namespace DMToolsLibrary.Security;
+namespace DMTools.Security;
 
 /// <summary>
 /// Handles authentication of the user.

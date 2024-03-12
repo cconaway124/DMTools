@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -18,7 +18,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DMTools.Database\DMTools.Database.csproj" />
-    <ProjectReference Include="..\DMToolsLibrary\DMToolsLibrary.csproj" />
+    <ProjectReference Include="..\DMTools.EncounterGenerator\DMTools.EncounterGenerator.csproj" />
+    <ProjectReference Include="..\DMTools.ScriptTracker\DMTools.ScriptTracker.csproj" />
+    <ProjectReference Include="..\DMTools.Security\DMTools.Security.csproj" />
+    <ProjectReference Include="..\DMToolsLibrary\DMTools.StatBlock.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DMToolsLibrary.Enums.LibraryEnums;
+using static DMTools.Shared.Enums.LibraryEnums;
 
-namespace DMToolsLibrary.StatBlocks.StatBlockHelpers
+namespace DMTools.StatBlocks.StatBlockHelpers
 {
     public class Stats
     {

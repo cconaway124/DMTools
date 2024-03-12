@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Names\" />
-    <Folder Include="EncounterGenerator\" />
-    <Folder Include="ScriptTracker\" />
-  </ItemGroup>
-
-  <ItemGroup>
 	  <AdditionalFiles Include="../stylecop.json" />
   </ItemGroup>
 
@@ -23,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DMTools.Database\DMTools.Database.csproj" />
+    <ProjectReference Include="..\DMTools.Shared\DMTools.Shared.csproj" />
   </ItemGroup>
 
 </Project>

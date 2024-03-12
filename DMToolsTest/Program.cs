@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
-using DMToolsLibrary;
-using DMToolsLibrary.StatBlocks;
-using DMToolsLibrary.StatBlocks.StatBlockHelpers;
-using static DMToolsLibrary.Enums.LibraryEnums;
+using DMTools;
+using DMTools.StatBlocks;
+using DMTools.StatBlocks.StatBlockHelpers;
+using static DMTools.Shared.Enums.LibraryEnums;
 
 namespace DMToolsTest
 {

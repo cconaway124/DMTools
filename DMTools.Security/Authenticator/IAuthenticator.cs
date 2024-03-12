@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DMToolsLibrary.Enums.LibraryEnums;
+using static DMTools.Shared.Enums.LibraryEnums;
 
-namespace DMToolsLibrary.Security;
+namespace DMTools.Security;
 
 public interface IAuthenticator
 {

@@ -1,8 +1,8 @@
-﻿using DMToolsLibrary.DiceCalculator;
-using DMToolsLibrary.StatBlocks.StatBlockHelpers;
-using static DMToolsLibrary.Enums.LibraryEnums;
+﻿using DMTools.DiceCalculator;
+using DMTools.StatBlocks.StatBlockHelpers;
+using static DMTools.Shared.Enums.LibraryEnums;
 
-namespace DMToolsLibrary.StatBlocks.Types;
+namespace DMTools.StatBlocks.Types;
 
 public class Monster : StatBlock
 {

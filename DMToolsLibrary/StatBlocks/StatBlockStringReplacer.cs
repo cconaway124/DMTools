@@ -1,5 +1,5 @@
-﻿using DMToolsLibrary.DiceCalculator;
-using DMToolsLibrary.StatBlocks.StatBlockHelpers;
+﻿using DMTools.DiceCalculator;
+using DMTools.StatBlocks.StatBlockHelpers;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace DMToolsLibrary.StatBlocks;
+namespace DMTools.StatBlocks;
 
 public static class StatBlockStringReplacer
 {

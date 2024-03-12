@@ -1,13 +1,13 @@
-﻿using DMToolsLibrary.DiceCalculator;
-using DMToolsLibrary.StatBlocks.StatBlockHelpers;
+﻿using DMTools.DiceCalculator;
+using DMTools.StatBlocks.StatBlockHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static DMToolsLibrary.Enums.LibraryEnums;
+using static DMTools.Shared.Enums.LibraryEnums;
 
-namespace DMToolsLibrary.StatBlocks.Types
+namespace DMTools.StatBlocks.Types
 {
     public abstract class StatBlock
     {
