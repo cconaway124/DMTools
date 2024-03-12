@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DMTools.Database\DMTools.Database.csproj" />
-  </ItemGroup>
-
 </Project>

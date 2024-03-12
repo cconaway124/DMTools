@@ -21,7 +21,7 @@
     <ProjectReference Include="..\DMTools.EncounterGenerator\DMTools.EncounterGenerator.csproj" />
     <ProjectReference Include="..\DMTools.ScriptTracker\DMTools.ScriptTracker.csproj" />
     <ProjectReference Include="..\DMTools.Security\DMTools.Security.csproj" />
-    <ProjectReference Include="..\DMToolsLibrary\DMTools.StatBlock.csproj" />
+    <ProjectReference Include="..\DMTools.StatBlock\DMTools.StatBlock.csproj" />
   </ItemGroup>
 
 </Project>
