@@ -1,9 +1,12 @@
-﻿<div class="property-line">
-	<h4>Condition Immunities</h4>
-	<p>
-		@conditionImmunities.ToString()
-	</p>
-</div> <!-- property line -->
+﻿@if (this.conditionImmunities.Count > 0)
+{
+	<div class="property-line">
+		<h4>Condition Immunities</h4>
+		<p>
+			@conditionImmunities.ToString()
+		</p>
+	</div> <!-- property line -->
+}
 
 @code {
 	[Parameter]

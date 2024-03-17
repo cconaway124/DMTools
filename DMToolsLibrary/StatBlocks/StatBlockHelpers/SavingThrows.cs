@@ -46,6 +46,14 @@ public class SavingThrows
         get => this.stats;
     }
 
+    public int NumOfSavingThrows
+    {
+        get
+        {
+            return this.stats.Where(pair => pair.Value != 0).Count();
+        }
+    }
+
     public int GetSavingThrowBonus(StatType statType)
     {
         this.stats.TryGetValue(statType, out int value);

@@ -20,6 +20,11 @@ public class ConditionImmunities
 		}
     }
 
+	public int Count
+	{
+		get => this .conditionImmunities.Length;
+	}
+
 	public override string ToString()
 	{
 		return string.Join(", ", this.conditionImmunities);

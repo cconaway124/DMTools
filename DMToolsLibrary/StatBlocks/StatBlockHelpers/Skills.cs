@@ -32,6 +32,11 @@ public class Skills
 		}
 	}
 
+	public int Count
+	{
+		get => this.skills.Count;
+	}
+
 	public override string ToString()
 	{
 		StringBuilder sb = new StringBuilder();
