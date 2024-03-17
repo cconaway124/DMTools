@@ -7,6 +7,8 @@ public partial class DamageTypes
 {
 	Dictionary<DamageType, List<string>> damageTypes;
 
+	public DamageTypes() { }
+
 	public DamageTypes(Dictionary<string, string>[] dTypes)
 	{
         this.damageTypes = new Dictionary<DamageType, List<string>>();

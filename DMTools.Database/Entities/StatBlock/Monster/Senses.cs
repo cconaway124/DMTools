@@ -11,6 +11,7 @@ using DMTools.Shared.Enums;
 
 namespace DMTools.Database.Entities;
 
+[Table(name: "Senses", Schema = "monster")]
 public partial class Senses
 {
     [Key]

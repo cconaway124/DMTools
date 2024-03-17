@@ -21,6 +21,8 @@ public partial class Speeds
         fly,
         swim,
     }
+    public Speeds() { }
+
     public Speeds(string speed,
         string burrowSpeed,
         string climbSpeed,

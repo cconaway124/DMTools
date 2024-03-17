@@ -13,6 +13,12 @@ public partial class ConditionImmunity
 	private string[] conditionImmunities;
 
 	public ConditionImmunity() { }
+
+	public static List<ConditionImmunity> CreateConditionImmunities(Dictionary<string, string>[] conditionImmunities)
+	{
+		return new();
+	}
+
     public ConditionImmunity(Dictionary<string, string>[] conditionImmunities)
     {
 		this.conditionImmunities = new string[conditionImmunities.Length];

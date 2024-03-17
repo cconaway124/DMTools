@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 
 namespace DMTools.Database.Entities;
 
+[Table(name: "ConditionImmunity", Schema = "monster")]
 public partial class ConditionImmunity
 {
 	[Key]
 	public int ConditionImmunityId { get; set; }
 	public string Description { get; set; }
+    [ForeignKey(name: "MonsterId")]
+    public virtual Monster? Monster { get; set; }
 }

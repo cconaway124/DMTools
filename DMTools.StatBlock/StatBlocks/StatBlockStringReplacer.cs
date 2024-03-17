@@ -1,5 +1,5 @@
-﻿using DMTools.DiceCalculator;
-using DMTools.StatBlocks.StatBlockHelpers;
+﻿using DMTools.Database.Entities;
+using DMTools.Shared.DiceCalculator;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;

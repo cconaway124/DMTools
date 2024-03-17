@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace DMTools.Database.Entities;
 
+[Table(name: "Actions", Schema = "monster")]
 public class Actions
 {
     [Key]

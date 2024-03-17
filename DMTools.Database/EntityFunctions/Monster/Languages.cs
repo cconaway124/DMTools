@@ -14,6 +14,8 @@ public partial class Languages
     private Dictionary<string, bool> languages;
     private string understandsBut;
 
+    public Languages() { }
+
     public Languages(Dictionary<string, string>[] languages, string understandsBut)
     {
         this.understandsBut = understandsBut;

@@ -28,6 +28,8 @@ public partial class MonsterActions
         get => this.actions;
     }
 
+    public MonsterActions() { }
+
     public MonsterActions(Dictionary<string, string>[] actions,
         string actionName,
         string actionDescription,

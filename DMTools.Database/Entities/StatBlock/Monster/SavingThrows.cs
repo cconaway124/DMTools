@@ -5,6 +5,7 @@ using static DMTools.Shared.Enums.LibraryEnums;
 
 namespace DMTools.Database.Entities;
 
+[Table(name: "SavingThrows", Schema = "monster")]
 public partial class SavingThrows
 {
     [Key]

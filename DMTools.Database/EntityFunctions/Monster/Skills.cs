@@ -13,6 +13,8 @@ public partial class Skills
 {
     private Dictionary<string, int> skills;
 
+	public Skills() { }
+
 	public Skills(Dictionary<string, string>[] skillDict, Stats stats, int profBonus)
 	{
 		this.skills = new Dictionary<string, int>();

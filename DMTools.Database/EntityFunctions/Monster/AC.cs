@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMTools.StatBlocks.StatBlockHelpers;
+namespace DMTools.Database.Entities;
 
 public partial class AC
 {
@@ -55,6 +55,7 @@ public partial class AC
 		MageArmor,
 	}
 
+	public AC() { }
 
 	// TODO: This will need to use the DBContext to fetch the type of armor and AC
 	public AC(string otherArmorDesc, int shieldBonus, string armorName, int dexBonus, int naturalArmorBonus)

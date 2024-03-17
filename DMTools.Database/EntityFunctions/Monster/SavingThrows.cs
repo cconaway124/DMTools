@@ -9,6 +9,7 @@ public partial class SavingThrows
 {
 
     private Dictionary<StatType, int> stats;
+    public SavingThrows() { }
     public SavingThrows(Dictionary<string, string>[] types, Stats stats, int profBonus)
     {
         StatType[] saveType = GetSaveTypes(types);

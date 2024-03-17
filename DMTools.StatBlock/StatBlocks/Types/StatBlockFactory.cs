@@ -2,6 +2,7 @@
 // No Copyright yet
 // </copyright>
 
+using DMTools.Database.Entities;
 using DMTools.Shared;
 using Newtonsoft.Json;
 using System.Reflection;

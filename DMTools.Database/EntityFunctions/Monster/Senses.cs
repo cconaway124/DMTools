@@ -36,6 +36,8 @@ public partial class Senses
         passive_perception
     }
 
+    public Senses() { }
+
     public Senses(
         string blindsight,
         bool blind,

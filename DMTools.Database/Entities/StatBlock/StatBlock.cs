@@ -1,5 +1,4 @@
 ﻿using DMTools.Shared.DiceCalculator;
-using DMTools.StatBlocks.StatBlockHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +10,25 @@ namespace DMTools.Database.Entities;
 
 public abstract class StatBlock
 {
-		public string Name { get; set; }
+    public string Name { get; set; }
 
-		public SizeEnum Size { get; set;}
+    public SizeEnum Size { get; set; }
 
-    public AC ArmorClass { get; set;}
+    public AC ArmorClass { get; set; }
 
-    public int HitPoints { get; set;}
+    public int HitPoints { get; set; }
 
-    public HitDie HitDie { get; set;}
+    public HitDie HitDie { get; set; }
 
-    public int Speed { get; set;}
+    public int Speed { get; set; }
 
-    public Stats Stats { get; set;}
+    public Stats Stats { get; set; }
 
-    public Senses Senses { get; set;}
+    public Senses Senses { get; set; }
 
-    public string Alignment { get; set;}
+    public string Alignment { get; set; }
 
-    public Speeds Speeds { get; set;}
+    public Speeds Speeds { get; set; }
 
-    public Languages Languages { get; set;}
+    public Languages Languages { get; set; }
 }

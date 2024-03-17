@@ -8,8 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMTools.StatBlocks.StatBlockHelpers;
+namespace DMTools.Database.Entities;
 
+[Table(name: "ArmorClass", Schema = "monster")]
 public partial class AC
 {
 	[Key]

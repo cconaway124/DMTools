@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace DMTools.Database.Entities;
 
+[Table(name: "Languages", Schema = "monster")]
 public partial class Languages
 {
 	[Key]

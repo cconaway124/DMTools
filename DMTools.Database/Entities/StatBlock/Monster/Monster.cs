@@ -1,12 +1,15 @@
-﻿namespace DMTools.Database.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace DMTools.Database.Entities;
+
+[Table(name: "Monster", Schema = "monster")]
 public partial class Monster : StatBlock
 {
     public string MonsterId { get; set; }
 
     public string Tag { get; set; }
 
-    public ChallengeRating Cr { get; set; }
+    public virtual ChallengeRating Cr { get; set; }
 
     public bool IsCustomCr { get; set; }
 
@@ -15,30 +18,30 @@ public partial class Monster : StatBlock
     public int ProfBonus { get; set; }
 
     public string Type { get; set; }
+    [NotMapped]
+    public virtual MonsterActions Abilities { get; set; }
+    [NotMapped]
+    public virtual MonsterActions Actions { get; set; }
+    [NotMapped]
+    public virtual MonsterActions BonusActions { get; set; }
+    [NotMapped]
+    public virtual MonsterActions Reactions { get; set; }
+    [NotMapped]
+    public virtual MonsterActions Legendaries { get; set; }
+    [NotMapped]
+    public virtual MonsterActions Mythics { get; set; }
+    [NotMapped]
+    public virtual MonsterActions Lairs { get; set; }
+    [NotMapped]
+    public virtual MonsterActions Regionals { get; set; }
+    [NotMapped]
+    public virtual SavingThrows Sthrows { get; set; }
 
-    public MonsterActions Abilities { get; set; }
+    public virtual Skills Mskills { get; set; }
 
-    public MonsterActions Actions { get; set; }
+    public virtual DamageTypes DamageTypes { get; set; }
 
-    public MonsterActions BonusActions { get; set; }
-
-    public MonsterActions Reactions { get; set; }
-
-    public MonsterActions Legendaries { get; set; }
-
-    public MonsterActions Mythics { get; set; }
-
-    public MonsterActions Lairs { get; set; }
-
-    public MonsterActions Regionals { get; set; }
-
-    public SavingThrows Sthrows { get; set; }
-
-    public Skills Mskills { get; set; }
-
-    public DamageTypes DamageTypes { get; set; }
-
-    public ConditionImmunity ConditionImmunities { get; set; }
+    public virtual List<ConditionImmunity> ConditionImmunity { get; set; }
 
     public bool CustomHp { get; set; }
 
@@ -64,8 +67,6 @@ public partial class Monster : StatBlock
 
     public string RegionalDescriptionEnd { get; set; }
 
-    public Properties Properties { get; set; }
-
     public string ShortName { get; set; }
 
     public string PluralName { get; set; }
@@ -73,6 +74,4 @@ public partial class Monster : StatBlock
     public bool DoubleColumns { get; set; }
 
     public int SeparationPoint { get; set; }
-
-    public object[] Damage { get; set; }
 }

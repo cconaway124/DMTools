@@ -1,10 +1,13 @@
 ﻿using static DMTools.Shared.Enums.LibraryEnums;
 using DMTools.Shared.DiceCalculator;
+using DMTools.Shared;
 
 namespace DMTools.Database.Entities;
 
 public partial class Monster : StatBlock
 {
+    private object[] Damage;
+    private Properties Properties { get; set; }
     public Monster() { }
 
     public Monster(FromJsonStatBlock jsonStatBlock)
@@ -55,17 +58,17 @@ public partial class Monster : StatBlock
         this.ShortName = jsonStatBlock.shortName;
         this.PluralName = jsonStatBlock.pluralName;
         this.RegionalDescriptionEnd = jsonStatBlock.regionalDescriptionEnd;
-        this.Abilities = this.CreateActions(jsonStatBlock.abilities, "Abilities", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
-        this.Actions = this.CreateActions(jsonStatBlock.actions, "Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
-        this.BonusActions = this.CreateActions(jsonStatBlock.bonusActions, "Bonus Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
-        this.Reactions = this.CreateActions(jsonStatBlock.reactions, "Reactions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
-        this.Legendaries = this.CreateActions(jsonStatBlock.legendaries, "Legendary Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isLegendary, jsonStatBlock.legendariesDescription));
-        this.Mythics = this.CreateActions(jsonStatBlock.mythics, "Mythic Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isMythic, jsonStatBlock.mythicDescription));
-        this.Lairs = this.CreateActions(jsonStatBlock.lairs, "Lair Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isLair, jsonStatBlock.lairDescription));
-        this.Regionals = this.CreateActions(jsonStatBlock.regionals, "Reional Effects", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isRegional, jsonStatBlock.regionalDescription + "\n\n" + jsonStatBlock.regionalDescriptionEnd));
+        this.Abilities = new();//this.CreateActions(jsonStatBlock.abilities, "Abilities", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
+        this.Actions = new();//this.CreateActions(jsonStatBlock.actions, "Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
+        this.BonusActions = new();//this.CreateActions(jsonStatBlock.bonusActions, "Bonus Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
+        this.Reactions = new();//this.CreateActions(jsonStatBlock.reactions, "Reactions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName);
+        this.Legendaries = new();//this.CreateActions(jsonStatBlock.legendaries, "Legendary Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isLegendary, jsonStatBlock.legendariesDescription));
+        this.Mythics = new();//this.CreateActions(jsonStatBlock.mythics, "Mythic Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isMythic, jsonStatBlock.mythicDescription));
+        this.Lairs = new();//this.CreateActions(jsonStatBlock.lairs, "Lair Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isLair, jsonStatBlock.lairDescription));
+        this.Regionals = new();//this.CreateActions(jsonStatBlock.regionals, "Reional Effects", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isRegional, jsonStatBlock.regionalDescription + "\n\n" + jsonStatBlock.regionalDescriptionEnd));
         this.Sthrows = new SavingThrows(jsonStatBlock.sthrows, this.Stats, this.ProfBonus);
         this.Mskills = new Skills(jsonStatBlock.skills, this.Stats, this.ProfBonus);
-        this.ConditionImmunities = new ConditionImmunity(jsonStatBlock.conditions);
+        this.ConditionImmunity = Entities.ConditionImmunity.CreateConditionImmunities(jsonStatBlock.conditions);
         this.Languages = new Languages(jsonStatBlock.languages, jsonStatBlock.understandsBut);
         this.DoubleColumns = jsonStatBlock.doubleColumns;
         this.SeparationPoint = jsonStatBlock.separationPoint;

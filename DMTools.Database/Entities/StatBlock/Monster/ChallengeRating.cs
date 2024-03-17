@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace DMTools.Database.Entities;
 
+[Table(name: "ChallengeRating", Schema = "monster")]
 public partial class ChallengeRating
 {
 	[Key]

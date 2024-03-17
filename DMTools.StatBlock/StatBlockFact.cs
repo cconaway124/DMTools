@@ -2,6 +2,7 @@
 // No Copyright yet
 // </copyright>
 
+using DMTools.Database.Entities;
 using DMTools.StatBlocks.Types;
 
 namespace DMTools

@@ -9,6 +9,7 @@ using static DMTools.Shared.Enums.LibraryEnums;
 
 namespace DMTools.Database.Entities;
 
+[Table(name: "Skills", Schema = "monster")]
 public partial class Skills
 {
 	[Key]

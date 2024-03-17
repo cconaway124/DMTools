@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace DMTools.Database.Entities;
 
+[Table(name: "Speeds", Schema = "monster")]
 public partial class Speeds
 {
     [Key]
