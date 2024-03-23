@@ -1,16 +1,23 @@
-﻿
-<div class="@((this.monster.DoubleColumns) ? "col-lg-6 col-md-8 col-sm-12" : "col-lg-3 col-md-4 col-sm-6") margin-20">
-    <div class="creature-heading colored-bg" name="nameTag" hidden>
-        <a name="slideBlock" id="a @monster.MonsterId" onclick="Slide(this)">
-            <h1>@monster.Name</h1>
-            <h2>@monster.Size @monster.Type, @monster.Alignment</h2>
-        </a>
-    </div> <!-- creature heading -->
+﻿<div class="@((this.monster.DoubleColumns) ? "col-lg-6 col-md-8 col-sm-12" : "col-lg-3 col-md-4 col-sm-6") margin-20">
+    <div class="stat-block-header">
+        <div class="button-group">
+            <button>Button1</button>
+            <button>Button2</button>
+            <button>Button3</button>
+        </div>
+    
+        <div class="creature-heading colored-bg" name="nameTag" hidden>
+            <a class="pointer" name="slideBlock" id="a @monster.MonsterId" onclick="Slide(this)">
+                <h1>@monster.Name</h1>
+                <h2>@monster.Size @monster.Type, @monster.Alignment</h2>
+            </a>
+        </div> <!-- creature heading -->
+    </div>
     <div class="stat-block @((this.monster.DoubleColumns) ? "wide" : "")">
         <hr class="orange-border" />
         <div class="section-left">
             <div class="creature-heading">
-                <a name="slideBlock" id="a @monster.MonsterId" onclick="Slide(this)">
+                <a class="pointer" name="slideBlock" id="a @monster.MonsterId" onclick="Slide(this)">
                     <h1>@monster.Name</h1>
                     <h2>@monster.Size @monster.Type, @monster.Alignment</h2>
                 </a>

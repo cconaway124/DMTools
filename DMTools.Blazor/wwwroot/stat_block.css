@@ -30,6 +30,19 @@ body {
     box-shadow: 0 0 1.5em #867453;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: black;   
+}
+
 .stat-block {
     text-align: left;
     /*margin: 20px;*/
@@ -111,6 +124,11 @@ body {
     color: #922610;
     fill: #922610;
     stroke: #922610;
+}
+
+div.creature-heading.colored-bg {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .creature-heading h1 {

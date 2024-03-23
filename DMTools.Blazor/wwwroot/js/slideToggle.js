@@ -12,9 +12,9 @@ function RegisterSlide(ele) {
 function Slide(ele) {
     let parent = $(ele).parents('div.stat-block');
     if (parent.length === 0)
-        parent = $(ele).parent().siblings('div.stat-block');
+        parent = $(ele).parents().siblings('div.stat-block');
 
-    let child = parent.siblings('div[name="nameTag"]');
+    let child = parent.siblings('div.stat-block-header').children('div[name="nameTag"]');
 
     if (child.attr('hidden'))
         child.removeAttr('hidden');
