@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using static DMTools.Shared.Enums.LibraryEnums;
@@ -37,63 +38,63 @@ public partial class Stats
 
     public int StrPoints
     {
-        get => this.statPoints[(int)StatType.Str];
+        get => (this.Str == 0) ? this.statPoints[(int)StatType.Str] : this.Str;
     }
 
     public int DexPoints
     {
-        get => this.statPoints[(int)StatType.Dex];
+        get => (this.Dex == 0) ?  this.statPoints[(int)StatType.Dex] : this.Dex;
     }
 
     public int ConPoints
     {
-        get => this.statPoints[(int)StatType.Con];
+        get => (this.Con == 0) ? this.statPoints[(int)StatType.Con] : this.Con;
     }
 
     public int IntPoints
     {
-        get => this.statPoints[(int)StatType.Int];
+        get => (this.Int == 0) ? this.statPoints[(int)StatType.Int] : this.Int;
     }
 
     public int WisPoints
     {
-        get => this.statPoints[(int)StatType.Wis];
+        get => (this.Wis == 0) ? this.statPoints[(int)StatType.Wis] : this.Wis;
     }
 
     public int ChaPoints
     {
-        get => this.statPoints[(int)StatType.Cha];
+        get => (this.Cha == 0) ? this.statPoints[(int)StatType.Cha] : this.Cha;
     }
 
-    /*public int Str
+    public int StrMod
     {
-        get => this.statMods[(int)StatType.Str];
+        get => this.CalculateAbilityMod(this.StrPoints);
     }
 
-    public int Dex
+    public int DexMod
     {
-        get => this.statMods[(int)StatType.Dex];
+        get => this.CalculateAbilityMod(this.DexPoints);
     }
 
-    public int Con
+    public int ConMod
     {
-        get => this.statMods[(int)StatType.Con];
+        get => this.CalculateAbilityMod(this.ConPoints);
     }
 
-    public int Int
+    public int IntMod
     {
-        get => this.statMods[(int)StatType.Int];
+        get => this.CalculateAbilityMod(this.IntPoints);
     }
 
-    public int Wis
+    public int WisMod
     {
-        get => this.statMods[(int)StatType.Wis];
+        get => this.CalculateAbilityMod(this.WisPoints);
     }
 
-    public int Cha
+    public int ChaMod
     {
-        get => this.statMods[(int)StatType.Cha];
-    }*/
+        get => this.CalculateAbilityMod(this.ChaPoints);
+    }
 
     private int CalculateAbilityMod(int points)
     {

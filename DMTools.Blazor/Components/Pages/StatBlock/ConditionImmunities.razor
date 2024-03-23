@@ -1,7 +1,7 @@
 ﻿<div class="property-line">
 	<h4>Condition Immunities</h4>
 	<p>
-		@conditionImmunities.ToString()
+		@string.Join(", ", conditionImmunities.Select(i => i.ToString()))
 	</p>
 </div> <!-- property line -->
 

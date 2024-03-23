@@ -10,27 +10,32 @@ namespace DMTools.Database.Entities;
 
 public partial class ConditionImmunity
 {
-	private string[] conditionImmunities;
-
 	public ConditionImmunity() { }
 
 	public static List<ConditionImmunity> CreateConditionImmunities(Dictionary<string, string>[] conditionImmunities)
 	{
-		return new();
-	}
+		List<ConditionImmunity> conditionImm = new();
+
+        for (int i = 0; i < conditionImmunities.Length; i++)
+        {
+			conditionImm.Add(new ConditionImmunity { Description = conditionImmunities[i]["name"] });
+        }
+
+		return conditionImm;
+    }
 
     public ConditionImmunity(Dictionary<string, string>[] conditionImmunities)
     {
-		this.conditionImmunities = new string[conditionImmunities.Length];
+		/*this.conditionImmunities = new string[conditionImmunities.Length];
 
 		for (int i = 0; i < conditionImmunities.Length; i++)
 		{
-			this.conditionImmunities[i] = conditionImmunities[i]["name"];
-		}
+			this.conditionImmunities.Add(new ConditionImmunity { Description = conditionImmunities[i]["name"] });
+        }*/
     }
 
 	public override string ToString()
 	{
-		return string.Join(", ", this.conditionImmunities);
+		return this.Description;
 	}
 }
