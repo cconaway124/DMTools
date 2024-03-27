@@ -2,12 +2,30 @@ using DMTools.Blazor.Components;
 using Microsoft.EntityFrameworkCore;
 using DMTools.Database;
 using DMTools.Security;
+using Carter;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string cookieBaseName = builder.Environment.ApplicationName.Replace(" ", "");
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddCarter();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(opt => {
+    opt.Cookie.Name = $"{cookieBaseName}.Session";
+    opt.IdleTimeout = TimeSpan.FromSeconds(10);
+    opt.Cookie.HttpOnly = true;
+    opt.Cookie.IsEssential = true;
+});
+builder.Services.AddAntiforgery(opt =>
+    opt.Cookie.Name = $"{cookieBaseName}.AntiForgery");
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddDbContext<DmtoolsContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -25,11 +43,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseSession();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+app.MapCarter();
 
 app.Run();

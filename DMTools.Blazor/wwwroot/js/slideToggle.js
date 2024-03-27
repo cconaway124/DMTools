@@ -14,7 +14,7 @@ function Slide(ele) {
     if (parent.length === 0)
         parent = $(ele).parents().siblings('div.stat-block');
 
-    let child = parent.siblings('div.stat-block-header').children('div[name="nameTag"]');
+    let child = parent.siblings('div[name="nameTag"]');
 
     if (child.attr('hidden'))
         child.removeAttr('hidden');

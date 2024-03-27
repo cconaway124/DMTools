@@ -5,7 +5,7 @@ namespace DMTools.Database.Entities;
 [Table(name: "Monster", Schema = "monster")]
 public partial class Monster : StatBlock
 {
-    public string MonsterId { get; set; }
+    public int MonsterId { get; set; }
 
     public string Tag { get; set; }
 
