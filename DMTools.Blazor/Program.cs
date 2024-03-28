@@ -4,6 +4,8 @@ using DMTools.Database;
 using DMTools.Security;
 using Carter;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Components.Authorization;
+using DMTools.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +17,15 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddCarter();
 
+builder.Services.AddScoped<AuthenticationStateProvider,
+    DmToolsAuthenticationStateProvider>();
+
+builder.Services.AddCascadingAuthenticationState();
+
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(opt => {
     opt.Cookie.Name = $"{cookieBaseName}.Session";
-    opt.IdleTimeout = TimeSpan.FromSeconds(10);
+    opt.IdleTimeout = TimeSpan.FromHours(1);
     opt.Cookie.HttpOnly = true;
     opt.Cookie.IsEssential = true;
 });

@@ -1,6 +1,8 @@
 ﻿@page "/login"
 @rendermode InteractiveServer
-@inject IAuthenticator authenticator
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
 <h3>Login</h3>
 
 
@@ -29,6 +31,6 @@
 
     public void Submit(MouseEventArgs e)
     {
-        authenticator.Authorize(this.User);
+        ((DmToolsAuthenticationStateProvider)AuthenticationStateProvider).AuthenticateUser(this.User);
     }
 }

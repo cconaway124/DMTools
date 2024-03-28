@@ -57,6 +57,8 @@ public class Authenticator : IAuthenticator
             _dmToolsContext.SaveChangesAsync();
         }
 
+        loginUser = user;
+
         return UserLoginType.Success;
     }
 }
