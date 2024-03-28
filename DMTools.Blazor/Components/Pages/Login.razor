@@ -31,6 +31,10 @@
 
     public void Submit(MouseEventArgs e)
     {
-        ((DmToolsAuthenticationStateProvider)AuthenticationStateProvider).AuthenticateUser(this.User);
+        if (((DmToolsAuthenticationStateProvider)AuthenticationStateProvider).AuthenticateUser(this.User)
+            == UserLoginType.Success)
+        {
+            StateHasChanged();
+        }
     }
 }

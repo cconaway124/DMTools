@@ -28,7 +28,7 @@ public class UserFunctions : IUserFunctions
 
         PasswordHasher hasher = new PasswordHasher();
         user = hasher.HashPassword(user, user.Password);
-        user.UserGuid = Guid.NewGuid();
+        user.UserGuid = Guid.NewGuid().ToString();
 
         try
         {

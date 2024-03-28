@@ -74,4 +74,5 @@ public partial class Monster : StatBlock
     public bool DoubleColumns { get; set; }
 
     public int SeparationPoint { get; set; }
+    public string UserGuid { get; set; }
 }

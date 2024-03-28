@@ -6,6 +6,9 @@ using Carter;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Components.Authorization;
 using DMTools.Blazor;
+using Auth0.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,15 +23,15 @@ builder.Services.AddCarter();
 builder.Services.AddScoped<AuthenticationStateProvider,
     DmToolsAuthenticationStateProvider>();
 
+builder.Services
+    .AddAuth0WebAppAuthentication(options => {
+        options.Domain = builder.Configuration["Auth0:Domain"];
+        options.ClientId = builder.Configuration["Auth0:ClientId"];
+        options.CallbackPath = new PathString("/callback");
+    });
+
 builder.Services.AddCascadingAuthenticationState();
 
-builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(opt => {
-    opt.Cookie.Name = $"{cookieBaseName}.Session";
-    opt.IdleTimeout = TimeSpan.FromHours(1);
-    opt.Cookie.HttpOnly = true;
-    opt.Cookie.IsEssential = true;
-});
 builder.Services.AddAntiforgery(opt =>
     opt.Cookie.Name = $"{cookieBaseName}.AntiForgery");
 
@@ -48,11 +51,31 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
 app.UseHttpsRedirection();
-app.UseSession();
+
 app.UseStaticFiles();
 app.UseAntiforgery();
+app.UseAuthentication();
+
+app.MapGet("/Account/Login", async (HttpContext httpContext, string redirectUri = "/") =>
+{
+    var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
+            .WithRedirectUri(redirectUri)
+            .Build();
+
+    await httpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
+});
+
+app.MapGet("/Account/Logout", async (HttpContext httpContext, string redirectUri = "/") =>
+{
+    var authenticationProperties = new LogoutAuthenticationPropertiesBuilder()
+            .WithRedirectUri(redirectUri)
+            .Build();
+
+    await httpContext.SignOutAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
+    await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+});
+app.UseStaticFiles();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

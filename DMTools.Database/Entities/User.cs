@@ -17,5 +17,5 @@ public class User
     public string UserEmail { get; set; } = string.Empty;
     [MaxLength(500)]
     public string Password { get; set; } = string.Empty;
-    public Guid UserGuid { get; set; }
+    public string UserGuid { get; set; }
 }

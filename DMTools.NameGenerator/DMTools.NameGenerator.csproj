@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DMTools.Database\DMTools.Database.csproj" />
     <ProjectReference Include="..\DMTools.Shared\DMTools.Shared.csproj" />
   </ItemGroup>

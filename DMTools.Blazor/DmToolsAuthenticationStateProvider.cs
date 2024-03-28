@@ -4,6 +4,7 @@ using DMTools.Database;
 using DMTools.Database.Entities;
 using DMTools.Security;
 using Microsoft.AspNetCore.Components.Authorization;
+using static DMTools.Shared.Enums.LibraryEnums;
 
 
 namespace DMTools.Blazor;
@@ -12,6 +13,8 @@ public class DmToolsAuthenticationStateProvider : AuthenticationStateProvider
 {
     private readonly DmtoolsContext dmToolsContext;
     private readonly IAuthenticator authenticator;
+
+    private ClaimsPrincipal? user;
 
     public DmToolsAuthenticationStateProvider(DmtoolsContext dmToolsContext, IAuthenticator authenticator)
     {
@@ -24,25 +27,28 @@ public class DmToolsAuthenticationStateProvider : AuthenticationStateProvider
         var identity = new ClaimsIdentity();
         var user = new ClaimsPrincipal(identity);
 
-        return Task.FromResult(new AuthenticationState(user));
+        return Task.FromResult(new AuthenticationState(this.user ?? user));
     }
 
-    public void AuthenticateUser(User user)
+    public UserLoginType AuthenticateUser(User user)
     {
 
-        if (authenticator.Authorize(user) != Shared.Enums.LibraryEnums.UserLoginType.Success)
+        if (authenticator.Authorize(user) != UserLoginType.Success)
         {
-            return;
+            return UserLoginType.NotFound;
         }
 
         var identity = new ClaimsIdentity(new[]
         {
-            new Claim(ClaimTypes.Thumbprint, user.UserName),
+            new Claim(ClaimTypes.Name, user.UserName),
         }, "Custom Authentication");
 
         var claimUser = new ClaimsPrincipal(identity);
 
         NotifyAuthenticationStateChanged(
             Task.FromResult(new AuthenticationState(claimUser)));
+        this.user = claimUser;
+
+        return UserLoginType.Success;
     }
 }

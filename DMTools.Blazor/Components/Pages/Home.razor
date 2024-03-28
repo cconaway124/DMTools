@@ -5,21 +5,15 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Home</PageTitle>
-<h3>ClaimsPrincipal Data</h3>
 
-<button @onclick="GetClaimsPrincipalData">Get ClaimsPrincipal Data</button>
-
-<p>@_authMessage</p>
-
-@if (_claims.Count() > 0)
-{
-    <ul>
-        @foreach (var claim in _claims)
-        {
-            <li>@claim.Type &ndash; @claim.Value</li>
-        }
-    </ul>
-}
+<AuthorizeView>
+    <Authorized>
+        hello
+    </Authorized>
+    <NotAuthorized>
+        Goodbye
+    </NotAuthorized>
+</AuthorizeView>
 
 <p>@_surnameMessage</p>
     
@@ -30,7 +24,7 @@
 
     public async Task GetClaimsPrincipalData()
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var authState = await ((DmToolsAuthenticationStateProvider)AuthenticationStateProvider).GetAuthenticationStateAsync();
         
         var user = authState.User;
 
