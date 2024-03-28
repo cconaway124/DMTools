@@ -17,7 +17,7 @@ namespace DMTools.Database.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -84,9 +84,8 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MonsterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Xp")
                         .IsRequired()
@@ -112,8 +111,8 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MonsterId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("MonsterId")
+                        .HasColumnType("int");
 
                     b.HasKey("ConditionImmunityId");
 
@@ -130,9 +129,8 @@ namespace DMTools.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DamageTypeId"));
 
-                    b.Property<string>("MonsterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -167,9 +165,8 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MonsterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
 
                     b.HasKey("HitDieId");
 
@@ -194,9 +191,8 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MonsterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
 
                     b.HasKey("LanguageId");
 
@@ -208,8 +204,11 @@ namespace DMTools.Database.Migrations
 
             modelBuilder.Entity("DMTools.Database.Entities.Monster", b =>
                 {
-                    b.Property<string>("MonsterId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MonsterId"));
 
                     b.Property<string>("Alignment")
                         .IsRequired()
@@ -305,6 +304,10 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserGuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("MonsterId");
 
                     b.HasIndex("ArmorClassAcId");
@@ -332,9 +335,8 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MonsterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -358,9 +360,8 @@ namespace DMTools.Database.Migrations
                     b.Property<int>("ConditionImmunityId")
                         .HasColumnType("int");
 
-                    b.Property<string>("MonsterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
 
                     b.HasKey("Monsters_ConditionImmunitiesId");
 
@@ -391,9 +392,8 @@ namespace DMTools.Database.Migrations
                     b.Property<int?>("Int")
                         .HasColumnType("int");
 
-                    b.Property<string>("MonsterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -429,9 +429,8 @@ namespace DMTools.Database.Migrations
                     b.Property<int?>("Darkvision")
                         .HasColumnType("int");
 
-                    b.Property<string>("MonsterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
 
                     b.Property<int>("PassivePerception")
                         .HasColumnType("int");
@@ -464,9 +463,8 @@ namespace DMTools.Database.Migrations
                     b.Property<int>("Bonus")
                         .HasColumnType("int");
 
-                    b.Property<string>("MonsterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -500,9 +498,8 @@ namespace DMTools.Database.Migrations
                     b.Property<int?>("Hover")
                         .HasColumnType("int");
 
-                    b.Property<string>("MonsterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("Speed")
                         .HasColumnType("int");
@@ -538,9 +535,8 @@ namespace DMTools.Database.Migrations
                     b.Property<int>("Int")
                         .HasColumnType("int");
 
-                    b.Property<string>("MonsterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Str")
                         .HasColumnType("int");
@@ -565,7 +561,6 @@ namespace DMTools.Database.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -574,8 +569,9 @@ namespace DMTools.Database.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<Guid>("UserGuid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("UserGuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -584,7 +580,7 @@ namespace DMTools.Database.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("DMTools.Database.Entities.Actions", b =>

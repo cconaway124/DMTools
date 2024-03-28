@@ -115,7 +115,8 @@
         if (auth is not null)
         {
             var state = await auth;
-            this.monster.UserGuid = state.User.Claims.First(cl => cl.Type == ClaimTypes.Thumbprint).Value;
+            var g = state.User.Claims.First(cl => cl.Type == ClaimTypes.NameIdentifier).Value;
+            this.monster.UserGuid = g;
             var result = await this.httpClient.PostAsJsonAsync("api/v1/monster/create", this.monster);
         }
     }

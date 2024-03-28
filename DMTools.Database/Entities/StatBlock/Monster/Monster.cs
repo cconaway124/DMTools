@@ -1,10 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DMTools.Database.Entities;
 
 [Table(name: "Monster", Schema = "monster")]
 public partial class Monster : StatBlock
 {
+    [Key]
     public int MonsterId { get; set; }
 
     public string Tag { get; set; }

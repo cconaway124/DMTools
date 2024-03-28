@@ -58,7 +58,7 @@ public class MonsterModule : CarterModule
             return TypedResults.BadRequest("User is not logged in.");
         }
 
-        User checkUser = dmtoolsContext.Users.Where(u => u.UserName == username && g == u.UserGuid).FirstOrDefault();
+        User checkUser = null;// dmtoolsContext.Users.Where(u => u.UserName == username && g == u.UserGuid).FirstOrDefault();
         if (checkUser == null)
         {
             return TypedResults.BadRequest("User does not match any resource.");
@@ -89,7 +89,7 @@ public class MonsterModule : CarterModule
             return TypedResults.BadRequest("User is not logged in.");
         }
 
-        User checkUser = dmtoolsContext.Users.Where(u => u.UserName == username && g == u.UserGuid).FirstOrDefault();
+        User checkUser = null;//dmtoolsContext.Users.Where(u => u.UserName == username && g == u.UserGuid).FirstOrDefault();
         if (checkUser == null)
         {
             return TypedResults.BadRequest("User does not match any resource.");
@@ -121,7 +121,7 @@ public class MonsterModule : CarterModule
             return TypedResults.BadRequest("User is not logged in.");
         }
 
-        User checkUser = dmtoolsContext.Users.Where(u => u.UserName == username && g == u.UserGuid).FirstOrDefault();
+        User checkUser = null;//dmtoolsContext.Users.Where(u => u.UserName == username && g == u.UserGuid).FirstOrDefault();
         if (checkUser == null)
         {
             return TypedResults.BadRequest("User does not match any resource.");

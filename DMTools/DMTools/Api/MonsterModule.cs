@@ -48,7 +48,7 @@ public class MonsterModule : CarterModule
 
     private async Task<Results<Ok, BadRequest<string>, NotFound<string>>> CreateMonster([FromServices] DmtoolsContext dmtoolsContext, HttpContext context, [FromBody] Monster monster)
     {
-        User user = dmtoolsContext.Users.Where(u => u.UserGuid == guid).FirstOrDefault();
+        User user = dmtoolsContext.Users.Where(u => u.UserGuid == monster.UserGuid).FirstOrDefault();
         if (user is null)
         {
             return TypedResults.BadRequest("User is not logged in.");
