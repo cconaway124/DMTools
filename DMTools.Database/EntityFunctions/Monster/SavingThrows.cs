@@ -18,6 +18,43 @@ public partial class SavingThrows
         {
             this.stats[statType] = stats.GetAbilityMod(statType) + profBonus;
         }
+
+        this.SetSavingThrows();
+    }
+
+    public void SetSavingThrows()
+    {
+        foreach (KeyValuePair<StatType, int> pair in this.stats)
+        {
+            switch (pair.Key)
+            {
+                case (StatType.Str):
+                    this.Str = pair.Value;
+                    break;
+
+                case (StatType.Dex):
+                    this.Dex = pair.Value;
+                    break;
+
+                case (StatType.Con):
+                    this.Con = pair.Value;
+                    break;
+
+                case (StatType.Int):
+                    this.Int = pair.Value;
+                    break;
+
+                case (StatType.Wis):
+                    this.Wis = pair.Value;
+                    break;
+
+                case (StatType.Cha):
+                    this.Cha = pair.Value;
+                    break;
+
+                default: break;
+            }
+        }
     }
 
     private StatType[] GetSaveTypes(Dictionary<string, string>[] types)

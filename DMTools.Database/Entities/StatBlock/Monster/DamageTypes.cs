@@ -12,6 +12,7 @@ public partial class DamageTypes
 	[Key]
 	public int DamageTypeId { get; set; }
 	public int Type { get; set; }
+	public string Description { get; set; }
 	[ForeignKey(name: "MonsterId")]
 	public virtual Monster Monster { get; set; }
 }

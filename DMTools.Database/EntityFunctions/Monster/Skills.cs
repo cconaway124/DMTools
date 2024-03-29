@@ -31,8 +31,24 @@ public partial class Skills
 			StatType type = StrToStatType(stat);
 			int mod = stats.GetAbilityMod(type);
 
-			skills[name] = mod + profBonus;
+			this.skills[name] = mod + profBonus;
 		}
+	}
+
+	public List<Skills> ConvertToList()
+	{
+		List<Skills> skills = new List<Skills>();
+
+		foreach (KeyValuePair<string, int> pair in this.skills)
+		{
+			skills.Add(new Skills
+			{
+				Name = pair.Key,
+				Bonus = pair.Value,
+			});
+		}
+
+		return skills;
 	}
 
 	public override string ToString()

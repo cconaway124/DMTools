@@ -79,4 +79,68 @@ public static class LibraryEnums
                 return StatType.None;
         }
     }
+
+    public enum ActionType
+    {
+        [Description("None")]
+        None = -1,
+
+        [Description("Actions")]
+        Action = 1,
+
+        [Description("Bonus Actions")]
+        BonusAction,
+
+        [Description("Reactions")]
+        Reactions,
+
+        [Description("Legendary Actions")]
+        Legendary,
+
+        [Description("Mythic Actions")]
+        Mythic,
+
+        [Description("Lair Actions")]
+        Lairs,
+
+        [Description("Regional Effects")]
+        Regionals,
+
+        [Description("Abilities")]
+        Abilities,
+    }
+
+    public static ActionType ActionStrToEnum(string action)
+    {
+        action = action.ToLower();
+        switch (action)
+        {
+            case "actions":
+                return ActionType.Action;
+
+            case "bonus actions":
+                return ActionType.BonusAction;
+
+            case "reactions":
+                return ActionType.Reactions;
+
+            case "legendary actions":
+                return ActionType.Legendary;
+
+            case "mythic actions":
+                return ActionType.Mythic;
+
+            case "lair actions":
+                return ActionType.Lairs;
+
+            case "regional effects":
+                return ActionType.Regionals;
+
+            case "abilities":
+                return ActionType.Abilities;
+            default:
+                return ActionType.None;
+        }
+    }
+
 }

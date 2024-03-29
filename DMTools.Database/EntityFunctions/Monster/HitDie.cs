@@ -19,6 +19,11 @@ public partial class HitDie
         (this.hitDie, int dieSize) = this.SetHitDie(size);
         this.conMod = this.SetConMod(conMod, numHitDie);
         this.avgHp = this.CalculateAvgHp(numHitDie, dieSize, conMod);
+
+        this.HitDieType = SetHitDie(size).Item1;
+        this.AverageHp = this.avgHp;
+        this.ConMod = this.conMod;
+        this.Count = this.numHitDie;
     }
 
     private (string, int) SetHitDie(SizeEnum size)

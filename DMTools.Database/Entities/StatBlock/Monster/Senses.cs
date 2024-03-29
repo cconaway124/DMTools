@@ -22,6 +22,7 @@ public partial class Senses
     public int? Truesight { get; set; }
     public int? Telepathy { get; set; }
     public int PassivePerception { get; set; }
+    public bool Blind { get; set; }
     [ForeignKey(name: "MonsterId")]
     public Monster Monster { get; set; }
 }

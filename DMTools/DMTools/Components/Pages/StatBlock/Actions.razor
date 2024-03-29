@@ -1,12 +1,12 @@
-﻿@if (actions.Actions.Count != 0)
+﻿@if (actions.Count() != 0)
 {
 	<div class="actions">
-		<h3>@actions.ActionName</h3>
-		@foreach (string s in actions.Actions.Keys)
+		<h3>@actions.First().ActionName</h3>
+		@foreach (MonsterActions action in actions)
 		{
 			<div class="property-block">
-				<h4>@s.</h4>
-				<p>@MarkupExtensions.MarkupString(actions.Actions[s])</p>
+				<h4>@action.Name.</h4>
+				<p>@MarkupExtensions.MarkupString(action.ActionDescription)</p>
 			</div> <!-- property block -->
 		}
 	</div> <!-- actions -->
@@ -14,7 +14,7 @@
 
 @code {
 	[Parameter]
-	public MonsterActions actions { get; set; }
+	public List<MonsterActions> actions { get; set; }
 
 	public MarkupString Italicize(string original)
 	{

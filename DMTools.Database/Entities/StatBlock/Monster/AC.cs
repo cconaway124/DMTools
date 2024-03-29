@@ -17,4 +17,6 @@ public partial class AC
 	public int AcId { get; set; }
 	public string ArmorName { get; set; }
 	public int AllowsDexMod { get; set; }
+    [ForeignKey(name: "MonsterId")]
+    public virtual Monster Monster { get; set; }
 }

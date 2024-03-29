@@ -18,7 +18,7 @@ public partial class Speeds
     public int? Climb { get; set; }
     public int? Fly { get; set; }
     public int? Swim { get; set; }
-    public int? Hover { get; set; }
+    public bool? Hover { get; set; }
     [ForeignKey(name: "MonsterId")]
     public Monster Monster { get; set; }
 }

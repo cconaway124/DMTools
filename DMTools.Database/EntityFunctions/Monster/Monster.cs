@@ -1,6 +1,7 @@
 ﻿using static DMTools.Shared.Enums.LibraryEnums;
 using DMTools.Shared.DiceCalculator;
 using DMTools.Shared;
+using DMTools.Shared.Enums;
 
 namespace DMTools.Database.Entities;
 
@@ -65,15 +66,15 @@ public partial class Monster : StatBlock
         this.Legendaries = this.CreateActions(jsonStatBlock.legendaries, "Legendary Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isLegendary, jsonStatBlock.legendariesDescription));
         this.Mythics = this.CreateActions(jsonStatBlock.mythics, "Mythic Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isMythic, jsonStatBlock.mythicDescription));
         this.Lairs = this.CreateActions(jsonStatBlock.lairs, "Lair Actions", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isLair, jsonStatBlock.lairDescription));
-        this.Regionals = this.CreateActions(jsonStatBlock.regionals, "Reional Effects", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isRegional, jsonStatBlock.regionalDescription + "\n\n" + jsonStatBlock.regionalDescriptionEnd));
+        this.Regionals = this.CreateActions(jsonStatBlock.regionals, "Regional Effects", this.Stats, this.ProfBonus, this.ShortName, this.PluralName, AddActionDescription(jsonStatBlock.isRegional, jsonStatBlock.regionalDescription + "\n\n" + jsonStatBlock.regionalDescriptionEnd));
         this.Sthrows = new SavingThrows(jsonStatBlock.sthrows, this.Stats, this.ProfBonus);
-        this.Mskills = new Skills(jsonStatBlock.skills, this.Stats, this.ProfBonus);
+        this.Mskills = new Skills(jsonStatBlock.skills, this.Stats, this.ProfBonus).ConvertToList();
         this.ConditionImmunity = Entities.ConditionImmunity.CreateConditionImmunities(jsonStatBlock.conditions);
-        this.Languages = new Languages(jsonStatBlock.languages, jsonStatBlock.understandsBut);
+        this.Languages = new Languages(jsonStatBlock.languages, jsonStatBlock.understandsBut).ConvertToList();
         this.DoubleColumns = jsonStatBlock.doubleColumns;
         this.SeparationPoint = jsonStatBlock.separationPoint;
         this.Damage = jsonStatBlock.damage;
-        this.DamageTypes = new DamageTypes(jsonStatBlock.damageTypes);
+        this.DamageTypes = new DamageTypes(jsonStatBlock.damageTypes).ToList();
     }
 
     private string AddActionDescription(bool isType, string desc)
@@ -108,8 +109,8 @@ public partial class Monster : StatBlock
         }
     }
 
-    private MonsterActions CreateActions(Dictionary<string, string>[] actions,
-        string actionName,
+    private List<MonsterActions> CreateActions(Dictionary<string, string>[] actions,
+        string actionType,
         Stats stats,
         int profBonus,
         string shortenedName,
@@ -117,7 +118,7 @@ public partial class Monster : StatBlock
         string actionDescription = ""
         )
     {
-        return new MonsterActions(actions, actionName, actionDescription, stats, profBonus, shortenedName, pluralName);
+        return new MonsterActions(actions, LibraryEnums.ActionStrToEnum(actionType), actionDescription, stats, profBonus, shortenedName, pluralName).ConvertToList();
     }
 
     private int CrToProfBonus(string cr, int customProf)

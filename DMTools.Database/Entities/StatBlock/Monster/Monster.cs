@@ -21,29 +21,31 @@ public partial class Monster : StatBlock
 
     public string Type { get; set; }
     [NotMapped]
-    public virtual MonsterActions Abilities { get; set; }
+    public virtual List<MonsterActions> Abilities { get; set; }
     [NotMapped]
-    public virtual MonsterActions Actions { get; set; }
+    public virtual List<MonsterActions> Actions { get; set; }
     [NotMapped]
-    public virtual MonsterActions BonusActions { get; set; }
+    public virtual List<MonsterActions> BonusActions { get; set; }
     [NotMapped]
-    public virtual MonsterActions Reactions { get; set; }
+    public virtual List<MonsterActions> Reactions { get; set; }
     [NotMapped]
-    public virtual MonsterActions Legendaries { get; set; }
+    public virtual List<MonsterActions> Legendaries { get; set; }
     [NotMapped]
-    public virtual MonsterActions Mythics { get; set; }
+    public virtual List<MonsterActions> Mythics { get; set; }
     [NotMapped]
-    public virtual MonsterActions Lairs { get; set; }
+    public virtual List<MonsterActions> Lairs { get; set; }
     [NotMapped]
-    public virtual MonsterActions Regionals { get; set; }
+    public virtual List<MonsterActions> Regionals { get; set; }
     [NotMapped]
     public virtual SavingThrows Sthrows { get; set; }
-
-    public virtual Skills Mskills { get; set; }
-
-    public virtual DamageTypes DamageTypes { get; set; }
-
+    [NotMapped]
+    public virtual List<Skills> Mskills { get; set; }
+    [NotMapped]
+    public virtual List<DamageTypes> DamageTypes { get; set; }
+    [NotMapped]
     public virtual List<ConditionImmunity> ConditionImmunity { get; set; }
+    [NotMapped]
+    public virtual List<Languages> Languages { get; set; }
 
     public bool CustomHp { get; set; }
 

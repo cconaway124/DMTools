@@ -16,6 +16,7 @@ public partial class Languages
 	public int LanguageId { get; set; }
 	public string LanguageName { get; set; }
 	public int LanguageLevel { get; set; }
+	public string? UnderstandsBut { get; set; }
 	[ForeignKey(name: "MonsterId")]
 	public virtual Monster Monster { get; set; }
 }

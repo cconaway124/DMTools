@@ -4,6 +4,7 @@ using DMTools.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DMTools.Database.Migrations
 {
     [DbContext(typeof(DmtoolsContext))]
-    partial class DmtoolsContextModelSnapshot : ModelSnapshot
+    [Migration("20240329040138_Stuffs")]
+    partial class Stuffs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,7 +150,8 @@ namespace DMTools.Database.Migrations
 
                     b.HasKey("DamageTypeId");
 
-                    b.HasIndex("MonsterId");
+                    b.HasIndex("MonsterId")
+                        .IsUnique();
 
                     b.ToTable("DamageTypes", "monster");
                 });
@@ -630,7 +634,7 @@ namespace DMTools.Database.Migrations
             modelBuilder.Entity("DMTools.Database.Entities.ConditionImmunity", b =>
                 {
                     b.HasOne("DMTools.Database.Entities.Monster", "Monster")
-                        .WithMany()
+                        .WithMany("ConditionImmunity")
                         .HasForeignKey("MonsterId");
 
                     b.Navigation("Monster");
@@ -639,8 +643,8 @@ namespace DMTools.Database.Migrations
             modelBuilder.Entity("DMTools.Database.Entities.DamageTypes", b =>
                 {
                     b.HasOne("DMTools.Database.Entities.Monster", "Monster")
-                        .WithMany()
-                        .HasForeignKey("MonsterId")
+                        .WithOne("DamageTypes")
+                        .HasForeignKey("DMTools.Database.Entities.DamageTypes", "MonsterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -661,7 +665,7 @@ namespace DMTools.Database.Migrations
             modelBuilder.Entity("DMTools.Database.Entities.Languages", b =>
                 {
                     b.HasOne("DMTools.Database.Entities.Monster", "Monster")
-                        .WithMany()
+                        .WithMany("Languages")
                         .HasForeignKey("MonsterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -724,7 +728,7 @@ namespace DMTools.Database.Migrations
             modelBuilder.Entity("DMTools.Database.Entities.Skills", b =>
                 {
                     b.HasOne("DMTools.Database.Entities.Monster", "Monster")
-                        .WithMany()
+                        .WithMany("Mskills")
                         .HasForeignKey("MonsterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -759,11 +763,20 @@ namespace DMTools.Database.Migrations
                     b.Navigation("ArmorClass")
                         .IsRequired();
 
+                    b.Navigation("ConditionImmunity");
+
                     b.Navigation("Cr")
+                        .IsRequired();
+
+                    b.Navigation("DamageTypes")
                         .IsRequired();
 
                     b.Navigation("HitDie")
                         .IsRequired();
+
+                    b.Navigation("Languages");
+
+                    b.Navigation("Mskills");
 
                     b.Navigation("Senses")
                         .IsRequired();

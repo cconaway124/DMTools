@@ -10,6 +10,7 @@ public partial class MonsterActions
     public int MonsterActionId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
+    public int ActionType { get; set; }
     [ForeignKey(name: "MonsterId")]
     public virtual Monster Monster { get; set; }
 }

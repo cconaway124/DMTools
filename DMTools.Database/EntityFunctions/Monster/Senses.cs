@@ -58,6 +58,44 @@ public partial class Senses
         };
 
         this.blind = blind;
+        this.SetSenses();
+    }
+
+    public void SetSenses()
+    {
+        for (int i = 0; i < this.senses.Length; i++)
+        {
+            bool val = int.TryParse(this.senses[i], out int a);
+            switch ((SightType)i)
+            {
+                case SightType.blindsight:
+                    this.BlindSight = val ? a : null;
+                    break;
+
+                case SightType.darkvision:
+                    this.Darkvision = val ? a : null;
+                    break;
+
+                case SightType.tremorsense:
+                    this.Tremorsense = val ? a : null;
+                    break;
+
+                case SightType.truesight:
+                    this.Truesight = val ? a : null;
+                    break;
+
+                case SightType.telepathy:
+                    this.Telepathy = val ? a : null;
+                    break;
+
+                case SightType.passive_perception:
+                    this.PassivePerception = val ? a : 8;
+                    break;
+
+                default: break;
+            }
+        }
+        this.Blind = this.blind;
     }
 
     public override string ToString()

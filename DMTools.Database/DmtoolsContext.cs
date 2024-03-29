@@ -22,7 +22,7 @@ public partial class DmtoolsContext : DbContext
     public DbSet<Actions> Actions { get; set; }
     public DbSet<ChallengeRating> ChallengeRating { get; set; }
     public DbSet<ConditionImmunity> ConditionImmunity { get; set; }
-    public DamageTypes DamageTypes { get; set; }
+    public DbSet<DamageTypes> DamageTypes { get; set; }
     public DbSet<Languages> Languages { get; set; }
     public DbSet<Monster> Monster { get; set; }
     public DbSet<Monsters_ConditionImmunity> Monsters_x_ConditionImmunity { get; set; }

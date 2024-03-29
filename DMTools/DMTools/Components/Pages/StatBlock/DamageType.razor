@@ -2,14 +2,14 @@
     int count = 0; 
 }
 
-@foreach (KeyValuePair<DMTools.Shared.Enums.LibraryEnums.DamageType, List<string>> keyVal in dTypes.Dtypes)
+@foreach (DamageTypes dType in dTypes)
 {
-    if (dTypes.Dtypes[keyVal.Key].Count == 0)
+    if (dType.Description.Length == 0)
         continue;
 
     <div class="property-line @((count == 0) ? "first" : "")">
-        <h4>@keyVal.Key.GetDescription()</h4>
-        <p>@string.Join(", ", keyVal.Value)</p>
+        <h4>@(((DMTools.Shared.Enums.LibraryEnums.DamageType)dType.Type).GetDescription())</h4>
+        <p>@dType.Description</p>
     </div> <!-- property line -->
     count++;
 }
@@ -17,5 +17,5 @@
 
 @code {
     [Parameter]
-    public DMTools.Database.Entities.DamageTypes dTypes { get; set; }
+    public List<DMTools.Database.Entities.DamageTypes> dTypes { get; set; }
 }

@@ -57,6 +57,6 @@ public static class MarkupExtensions
 
 	public static string AddNewLines(string original)
 	{
-		return Regex.Replace(original, @"\r\n?|\n", "<br />"); ;
+		return Regex.Replace(original ?? string.Empty, @"\r\n?|\n", "<br />"); ;
 	}
 }

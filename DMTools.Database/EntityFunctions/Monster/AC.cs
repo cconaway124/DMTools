@@ -84,6 +84,9 @@ public partial class AC
 			{ "plate", 18 },
 			{ "other", 0 },
 		};
+
+		this.ArmorName = armorName;
+		this.AllowsDexMod = (dexBonus > 0) ? 1 : 0;
 	}
 
 	public string GetAc
