@@ -7,8 +7,13 @@
 <link rel="stylesheet" href="stat_block.css"/>
 <script src="/lib/jquery/jquery.js"></script>
 <script defer src="js/slideToggle.js"></script>
-<InputFile OnChange="@LoadFiles" />
-<input class="" @bind-value="SearchText" @bind-value:event="oninput" placeholder="Search by name" />
+<div class="monster-upload-row">
+    <label for="dminput" class="dmbutton dminput">
+        Upload monster
+    </label>
+    <InputFile class="dmbutton" id="dminput" OnChange="@LoadFiles" />
+    <input type="text" class="" @bind-value="SearchText" @bind-value:event="oninput" placeholder="Search by name" />
+</div>
 
 <div class="row">
     @{
