@@ -20,32 +20,32 @@ public partial class Monster : StatBlock
     public int ProfBonus { get; set; }
 
     public string Type { get; set; }
+    [InverseProperty(nameof(MonsterActions))]
+    public virtual ICollection<MonsterActions> Abilities { get; set; }
     [NotMapped]
-    public virtual List<MonsterActions> Abilities { get; set; }
+    public virtual ICollection<MonsterActions> Actions { get; set; }
     [NotMapped]
-    public virtual List<MonsterActions> Actions { get; set; }
+    public virtual ICollection<MonsterActions> BonusActions { get; set; }
     [NotMapped]
-    public virtual List<MonsterActions> BonusActions { get; set; }
+    public virtual ICollection<MonsterActions> Reactions { get; set; }
     [NotMapped]
-    public virtual List<MonsterActions> Reactions { get; set; }
+    public virtual ICollection<MonsterActions> Legendaries { get; set; }
     [NotMapped]
-    public virtual List<MonsterActions> Legendaries { get; set; }
+    public virtual ICollection<MonsterActions> Mythics { get; set; }
     [NotMapped]
-    public virtual List<MonsterActions> Mythics { get; set; }
+    public virtual ICollection<MonsterActions> Lairs { get; set; }
     [NotMapped]
-    public virtual List<MonsterActions> Lairs { get; set; }
-    [NotMapped]
-    public virtual List<MonsterActions> Regionals { get; set; }
+    public virtual ICollection<MonsterActions> Regionals { get; set; }
     [NotMapped]
     public virtual SavingThrows Sthrows { get; set; }
     [NotMapped]
-    public virtual List<Skills> Mskills { get; set; }
+    public virtual ICollection<Skills> Mskills { get; set; }
     [NotMapped]
-    public virtual List<DamageTypes> DamageTypes { get; set; }
+    public virtual ICollection<DamageTypes> DamageTypes { get; set; }
     [NotMapped]
-    public virtual List<ConditionImmunity> ConditionImmunity { get; set; }
+    public virtual ICollection<ConditionImmunity> ConditionImmunity { get; set; }
     [NotMapped]
-    public virtual List<Languages> Languages { get; set; }
+    public virtual ICollection<Languages> Languages { get; set; }
 
     public bool CustomHp { get; set; }
 
