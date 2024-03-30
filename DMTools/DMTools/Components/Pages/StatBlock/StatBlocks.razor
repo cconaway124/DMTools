@@ -1,6 +1,7 @@
 ﻿@page "/statblocks"
 @rendermode InteractiveServer
 @inject IJSRuntime JS
+@inject DMTools.Database.DmtoolsContext dmToolsContext
 
 <PageTitle>Stat Blocks</PageTitle>
 
@@ -13,6 +14,21 @@
     </label>
     <InputFile class="dmbutton" id="dminput" OnChange="@LoadFiles" />
     <input type="text" class="" @bind-value="SearchText" @bind-value:event="oninput" placeholder="Search by name" />
+    <div class="search-monsters">
+        <div class="selected-group">
+
+        </div>
+        <div class="available-monsters">
+            <input type="text" placeholder="Search for a previously saved monster" />
+            <div class="checkbox-mons">
+                @foreach ((int id, string name) in this.monsterIds)
+                {
+                    <input id="@id" type="checkbox" value="@id" />
+                    <label for="@id">@name</label>
+                }
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -39,13 +55,43 @@
 
     public string SearchText { get; set; } = "";
 
+    public List<(int, string)> monsterIds { get; set; } = new();
+
     StatBlockFactory statBlockFactory = new StatBlockFactory();
 
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+    private List<(int, string)> selectedMonsterIds { get; set; } = new List<(int, string)>();
     private List<IBrowserFile> loadedFiles = new();
     private long maxFileSize = 1024 * 15;
     private int maxAllowedFiles = 3;
     private bool isLoading;
     private int monsterId;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (authenticationState is not null)
+        {
+            var auth = await authenticationState;
+
+            if (auth.User.Identity.IsAuthenticated)
+            {
+                string id = (auth.User.Claims.FirstOrDefault(cl => cl.Type == ClaimTypes.NameIdentifier)).Value;
+                var mons = this.dmToolsContext.Monster
+                   .Where(mon =>
+                       mon.UserGuid ==
+                           id)
+                   .Select(mon => new { mon.MonsterId, mon.Name }).ToList();
+                foreach (var result in mons)
+                {
+                    this.monsterIds.Add((result.MonsterId, result.Name));
+                }
+            }
+        }
+
+        await base.OnParametersSetAsync();
+        return;
+    }
 
     private async Task LoadFiles(InputFileChangeEventArgs e)
     {
@@ -93,5 +139,10 @@
     public async Task DeleteMonster(object monster)
     {
         this.monsters.Remove(monster as Monster);
+    }
+
+    public void AddCheckBox(MouseEventArgs e)
+    {
+        var list = 0;
     }
 }

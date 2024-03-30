@@ -1,0 +1,13 @@
+﻿
+<!---->
+<div class="selected-group">
+
+</div>
+
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+    public List<int> monsterIds { get; set; }
+    private List<int> selectedMonsterIds { get; set; } = new List<int>();
+}
