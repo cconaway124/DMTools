@@ -4,6 +4,7 @@ using DMTools.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DMTools.Database.Migrations
 {
     [DbContext(typeof(DmtoolsContext))]
-    partial class DmtoolsContextModelSnapshot : ModelSnapshot
+    [Migration("20240331064834_AddShieldBonus")]
+    partial class AddShieldBonus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,13 +40,7 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DexBonus")
-                        .HasColumnType("int");
-
                     b.Property<int>("MonsterId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("NaturalArmorBonus")
                         .HasColumnType("int");
 
                     b.Property<int>("ShieldBonus")

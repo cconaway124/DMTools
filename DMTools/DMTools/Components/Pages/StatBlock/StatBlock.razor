@@ -170,18 +170,16 @@
             dmToolsContext.Monster.AddRange(mon);
             await dmToolsContext.SaveChangesAsync();
 
-            mon.Abilities.Select(m => m.MonsterId = mon.MonsterId);
-            mon.Actions.Select(m => m.MonsterId = mon.MonsterId);
-            mon.BonusActions.Select(m => m.MonsterId = mon.MonsterId);
-            mon.Reactions.Select(m => m.MonsterId = mon.MonsterId);
-            mon.Legendaries.Select(m => m.MonsterId = mon.MonsterId);
-            mon.Lairs.Select(m => m.MonsterId = mon.MonsterId);
-            mon.Mythics.Select(m => m.MonsterId = mon.MonsterId);
-            mon.Regionals.Select(m => m.MonsterId = mon.MonsterId);
-            mon.Mskills.Select(m => m.MonsterId = mon.MonsterId);
-            mon.DamageTypes.Select(m => m.MonsterId = mon.MonsterId);
-            mon.ConditionImmunity.Select(m => m.MonsterId = mon.MonsterId);
-            mon.Languages.Select(m => m.MonsterId = mon.MonsterId);
+            UpdateId(mon.Abilities, mon.MonsterId);
+            UpdateId(mon.Actions, mon.MonsterId);
+            UpdateId(mon.BonusActions, mon.MonsterId);
+            UpdateId(mon.Reactions, mon.MonsterId);
+            UpdateId(mon.Legendaries, mon.MonsterId);
+            UpdateId(mon.Lairs, mon.MonsterId);
+            UpdateId(mon.BonusActions, mon.MonsterId);
+            UpdateId(mon.Mythics, mon.MonsterId);
+            UpdateId(mon.Regionals, mon.MonsterId);
+
             AddCollection(mon.Abilities);
             AddCollection(mon.Actions);
             AddCollection(mon.BonusActions);
@@ -190,12 +188,24 @@
             AddCollection(mon.Lairs);
             AddCollection(mon.Mythics);
             AddCollection(mon.Regionals);
-            this.dmToolsContext.Skills.AddRange(mon.Mskills);
-            this.dmToolsContext.DamageTypes.AddRange(mon.DamageTypes);
-            this.dmToolsContext.ConditionImmunity.AddRange(mon.ConditionImmunity);
-            this.dmToolsContext.Languages.AddRange(mon.Languages);
 
             await dmToolsContext.SaveChangesAsync();
+        }
+    }
+
+    private void UpdateId(ICollection<MonsterActions> actions, int id)
+    {
+        foreach (var ab in actions)
+        {
+            ab.MonsterId = id;
+        }
+    }
+
+    private void UpdateId(ICollection<Skills> actions, int id)
+    {
+        foreach (var ab in actions)
+        {
+            ab.MonsterId = id;
         }
     }
 

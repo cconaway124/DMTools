@@ -159,32 +159,25 @@
 
         if (isOn.Value)
         {
-            this.monsterIds.Add((id, name));
+            this.selectedMonsterIds.Add((id, name));
         }
         else
         {
-            this.monsterIds.Remove((id, name));
+            this.selectedMonsterIds.Remove((id, name));
         }
     }
 
     public async Task LoadMonstersFromDb(MouseEventArgs e)
     {
-        foreach ((int id, string _) in this.monsterIds)
+        foreach ((int id, string _) in this.selectedMonsterIds)
         {
-            Monster monster = dmToolsContext.Monster.Include(mon => mon.Abilities)
-                .Include(mon => mon.Actions)
+            Monster monster = dmToolsContext.Monster
                 .Include(mon => mon.ArmorClass)
                 .Include(mon => mon.HitDie)
                 .Include(mon => mon.Stats)
                 .Include(mon => mon.Senses)
                 .Include(mon => mon.Speeds)
                 .Include(mon => mon.Languages)
-                .Include(mon => mon.BonusActions)
-                .Include(mon => mon.Reactions)
-                .Include(mon => mon.Legendaries)
-                .Include(mon => mon.Mythics)
-                .Include(mon => mon.Lairs)
-                .Include(mon => mon.Regionals)
                 .Include(mon => mon.Sthrows)
                 .Include(mon => mon.Mskills)
                 .Include(mon => mon.DamageTypes)
@@ -192,7 +185,15 @@
                 .Include(mon => mon.Languages)
                 .Include(mon => mon.Cr)
                 .Where(mon => mon.MonsterId == id).AsSplitQuery().FirstOrDefault();
-            ;
+
+            monster.Abilities = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Abilities").ToList();
+            monster.Actions = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Actions").ToList();
+            monster.BonusActions = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Bonus Actions").ToList();
+            monster.Reactions = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Reactions").ToList();
+            monster.Lairs = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Lair Actions").ToList();
+            monster.Mythics = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Mythic Actions").ToList();
+            monster.Regionals = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Regional Actions").ToList();
+            monster.Legendaries = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Legendary Actions").ToList();
 
             if (monster == null)
                 continue;

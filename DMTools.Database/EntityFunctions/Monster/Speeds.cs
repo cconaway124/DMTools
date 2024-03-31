@@ -88,6 +88,17 @@ public partial class Speeds
 
     public override string ToString()
     {
+        if (this.speed == null)
+        {
+            this.speed = new string[]
+            {
+                (this.Speed ?? 0).ToString(),
+                (this.Burrow ?? 0).ToString(),
+                (this.Climb ?? 0).ToString(),
+                (this.Fly ?? 0).ToString(),
+                (this.Swim ?? 0).ToString(),
+            };
+        }
         StringBuilder movementStr = new StringBuilder();
         int count = 0;
         for (int i = 0; i < this.speed.Length; i++)

@@ -91,6 +91,19 @@ public partial class SavingThrows
 
     public override string ToString()
     {
+        if (this.stats == null)
+        {
+            this.stats = new Dictionary<StatType, int>()
+            {
+                { StatType.Str, this.Str ?? 0 },
+                { StatType.Dex, this.Dex ?? 0 },
+                { StatType.Con, this.Con ?? 0 },
+                { StatType.Int, this.Int ?? 0 },
+                { StatType.Wis, this.Wis ?? 0 },
+                { StatType.Cha, this.Cha ?? 0 },
+            };
+        }
+
         StringBuilder sb = new StringBuilder();
         int count = 0;
         foreach (StatType type in this.stats.Keys)

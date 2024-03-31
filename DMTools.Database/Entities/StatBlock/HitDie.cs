@@ -9,7 +9,7 @@ namespace DMTools.Database.Entities;
 public partial class HitDie
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]   
     public int HitDieId { get; set; }
     public int Count { get; set; }
     public string HitDieType { get; set; }

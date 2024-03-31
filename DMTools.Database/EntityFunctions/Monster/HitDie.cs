@@ -61,6 +61,14 @@ public partial class HitDie
 
     public override string ToString()
     {
+        if (avgHp == 0)
+        {
+            this.avgHp = this.AverageHp;
+            this.numHitDie = this.Count;
+            this.hitDie = this.HitDieType;
+            this.conMod = this.ConMod;
+        }
+
         return string.Format(
             "{0} ({1}{2}{3})",
             this.avgHp,
