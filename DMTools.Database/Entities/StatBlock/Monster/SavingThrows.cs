@@ -9,6 +9,7 @@ namespace DMTools.Database.Entities;
 public partial class SavingThrows
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int SavingThrowId { get; set; }
     public int ProfBonus { get; set; }
     public int? Str { get; set; }
@@ -17,7 +18,7 @@ public partial class SavingThrows
     public int? Int { get; set; }
     public int? Wis { get; set; }
     public int? Cha { get; set; }
-    public string Name { get; set; }
-    [ForeignKey(name: "MonsterId")]
+    [ForeignKey(name: "Monster")]
+    public int MonsterId { get; set; }
     public virtual Monster Monster { get; set; }
 }

@@ -14,7 +14,7 @@
 
 @code {
 	[Parameter]
-	public List<MonsterActions> actions { get; set; }
+	public ICollection<MonsterActions> actions { get; set; }
 
 	public MarkupString Italicize(string original)
 	{

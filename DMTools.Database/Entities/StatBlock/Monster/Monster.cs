@@ -7,6 +7,7 @@ namespace DMTools.Database.Entities;
 public partial class Monster : StatBlock
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int MonsterId { get; set; }
 
     public string Tag { get; set; }
@@ -20,7 +21,7 @@ public partial class Monster : StatBlock
     public int ProfBonus { get; set; }
 
     public string Type { get; set; }
-    [InverseProperty(nameof(MonsterActions))]
+    [NotMapped]
     public virtual ICollection<MonsterActions> Abilities { get; set; }
     [NotMapped]
     public virtual ICollection<MonsterActions> Actions { get; set; }
@@ -36,17 +37,10 @@ public partial class Monster : StatBlock
     public virtual ICollection<MonsterActions> Lairs { get; set; }
     [NotMapped]
     public virtual ICollection<MonsterActions> Regionals { get; set; }
-    [NotMapped]
     public virtual SavingThrows Sthrows { get; set; }
-    [NotMapped]
     public virtual ICollection<Skills> Mskills { get; set; }
-    [NotMapped]
     public virtual ICollection<DamageTypes> DamageTypes { get; set; }
-    [NotMapped]
     public virtual ICollection<ConditionImmunity> ConditionImmunity { get; set; }
-    [NotMapped]
-    public virtual ICollection<Languages> Languages { get; set; }
-
     public bool CustomHp { get; set; }
 
     public bool CustomSpeed { get; set; }

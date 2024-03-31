@@ -4,6 +4,7 @@ using DMTools.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DMTools.Database.Migrations
 {
     [DbContext(typeof(DmtoolsContext))]
-    partial class DmtoolsContextModelSnapshot : ModelSnapshot
+    [Migration("20240331035709_fixfuckyDB4")]
+    partial class fixfuckyDB4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,7 +94,7 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MonsterId")
+                    b.Property<int?>("MonsterId")
                         .HasColumnType("int");
 
                     b.HasKey("ConditionImmunityId");
@@ -326,6 +329,29 @@ namespace DMTools.Database.Migrations
                     b.HasIndex("MonsterId");
 
                     b.ToTable("MonsterActions", "monster");
+                });
+
+            modelBuilder.Entity("DMTools.Database.Entities.Monsters_ConditionImmunity", b =>
+                {
+                    b.Property<int>("Monsters_ConditionImmunitiesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Monsters_ConditionImmunitiesId"));
+
+                    b.Property<int>("ConditionImmunityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Monsters_ConditionImmunitiesId");
+
+                    b.HasIndex("ConditionImmunityId");
+
+                    b.HasIndex("MonsterId");
+
+                    b.ToTable("Monsters_x_ConditionImmunity", "monster");
                 });
 
             modelBuilder.Entity("DMTools.Database.Entities.SavingThrows", b =>
@@ -564,9 +590,7 @@ namespace DMTools.Database.Migrations
                 {
                     b.HasOne("DMTools.Database.Entities.Monster", "Monster")
                         .WithMany("ConditionImmunity")
-                        .HasForeignKey("MonsterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MonsterId");
 
                     b.Navigation("Monster");
                 });
@@ -611,6 +635,25 @@ namespace DMTools.Database.Migrations
                         .HasForeignKey("MonsterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Monster");
+                });
+
+            modelBuilder.Entity("DMTools.Database.Entities.Monsters_ConditionImmunity", b =>
+                {
+                    b.HasOne("DMTools.Database.Entities.ConditionImmunity", "ConditionImmunity")
+                        .WithMany()
+                        .HasForeignKey("ConditionImmunityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DMTools.Database.Entities.Monster", "Monster")
+                        .WithMany()
+                        .HasForeignKey("MonsterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ConditionImmunity");
 
                     b.Navigation("Monster");
                 });

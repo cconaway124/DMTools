@@ -15,6 +15,7 @@ namespace DMTools.Database.Entities;
 public partial class Senses
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int SenseId { get; set; }
     public int? BlindSight { get; set; }
     public int? Darkvision { get; set; }
@@ -23,6 +24,7 @@ public partial class Senses
     public int? Telepathy { get; set; }
     public int PassivePerception { get; set; }
     public bool Blind { get; set; }
-    [ForeignKey(name: "MonsterId")]
-    public Monster Monster { get; set; }
+    [ForeignKey(name: "Monster")]
+    public int MonsterId { get; set; }
+    public virtual Monster Monster { get; set; }
 }

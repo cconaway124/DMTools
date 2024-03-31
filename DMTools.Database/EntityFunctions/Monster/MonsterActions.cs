@@ -10,21 +10,6 @@ public partial class MonsterActions
     private string actionDescription;
     private Dictionary<string, string> actions;
 
-    /// <summary>
-    /// This is your "Legendary Action", "Action", etc.
-    /// </summary>
-    public string ActionName
-    { 
-        get => this.actionName.GetDescription(); 
-        set => this.actionName = ActionStrToEnum(value); 
-    }
-
-    public string ActionDescription
-    {
-        get => this.actionDescription;
-        set => this.actionDescription = value;
-    }
-
     public Dictionary<string, string> Actions
     {
         get => this.actions;

@@ -14,10 +14,12 @@ namespace DMTools.Database.Entities;
 public partial class ChallengeRating
 {
 	[Key]
-	public int ChallengeRatingId { get; set; }
-	[ForeignKey(name: "MonsterId")]
-	public virtual Monster Monster { get; set; }
-	public string Cr { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int ChallengeRatingId { get; set; }
+    [ForeignKey(name: "Monster")]
+    public int MonsterId { get; set; }
+    public virtual Monster Monster { get; set; }
+    public string Cr { get; set; }
 	public string Xp { get; set; }
 	public string CustomCr { get; set; }
 }

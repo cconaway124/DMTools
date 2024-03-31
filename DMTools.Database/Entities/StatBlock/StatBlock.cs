@@ -30,5 +30,5 @@ public abstract class StatBlock
 
     public Speeds Speeds { get; set; }
 
-    public Languages Languages { get; set; }
+    public ICollection<Languages> Languages { get; set; }
 }

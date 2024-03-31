@@ -13,9 +13,11 @@ namespace DMTools.Database.Entities;
 public partial class Skills
 {
 	[Key]
-	public int SkillId { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int SkillId { get; set; }
 	public string Name { get; set; }
 	public int Bonus { get; set; }
-    [ForeignKey(name: "MonsterId")]
-    public Monster Monster { get; set; }
+    [ForeignKey(name: "Monster")]
+    public int MonsterId { get; set; }
+    public virtual Monster Monster { get; set; }
 }

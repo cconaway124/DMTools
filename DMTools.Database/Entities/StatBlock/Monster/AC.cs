@@ -14,9 +14,11 @@ namespace DMTools.Database.Entities;
 public partial class AC
 {
 	[Key]
-	public int AcId { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int AcId { get; set; }
 	public string ArmorName { get; set; }
 	public int AllowsDexMod { get; set; }
-    [ForeignKey(name: "MonsterId")]
-    public virtual Monster Monster { get; set; }
+    [ForeignKey(name: "Monster")]
+    public int MonsterId { get; set; }
+	public virtual Monster Monster { get; set; }
 }

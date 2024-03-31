@@ -13,8 +13,10 @@ namespace DMTools.Database.Entities;
 public partial class ConditionImmunity
 {
 	[Key]
-	public int ConditionImmunityId { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int ConditionImmunityId { get; set; }
 	public string Description { get; set; }
-    [ForeignKey(name: "MonsterId")]
-    public virtual Monster? Monster { get; set; }
+    [ForeignKey(name: "Monster")]
+    public int MonsterId { get; set; }
+    public virtual Monster Monster { get; set; }
 }

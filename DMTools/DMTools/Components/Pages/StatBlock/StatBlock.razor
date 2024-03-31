@@ -166,8 +166,44 @@
                 Speeds = monster.Speeds,
                 Languages = monster.Languages,
             };
+
             dmToolsContext.Monster.AddRange(mon);
             await dmToolsContext.SaveChangesAsync();
+
+            mon.Abilities.Select(m => m.MonsterId = mon.MonsterId);
+            mon.Actions.Select(m => m.MonsterId = mon.MonsterId);
+            mon.BonusActions.Select(m => m.MonsterId = mon.MonsterId);
+            mon.Reactions.Select(m => m.MonsterId = mon.MonsterId);
+            mon.Legendaries.Select(m => m.MonsterId = mon.MonsterId);
+            mon.Lairs.Select(m => m.MonsterId = mon.MonsterId);
+            mon.Mythics.Select(m => m.MonsterId = mon.MonsterId);
+            mon.Regionals.Select(m => m.MonsterId = mon.MonsterId);
+            mon.Mskills.Select(m => m.MonsterId = mon.MonsterId);
+            mon.DamageTypes.Select(m => m.MonsterId = mon.MonsterId);
+            mon.ConditionImmunity.Select(m => m.MonsterId = mon.MonsterId);
+            mon.Languages.Select(m => m.MonsterId = mon.MonsterId);
+            AddCollection(mon.Abilities);
+            AddCollection(mon.Actions);
+            AddCollection(mon.BonusActions);
+            AddCollection(mon.Reactions);
+            AddCollection(mon.Legendaries);
+            AddCollection(mon.Lairs);
+            AddCollection(mon.Mythics);
+            AddCollection(mon.Regionals);
+            this.dmToolsContext.Skills.AddRange(mon.Mskills);
+            this.dmToolsContext.DamageTypes.AddRange(mon.DamageTypes);
+            this.dmToolsContext.ConditionImmunity.AddRange(mon.ConditionImmunity);
+            this.dmToolsContext.Languages.AddRange(mon.Languages);
+
+            await dmToolsContext.SaveChangesAsync();
+        }
+    }
+
+    public void AddCollection(ICollection<MonsterActions> actions)
+    {
+        if (actions != null)
+        {
+            this.dmToolsContext.MonsterActions.AddRange(actions);
         }
     }
 }
