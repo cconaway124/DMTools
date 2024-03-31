@@ -89,6 +89,7 @@ public partial class AC
 		this.AllowsDexMod = (dexBonus > 0) ? 1 : 0;
 		this.ShieldBonus = this.shieldBonus;
 		this.DexBonus = this.dexBonus;
+		this.NaturalArmorBonus = this.naturalArmorBonus;
 	}
 
 
@@ -140,7 +141,7 @@ public partial class AC
         {
             { "none", 10 },
             { "natural armor", 10 + naturalArmorBonus },
-            { "padded armor",11 + this.dexBonus + this.shieldBonus },
+            { "padded armor",11 + dexBonus + shieldBonus },
             { "leather armor", 11 },
             { "studded leather", 12 },
             { "hide armor", 12 },

@@ -34,8 +34,8 @@ public partial class Monster : StatBlock
             jsonStatBlock.intPoints,
             jsonStatBlock.wisPoints,
             jsonStatBlock.chaPoints);
-        this.ArmorClass = new AC(jsonStatBlock.otherArmorDesc, jsonStatBlock.shieldBonus, jsonStatBlock.armorName, this.Stats.Dex, jsonStatBlock.natArmorBonus);
-        this.HitDie = new HitDie(jsonStatBlock.hitDice, this.Size, this.Stats.Con);
+        this.ArmorClass = new AC(jsonStatBlock.otherArmorDesc, jsonStatBlock.shieldBonus, jsonStatBlock.armorName, this.Stats.DexMod, jsonStatBlock.natArmorBonus);
+        this.HitDie = new HitDie(jsonStatBlock.hitDice, this.Size, this.Stats.ConMod);
         this.Senses = new Senses(
             jsonStatBlock.blindsight,
             jsonStatBlock.blind,
@@ -43,7 +43,7 @@ public partial class Monster : StatBlock
             jsonStatBlock.tremorsense,
             jsonStatBlock.truesight,
             jsonStatBlock.telepathy,
-            (10 + this.Stats.Wis).ToString());
+            (10 + this.Stats.WisMod).ToString());
         this.Cr = new ChallengeRating(jsonStatBlock.cr, jsonStatBlock.customCr);
         this.CustomCr = jsonStatBlock.customCr;
         this.ProfBonus = this.CrToProfBonus(jsonStatBlock.cr, jsonStatBlock.customProf);

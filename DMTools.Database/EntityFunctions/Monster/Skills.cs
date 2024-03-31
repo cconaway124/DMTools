@@ -53,6 +53,11 @@ public partial class Skills
 
 	public override string ToString()
 	{
+		if (this.skills == null)
+		{
+			return $"{this.Name} {(this.Bonus > 0 ? "+" : "-")}{Math.Abs(this.Bonus)}";
+		}
+
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
 		foreach (string key in this.skills.Keys)

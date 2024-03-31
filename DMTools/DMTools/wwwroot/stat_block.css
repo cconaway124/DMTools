@@ -280,3 +280,8 @@ div.creature-heading.colored-bg {
         margin: 20px 0;
     }
 }
+
+.stat-block-link {
+    text-decoration: underline;
+    color: #922610;
+}

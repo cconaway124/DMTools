@@ -89,21 +89,45 @@ public partial class SavingThrows
         return value;
     }
 
+    public void SetStats()
+    {
+		if (this.stats == null)
+		{
+			this.stats = new Dictionary<StatType, int>();
+			if (this.Str != null)
+			{
+				this.stats.Add(StatType.Str, this.Str ?? 0);
+			}
+
+			if (this.Dex != null)
+			{
+				this.stats.Add(StatType.Dex, this.Dex ?? 0);
+			}
+
+			if (this.Con != null)
+			{
+				this.stats.Add(StatType.Con, this.Con ?? 0);
+			}
+
+			if (this.Int != null)
+			{
+				this.stats.Add(StatType.Int, this.Int ?? 0);
+			}
+
+			if (this.Wis != null)
+			{
+				this.stats.Add(StatType.Wis, this.Wis ?? 0);
+			}
+
+			if (this.Cha != null)
+			{
+				this.stats.Add(StatType.Cha, this.Cha ?? 0);
+			}
+		}
+	}
+
     public override string ToString()
     {
-        if (this.stats == null)
-        {
-            this.stats = new Dictionary<StatType, int>()
-            {
-                { StatType.Str, this.Str ?? 0 },
-                { StatType.Dex, this.Dex ?? 0 },
-                { StatType.Con, this.Con ?? 0 },
-                { StatType.Int, this.Int ?? 0 },
-                { StatType.Wis, this.Wis ?? 0 },
-                { StatType.Cha, this.Cha ?? 0 },
-            };
-        }
-
         StringBuilder sb = new StringBuilder();
         int count = 0;
         foreach (StatType type in this.stats.Keys)

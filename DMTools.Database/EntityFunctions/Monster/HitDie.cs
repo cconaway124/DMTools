@@ -7,7 +7,7 @@ namespace DMTools.Database.Entities;
 public partial class HitDie
 {
     private int numHitDie;
-    private string hitDie;
+    private string hitDieType;
     private string conMod;
     private int avgHp;
 
@@ -16,7 +16,9 @@ public partial class HitDie
     public HitDie(int numHitDie, SizeEnum size, int conMod)
     {
         this.numHitDie = numHitDie;
-        (this.hitDie, int dieSize) = this.SetHitDie(size);
+        var tuple = this.SetHitDie(size);
+        this.hitDieType = tuple.Item1;
+        int dieSize = tuple.Item2;
         this.conMod = this.SetConMod(conMod, numHitDie);
         this.avgHp = this.CalculateAvgHp(numHitDie, dieSize, conMod);
 
@@ -65,7 +67,7 @@ public partial class HitDie
         {
             this.avgHp = this.AverageHp;
             this.numHitDie = this.Count;
-            this.hitDie = this.HitDieType;
+            this.hitDieType = this.HitDieType;
             this.conMod = this.ConMod;
         }
 
@@ -73,7 +75,7 @@ public partial class HitDie
             "{0} ({1}{2}{3})",
             this.avgHp,
             this.numHitDie,
-            this.hitDie,
+            this.hitDieType,
             this.conMod);
     }
 }

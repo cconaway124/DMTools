@@ -127,6 +127,11 @@ label.dminput {
     margin: 0.5em calc(1.125rem + .25rem);
 }
 
+.dminput:hover {
+    box-shadow: 0 5px 14px rgba(0,0,0,.4);
+    background-color: #c23417;
+}
+
 button {
     position: relative;
 }
@@ -191,4 +196,61 @@ input[type="text"] {
 .monster-select {
     max-width: fit-content;
     margin: 0.5em calc(1.125rem + .25rem);
+}
+
+.mon-columns {
+    max-height: 8rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 0.5rem;
+    border-top: 1px solid #922610
+}
+
+.half-row {
+    max-width: 50%;
+}
+
+.checkbox-mons {
+}
+
+    .checkbox-mons label {
+        color: #922610;
+        margin-left: 5px;   
+    }
+
+span.col-title {
+    font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 20px;=
+    border-radius: 6px;
+    padding: 0 1rem 0 1rem;
+    color: #922610;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+input[type="checkbox"] {
+    accent-color: #922610;
+    margin-left: 1rem;
+}
+
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.selected-mons {
+}
+
+.selected-monster {
+    margin-left: 0.5rem;
+    color: #922610;
+}
+
+.row > * {
+    padding:0;
+}
+
+.no-margin {
+    margin: 0;
 }
