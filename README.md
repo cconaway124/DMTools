@@ -28,3 +28,5 @@ The non-combat generator should be able to take in a setting (i.e., night in the
 Example: The player on watch hears a beautiful song in the distance. The archfey Titania is singing in the woods, in a circle of mushrooms, a distance away. SHe asks the player, as they approach "Can I have your name?"
 
 And so on.
+
+ugh
