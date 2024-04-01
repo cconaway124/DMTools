@@ -14,8 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddAuth0WebAppAuthentication(options => {
-        options.Domain = builder.Configuration["Auth0:Domain"];
-        options.ClientId = builder.Configuration["Auth0:ClientId"];
+        options.Domain = builder.Configuration.GetValue<string>("Auth0:Domain");
+        options.ClientId = builder.Configuration.GetValue<string>("Auth0:ClientId");
     });
 
 builder.Services.AddCarter();
@@ -52,7 +52,7 @@ else
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-app.UseAntiforgery();
+//app.UseAntiforgery();
 
 app.MapGet("/Account/Login", async (HttpContext httpContext, string redirectUri = "/") =>
 {
