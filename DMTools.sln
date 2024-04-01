@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools", "DMTools\DMTools\DMTools.csproj", "{9532D5D6-F17A-471E-8845-313362D945C1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.Client", "DMTools\DMTools.Client\DMTools.Client.csproj", "{306C801B-6A26-491C-AEDF-99E0965765A9}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMToolsTest", "DMToolsTest\DMToolsTest.csproj", "{10BFEB88-0DC5-40DB-BDA4-40DC3DA435E0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.Database", "DMTools.Database\DMTools.Database.csproj", "{4CBA827B-DA69-4809-922D-7CB1E6464297}"
@@ -18,10 +22,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.NameGenerator", "DMTools.NameGenerator\DMTools.NameGenerator.csproj", "{973ABD7B-01A2-4F6B-ADFC-BB5D86CCBCCB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.StatBlock", "DMTools.StatBlock\DMTools.StatBlock.csproj", "{E940E99A-8D61-4653-839C-0D51A02CBC6C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools", "DMTools\DMTools\DMTools.csproj", "{9532D5D6-F17A-471E-8845-313362D945C1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.Client", "DMTools\DMTools.Client\DMTools.Client.csproj", "{306C801B-6A26-491C-AEDF-99E0965765A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
