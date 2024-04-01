@@ -4,18 +4,15 @@
 <div class="@((this.monster.DoubleColumns) ? "col-lg-6 col-md-8 col-sm-12" : "col-lg-3 col-md-4 col-sm-6") margin-20">
     <div class="stat-block-header">
         <div class="button-group">
-            <button class="dmbutton"><i class="fa-solid fa-download"></i></button>
+            <button class="dmbutton"><i class="fa-solid fa-download no-margin"></i></button>
             @if(authenticationState.Result.User.Identity.IsAuthenticated)
             {
-                <button class="dmbutton" @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                <button class="dmbutton" @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket no-margin"></i></button>
             }
             else
             {
-                <button class="dmbutton" disabled @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                <button class="dmbutton" disabled @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket no-margin"></i></button>
             }
-            <button class="dmbutton" @onclick="() => Delete()"><i class="fa-solid fa-xmark"></i></button>
-            <button class="dmbutton"><i class="fa-solid fa-download no-margin"></i></button>
-            <button class="dmbutton" @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket no-margin"></i></button>
             <button class="dmbutton" @onclick="() => Delete()"><i class="fa-solid fa-xmark no-margin"></i></button>
         </div>
     </div>
