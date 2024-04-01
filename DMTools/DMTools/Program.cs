@@ -52,7 +52,7 @@ else
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
-//app.UseAntiforgery();
+app.UseAntiforgery();
 
 app.MapGet("/Account/Login", async (HttpContext httpContext, string redirectUri = "/") =>
 {
