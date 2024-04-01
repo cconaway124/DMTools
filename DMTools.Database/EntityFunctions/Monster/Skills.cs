@@ -51,6 +51,11 @@ public partial class Skills
 		return skills;
 	}
 
+	public int Count
+	{
+		get => this.skills.Count;
+	}
+
 	public override string ToString()
 	{
 		if (this.skills == null)

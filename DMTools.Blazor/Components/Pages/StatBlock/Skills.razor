@@ -1,0 +1,14 @@
+﻿@if (this.skills.Count > 0)
+{
+	<div class="property-line">
+		<h4>Skills</h4>
+		<p>
+			@skills.ToString()
+		</p>
+	</div> <!-- property line -->
+}
+
+@code {
+	[Parameter]
+	public DMToolsLibrary.StatBlocks.StatBlockHelpers.Skills skills { get; set; }
+}
