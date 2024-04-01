@@ -1,0 +1,35 @@
+﻿@page "/"
+@inject DMTools.Database.DmtoolsContext dmToolsContext
+
+<PageTitle>Home</PageTitle>
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var state = await authenticationState;
+        if (state is not null)
+        {
+            if (state.User.Identity.IsAuthenticated)
+            {
+                string guid = state.User.Claims.First(cl => cl.Type == ClaimTypes.NameIdentifier).Value;
+                User user = dmToolsContext.Users.Where(u => u.UserGuid == guid).FirstOrDefault();
+                if (user == null)
+                {
+                    user = new User
+                        {
+                            UserGuid = guid,
+                            UserName = state.User.Identity.Name,
+                            UserEmail = state.User.Identity.Name,
+                        };
+                    dmToolsContext.Users.Add(user);
+                    dmToolsContext.SaveChangesAsync();
+                }
+            }
+        }
+        await base.OnInitializedAsync();
+        return;
+    }
+}

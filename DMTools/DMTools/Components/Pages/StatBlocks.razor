@@ -1,0 +1,238 @@
+﻿@page "/statblocks"
+@rendermode InteractiveServer
+@inject IJSRuntime JS
+@inject DMTools.Database.DmtoolsContext dmToolsContext
+
+<PageTitle>Stat Blocks</PageTitle>
+
+<link rel="stylesheet" href="stat_block.css" />
+<script src="/lib/jquery/jquery.js"></script>
+<script defer src="js/slideToggle.js"></script>
+<div class="monster-upload-row">
+    <label for="dminput" class="dmbutton dminput">
+        Upload monster
+    </label>
+    <InputFile class="dmbutton" id="dminput" OnChange="@LoadFiles" />
+    <input type="text" class="" @bind-value="SearchText" @bind-value:event="oninput" placeholder="Search by name" />
+    @if (this.IsAuthenticated)
+    {
+        <div class="search-monsters">
+            <div class="selected-group">
+            </div>
+            <div class="available-monsters">
+                <div class="row">
+                    <input type="text" class="monster-select" @bind-value:event="oninput" @bind-value="FromDbSearchText" placeholder="Search for monster(s)" />
+                    <button type="button" class="dmbutton monster-select" @onclick="LoadMonstersFromDb">Load stat block(s)</button>
+                    <button class="dmbutton monster-select" onclick="HideUpload(this)"><span>Hide</span><i class="fa-solid fa-chevron-up"></i></button>
+                </div>
+                <div id="monsterUpload" class="row">
+                    <div class="half-row checkbox-mons">
+                        <span class="col-title">Available stat blocks</span>
+                        <div class="mon-columns">
+                            @foreach ((int id, string name) in this.monsterIds.Where(mon => mon.Item2.ToLower().Contains(this.FromDbSearchText.ToLower())))
+                            {
+                                <div class="row">
+                                    <div class="flex-start">
+                                        <input id="@id" type="checkbox" value="@id" @onchange="eventArgs => { CheckboxClicked(id, name, eventArgs.Value); }" />
+                                        <label for="@id">@name</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="half-row selected-mons">
+                        <span class="col-title">Selected stat blocks</span>
+                        <div class="mon-columns">
+                            @foreach ((int id, string name) in this.selectedMonsterIds)
+                            {
+                                <div class="flex-start selected-monster">
+                                    @name
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row">
+    @{
+        int counter = 0;
+    }
+    @foreach (Monster monster in monsters.Where(mon => mon.Name.ToLower().Contains(SearchText.ToLower())))
+    {
+        monster.MonsterId = counter;
+        <StatBlock monster="monster" OnDeleteButtonClicked="DeleteMonster" OnMonsterUploaded="AddMonsterOnUpload"></StatBlock>
+        counter++;
+        //RegisterSlide(counter);
+    }
+</div>
+
+
+<footer class="page-footer" target="_blank">
+    This site directly uses the files downloaded from <a class="stat-block-link" href="https://tetra-cube.com/dnd/dnd-statblock.html">this stat block generator</a>.
+    Please note that this person rounds <i>down</i> when doing dice calculations, and I round <i>up</i>, which is why you may see some differences.
+</footer>
+
+@code {
+    List<DMTools.Database.Entities.StatBlock> monsters = new List<DMTools.Database.Entities.StatBlock>();
+
+    public string SearchText { get; set; } = "";
+    public string FromDbSearchText { get; set; } = "";
+
+    public HashSet<(int, string)> monsterIds { get; set; } = new();
+
+    StatBlockFactory statBlockFactory = new StatBlockFactory();
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+    private List<(int, string)> selectedMonsterIds { get; set; } = new List<(int, string)>();
+    private List<IBrowserFile> loadedFiles = new();
+    private long maxFileSize = 1024 * 15;
+    private int maxAllowedFiles = 3;
+    private bool isLoading;
+    private int monsterId;
+
+    private bool IsAuthenticated { get; set; } = false;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (authenticationState is not null)
+        {
+            var auth = await authenticationState;
+            this.IsAuthenticated = (auth.User.Identity ?? new ClaimsIdentity()).IsAuthenticated;
+            if ((auth.User.Identity ?? new ClaimsIdentity()).IsAuthenticated)
+            {
+                string id = (auth.User.Claims.FirstOrDefault(cl => cl.Type == ClaimTypes.NameIdentifier)).Value;
+                var mons = this.dmToolsContext.Monster
+                   .Where(mon =>
+                       mon.UserGuid ==
+                           id)
+                   .Select(mon => new { mon.MonsterId, mon.Name }).ToList();
+                foreach (var result in mons)
+                {
+                    this.monsterIds.Add((result.MonsterId, result.Name));
+                }
+            }
+        }
+
+        await base.OnParametersSetAsync();
+        return;
+    }
+
+    private async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        this.isLoading = true;
+
+        foreach (IBrowserFile file in e.GetMultipleFiles())
+        {
+            try
+            {
+                loadedFiles.Add(file);
+                // technically NOT recommended, but these JSON files are ~4 KB in size, so it
+                // *really* shouldn't matter that much...
+                // https://learn.microsoft.com/en-us/aspnet/core/blazor/file-uploads?view=aspnetcore-8.0
+                var reader =
+                    await new StreamReader(file.OpenReadStream()).ReadToEndAsync();
+
+                DMTools.Database.Entities.StatBlock statBlock = this.statBlockFactory.CreateStatBlock("Monster", reader);
+
+                // did statBlock actually get created?
+                if (statBlock is null)
+                {
+                    throw new ArgumentException("Statblock could not be created.");
+                }
+
+                UploadedBlocks(statBlock);
+            }
+            catch (Exception)
+            {
+                // do somethiing
+            }
+        }
+        this.isLoading = false;
+    }
+
+    public void UploadedBlocks(DMTools.Database.Entities.StatBlock monster)
+    {
+        monsters.Add(monster);
+    }
+
+    public async Task RegisterSlide(int counter)
+    {
+        await JS.InvokeVoidAsync("RegisterSlide", new object[] { 1 });
+    }
+
+    public async Task DeleteMonster(object monster)
+    {
+        this.monsters.Remove(monster as Monster);
+    }
+
+    public async Task AddMonsterOnUpload(object monster)
+    {
+        Monster mon = monster as Monster;
+        if (mon == null)
+            return;
+
+        this.monsterIds.Add((mon.MonsterId, mon.Name));
+    }
+
+    public void CheckboxClicked(int id, string name, object checkBox)
+    {
+        bool? isOn = checkBox as bool?;
+
+        if (isOn == null)
+        {
+            return;
+        }
+
+        if (isOn.Value)
+        {
+            this.selectedMonsterIds.Add((id, name));
+        }
+        else
+        {
+            this.selectedMonsterIds.Remove((id, name));
+        }
+    }
+
+    public async Task LoadMonstersFromDb(MouseEventArgs e)
+    {
+        foreach ((int id, string _) in this.selectedMonsterIds)
+        {
+            Monster monster = dmToolsContext.Monster
+                .Include(mon => mon.ArmorClass)
+                .Include(mon => mon.HitDie)
+                .Include(mon => mon.Stats)
+                .Include(mon => mon.Senses)
+                .Include(mon => mon.Speeds)
+                .Include(mon => mon.Languages)
+                .Include(mon => mon.Sthrows)
+                .Include(mon => mon.Mskills)
+                .Include(mon => mon.DamageTypes)
+                .Include(mon => mon.ConditionImmunity)
+                .Include(mon => mon.Languages)
+                .Include(mon => mon.Cr)
+                .Where(mon => mon.MonsterId == id).AsSplitQuery().FirstOrDefault();
+
+            monster.Abilities = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Abilities").ToList();
+            monster.Actions = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Actions").ToList();
+            monster.BonusActions = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Bonus Actions").ToList();
+            monster.Reactions = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Reactions").ToList();
+            monster.Lairs = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Lair Actions").ToList();
+            monster.Mythics = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Mythic Actions").ToList();
+            monster.Regionals = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Regional Actions").ToList();
+            monster.Legendaries = dmToolsContext.MonsterActions.Where(mon => mon.MonsterId == id && mon.ActionName == "Legendary Actions").ToList();
+
+            if (monster == null)
+                continue;
+
+            this.monsters.Add(monster);
+        }
+
+        this.selectedMonsterIds.Clear();
+        return;
+    }
+}

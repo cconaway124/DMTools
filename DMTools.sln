@@ -3,11 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMToolsLibrary", "DMToolsLibrary\DMToolsLibrary.csproj", "{6F115A74-81FA-41D7-ABD1-F3A2CFA60387}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMToolsTest", "DMToolsTest\DMToolsTest.csproj", "{10BFEB88-0DC5-40DB-BDA4-40DC3DA435E0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.Blazor", "DMTools.Blazor\DMTools.Blazor.csproj", "{AD684E2E-197A-447C-A4A1-5FD72D285C58}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.Database", "DMTools.Database\DMTools.Database.csproj", "{4CBA827B-DA69-4809-922D-7CB1E6464297}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.Security", "DMTools.Security\DMTools.Security.csproj", "{A051FF8E-2300-4FA0-9A2C-460300D7A911}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.ScriptTracker", "DMTools.ScriptTracker\DMTools.ScriptTracker.csproj", "{CA37E87B-DD70-4698-85D6-DFB348E48C4F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.EncounterGenerator", "DMTools.EncounterGenerator\DMTools.EncounterGenerator.csproj", "{2154708C-AD25-48BD-BD15-C458F10148C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.Shared", "DMTools.Shared\DMTools.Shared.csproj", "{4F02AB3F-541D-4E93-9481-DE98D0150720}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.NameGenerator", "DMTools.NameGenerator\DMTools.NameGenerator.csproj", "{973ABD7B-01A2-4F6B-ADFC-BB5D86CCBCCB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.StatBlock", "DMTools.StatBlock\DMTools.StatBlock.csproj", "{E940E99A-8D61-4653-839C-0D51A02CBC6C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools", "DMTools\DMTools\DMTools.csproj", "{9532D5D6-F17A-471E-8845-313362D945C1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DMTools.Client", "DMTools\DMTools.Client\DMTools.Client.csproj", "{306C801B-6A26-491C-AEDF-99E0965765A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +31,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6F115A74-81FA-41D7-ABD1-F3A2CFA60387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F115A74-81FA-41D7-ABD1-F3A2CFA60387}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F115A74-81FA-41D7-ABD1-F3A2CFA60387}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F115A74-81FA-41D7-ABD1-F3A2CFA60387}.Release|Any CPU.Build.0 = Release|Any CPU
 		{10BFEB88-0DC5-40DB-BDA4-40DC3DA435E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10BFEB88-0DC5-40DB-BDA4-40DC3DA435E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10BFEB88-0DC5-40DB-BDA4-40DC3DA435E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +39,42 @@ Global
 		{AD684E2E-197A-447C-A4A1-5FD72D285C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD684E2E-197A-447C-A4A1-5FD72D285C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD684E2E-197A-447C-A4A1-5FD72D285C58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CBA827B-DA69-4809-922D-7CB1E6464297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CBA827B-DA69-4809-922D-7CB1E6464297}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CBA827B-DA69-4809-922D-7CB1E6464297}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CBA827B-DA69-4809-922D-7CB1E6464297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A051FF8E-2300-4FA0-9A2C-460300D7A911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A051FF8E-2300-4FA0-9A2C-460300D7A911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A051FF8E-2300-4FA0-9A2C-460300D7A911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A051FF8E-2300-4FA0-9A2C-460300D7A911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA37E87B-DD70-4698-85D6-DFB348E48C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA37E87B-DD70-4698-85D6-DFB348E48C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA37E87B-DD70-4698-85D6-DFB348E48C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA37E87B-DD70-4698-85D6-DFB348E48C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2154708C-AD25-48BD-BD15-C458F10148C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2154708C-AD25-48BD-BD15-C458F10148C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2154708C-AD25-48BD-BD15-C458F10148C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2154708C-AD25-48BD-BD15-C458F10148C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F02AB3F-541D-4E93-9481-DE98D0150720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F02AB3F-541D-4E93-9481-DE98D0150720}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F02AB3F-541D-4E93-9481-DE98D0150720}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F02AB3F-541D-4E93-9481-DE98D0150720}.Release|Any CPU.Build.0 = Release|Any CPU
+		{973ABD7B-01A2-4F6B-ADFC-BB5D86CCBCCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{973ABD7B-01A2-4F6B-ADFC-BB5D86CCBCCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{973ABD7B-01A2-4F6B-ADFC-BB5D86CCBCCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{973ABD7B-01A2-4F6B-ADFC-BB5D86CCBCCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E940E99A-8D61-4653-839C-0D51A02CBC6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E940E99A-8D61-4653-839C-0D51A02CBC6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E940E99A-8D61-4653-839C-0D51A02CBC6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E940E99A-8D61-4653-839C-0D51A02CBC6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9532D5D6-F17A-471E-8845-313362D945C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9532D5D6-F17A-471E-8845-313362D945C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9532D5D6-F17A-471E-8845-313362D945C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9532D5D6-F17A-471E-8845-313362D945C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{306C801B-6A26-491C-AEDF-99E0965765A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{306C801B-6A26-491C-AEDF-99E0965765A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{306C801B-6A26-491C-AEDF-99E0965765A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{306C801B-6A26-491C-AEDF-99E0965765A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

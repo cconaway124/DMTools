@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
-using DMToolsLibrary;
-using DMToolsLibrary.StatBlocks;
-using DMToolsLibrary.StatBlocks.StatBlockHelpers;
-using static DMToolsLibrary.Enums.LibraryEnums;
+using DMTools;
+using DMTools.StatBlocks;
+
+using static DMTools.Shared.Enums.LibraryEnums;
+using DMTools.Database.Entities;
+using DMTools.Shared;
 
 namespace DMToolsTest
 {
@@ -10,7 +12,7 @@ namespace DMToolsTest
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine(StatBlockStringReplacer.ReplaceBracketModifiers(@"[3D6 - 14]", new Stats(16, 18, 15, 8, 8, 10), 2, "Fallen", "The Fallen"));
+            Console.WriteLine(DMTools.Database.Entities.StatBlockStringReplacer.ReplaceBracketModifiers(@"[3D6 - 14]", new Stats(16, 18, 15, 8, 8, 10), 2, "Fallen", "The Fallen"));
 
             Console.WriteLine(new Speeds("30", "30", "30", "30", "30", true).ToString());
             Stats stats = new Stats(20, 18, 25, 5, 10, 1);

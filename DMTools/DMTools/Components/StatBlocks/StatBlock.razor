@@ -1,0 +1,233 @@
+﻿@inject AuthenticationStateProvider authenticationProv
+@inject DMTools.Database.DmtoolsContext dmToolsContext
+
+<div class="@((this.monster.DoubleColumns) ? "col-lg-6 col-md-8 col-sm-12" : "col-lg-3 col-md-4 col-sm-6") margin-20">
+    <div class="stat-block-header">
+        <div class="button-group">
+            <button class="dmbutton"><i class="fa-solid fa-download no-margin"></i></button>
+            @if(authenticationState.Result.User.Identity.IsAuthenticated)
+            {
+                <button class="dmbutton" @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket no-margin"></i></button>
+            }
+            else
+            {
+                <button class="dmbutton" disabled @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket no-margin"></i></button>
+            }
+            <button class="dmbutton" @onclick="() => Delete()"><i class="fa-solid fa-xmark no-margin"></i></button>
+        </div>
+    </div>
+    <div class="creature-heading colored-bg" name="nameTag" hidden>
+        <a class="pointer" name="slideBlock" id="a @monster.MonsterId" onclick="Slide(this)">
+            <h1>@monster.Name</h1>
+            <h2>@monster.Size @monster.Type, @monster.Alignment</h2>
+        </a>
+    </div> <!-- creature heading -->
+    <div class="stat-block @((this.monster.DoubleColumns) ? "wide" : "")">
+        <hr class="orange-border" />
+        <div class="section-left">
+            <div class="creature-heading">
+                <a class="pointer" name="slideBlock" id="a @monster.MonsterId" onclick="Slide(this)">
+                    <h1>@monster.Name</h1>
+                    <h2>@monster.Size @monster.Type, @monster.Alignment</h2>
+                </a>
+            </div> <!-- creature heading -->
+            <svg height="5" width="100%" class="tapered-rule">
+                <polyline points="0,0 400,2.5 0,5"></polyline>
+            </svg>
+            <div class="top-stats">
+                <div class="property-line first">
+                    <h4>Armor Class</h4>
+                    <p>@monster.ArmorClass.GetAc</p>
+                </div> <!-- property line -->
+                <div class="property-line">
+                    <h4>Hit Points</h4>
+                    <p>@monster.HitDie.ToString()</p>
+                </div> <!-- property line -->
+                <div class="property-line last">
+                    <h4>Speed</h4>
+                    <p>@monster.Speeds.ToString()</p>
+                </div> <!-- property line -->
+                <svg height="5" width="100%" class="tapered-rule">
+                    <polyline points="0,0 400,2.5 0,5"></polyline>
+                </svg>
+                <div class="abilities">
+                    <div class="ability-strength">
+                        <h4>STR</h4>
+                        <p>@monster.Stats.ToString(StatType.Str)</p>
+                    </div> <!-- ability strength -->
+                    <div class="ability-dexterity">
+                        <h4>DEX</h4>
+                        <p>@monster.Stats.ToString(StatType.Dex)</p>
+                    </div> <!-- ability dexterity -->
+                    <div class="ability-constitution">
+                        <h4>CON</h4>
+                        <p>@monster.Stats.ToString(StatType.Con)</p>
+                    </div> <!-- ability constitution -->
+                    <div class="ability-intelligence">
+                        <h4>INT</h4>
+                        <p>@monster.Stats.ToString(StatType.Int)</p>
+                    </div> <!-- ability intelligence -->
+                    <div class="ability-wisdom">
+                        <h4>WIS</h4>
+                        <p>@monster.Stats.ToString(StatType.Wis)</p>
+                    </div> <!-- ability wisdom -->
+                    <div class="ability-charisma">
+                        <h4>CHA</h4>
+                        <p>@monster.Stats.ToString(StatType.Cha)</p>
+                    </div> <!-- ability charisma -->
+                </div> <!-- abilities -->
+                <svg height="5" width="100%" class="tapered-rule">
+                    <polyline points="0,0 400,2.5 0,5"></polyline>
+                </svg>
+                <DamageType dTypes="@monster.DamageTypes" />
+                <SavingThrows savingThrows="@monster.Sthrows" />
+                <Skills skills="@monster.Mskills" />
+                <ConditionImmunities conditionImmunities="@monster.ConditionImmunity" />
+                <Senses senses="monster.Senses" />
+                <Languages languages="monster.Languages" />
+                <Cr CR="@monster.Cr" />
+            </div> <!-- top stats -->
+            <svg height="5" width="100%" class="tapered-rule">
+                <polyline points="0,0 400,2.5 0,5"></polyline>
+            </svg>
+            <StatBlockProperties properties="@monster.Abilities" />
+        </div>
+        <div class="section-right">
+            <Actions actions="@monster.Actions" />
+            <Actions actions="@monster.Reactions" />
+            <Actions actions="@monster.Legendaries" />
+            <Actions actions="@monster.Mythics" />
+            <Actions actions="@monster.Regionals" />
+        </div> <!-- section right -->
+        <hr class="orange-border bottom" />
+    </div> <!-- stat block -->
+</div>
+
+@code {
+    [Parameter]
+    public Monster monster { get; set; }
+    [Parameter]
+    public string Id { get; set; }
+    [Parameter]
+    public EventCallback OnDeleteButtonClicked { get; set; }
+    [Parameter]
+    public EventCallback OnMonsterUploaded { get; set; }
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (authenticationState is not null)
+            await authenticationState;
+
+        await base.OnParametersSetAsync();
+        return;
+    }
+
+    protected async Task Delete()
+    {
+        await OnDeleteButtonClicked.InvokeAsync(this.monster);
+    }
+
+    protected async Task SaveMonster()
+    {
+        var auth = ((PersistingRevalidatingAuthenticationStateProvider)authenticationProv).GetAuthenticationStateAsync();
+        if (auth is not null)
+        {
+            var state = await auth;
+            var g = state.User.Claims.First(cl => cl.Type == ClaimTypes.NameIdentifier).Value;
+            this.monster.UserGuid = g;
+            Monster mon = new()
+            {
+                Tag = monster.Tag,
+                Cr = monster.Cr,
+                IsCustomCr = monster.IsCustomCr,
+                CustomCr = monster.CustomCr,
+                ProfBonus = monster.ProfBonus,
+                Type = monster.Type,
+                ArmorClass = monster.ArmorClass,
+                Abilities = monster.Abilities,
+                Actions = monster.Actions,
+                BonusActions = monster.BonusActions,
+                Reactions = monster.Reactions,
+                Legendaries = monster.Legendaries,
+                Mythics = monster.Mythics,
+                Lairs = monster.Lairs,
+                Regionals = monster.Regionals,
+                Sthrows = monster.Sthrows,
+                Mskills = monster.Mskills,
+                DamageTypes = monster.DamageTypes,
+                ConditionImmunity = monster.ConditionImmunity,
+                CustomHp = monster.CustomHp,
+                CustomSpeed = monster.CustomSpeed,
+                IsLegendary = monster.IsLegendary,
+                LegendariesDescription = monster.LegendariesDescription,
+                IsLair = monster.IsLair,
+                LairDescription = monster.LairDescription,
+                LairDescriptionEnd = monster.LairDescriptionEnd,
+                IsMythic = monster.IsMythic,
+                MythicDescription = monster.MythicDescription,
+                IsRegional = monster.IsRegional,
+                RegionalDescription = monster.RegionalDescription,
+                RegionalDescriptionEnd = monster.RegionalDescriptionEnd,
+                ShortName = monster.ShortName,
+                PluralName = monster.PluralName,
+                DoubleColumns = monster.DoubleColumns,
+                SeparationPoint = monster.SeparationPoint,
+                UserGuid = g,
+                Senses = monster.Senses,
+                Name = monster.Name,
+                Size = monster.Size,
+                HitPoints = monster.HitPoints,
+                HitDie = monster.HitDie,
+                Speed = monster.Speed,
+                Stats = monster.Stats,
+                Alignment = monster.Alignment,
+                Speeds = monster.Speeds,
+                Languages = monster.Languages,
+            };
+
+            dmToolsContext.Monster.AddRange(mon);
+            await dmToolsContext.SaveChangesAsync();
+
+            UpdateId(mon.Abilities, mon.MonsterId);
+            UpdateId(mon.Actions, mon.MonsterId);
+            UpdateId(mon.BonusActions, mon.MonsterId);
+            UpdateId(mon.Reactions, mon.MonsterId);
+            UpdateId(mon.Legendaries, mon.MonsterId);
+            UpdateId(mon.Lairs, mon.MonsterId);
+            UpdateId(mon.BonusActions, mon.MonsterId);
+            UpdateId(mon.Mythics, mon.MonsterId);
+            UpdateId(mon.Regionals, mon.MonsterId);
+
+            AddCollection(mon.Abilities);
+            AddCollection(mon.Actions);
+            AddCollection(mon.BonusActions);
+            AddCollection(mon.Reactions);
+            AddCollection(mon.Legendaries);
+            AddCollection(mon.Lairs);
+            AddCollection(mon.Mythics);
+            AddCollection(mon.Regionals);
+
+            await dmToolsContext.SaveChangesAsync();
+
+            await this.OnMonsterUploaded.InvokeAsync(mon);
+        }
+    }
+
+    private void UpdateId(ICollection<MonsterActions> actions, int id)
+    {
+        foreach (var ab in actions)
+        {
+            ab.MonsterId = id;
+        }
+    }
+
+    public void AddCollection(ICollection<MonsterActions> actions)
+    {
+        if (actions != null)
+        {
+            this.dmToolsContext.MonsterActions.AddRange(actions);
+        }
+    }
+}

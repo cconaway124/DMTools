@@ -1,0 +1,14 @@
+﻿@if (this.conditionImmunities.Count() > 0)
+{
+	<div class="property-line">
+		<h4>Condition Immunities</h4>
+		<p>
+			@string.Join(", ", conditionImmunities.Select(i => i.ToString()))
+		</p>
+	</div> <!-- property line -->
+}
+
+@code {
+	[Parameter]
+	public ICollection<ConditionImmunity> conditionImmunities { get; set; }
+}

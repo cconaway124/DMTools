@@ -8,11 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DMToolsLibrary\DMToolsLibrary.csproj" />
+    <ProjectReference Include="..\DMTools.StatBlock\DMTools.StatBlock.csproj" />
   </ItemGroup>
 
 </Project>

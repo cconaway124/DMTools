@@ -1,0 +1,21 @@
+﻿@{
+    int count = 0; 
+}
+
+@foreach (DamageTypes dType in dTypes)
+{
+    if (dType.Description.Length == 0)
+        continue;
+
+    <div class="property-line @((count == 0) ? "first" : "")">
+        <h4>@(((DMTools.Shared.Enums.LibraryEnums.DamageType)dType.Type).GetDescription())</h4>
+        <p>@dType.Description</p>
+    </div> <!-- property line -->
+    count++;
+}
+
+
+@code {
+    [Parameter]
+    public ICollection<DMTools.Database.Entities.DamageTypes> dTypes { get; set; }
+}
