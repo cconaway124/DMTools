@@ -1,11 +1,17 @@
 ﻿@inject AuthenticationStateProvider authenticationProv
 @inject HttpClient httpClient
-
 <div class="@((this.monster.DoubleColumns) ? "col-lg-6 col-md-8 col-sm-12" : "col-lg-3 col-md-4 col-sm-6") margin-20">
     <div class="stat-block-header">
         <div class="button-group">
             <button class="dmbutton"><i class="fa-solid fa-download"></i></button>
-            <button class="dmbutton" @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+            @if(authenticationState.Result.User.Identity.IsAuthenticated)
+            {
+                <button class="dmbutton" @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+            }
+            else
+            {
+                <button class="dmbutton" disabled @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+            }
             <button class="dmbutton" @onclick="() => Delete()"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
@@ -103,6 +109,15 @@
     public EventCallback OnDeleteButtonClicked { get; set; }
     [CascadingParameter]
     private Task<AuthenticationState>? authenticationState { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (authenticationState is not null)
+            await authenticationState;
+
+        await base.OnParametersSetAsync();
+        return;
+    }
 
     protected async Task Delete()
     {

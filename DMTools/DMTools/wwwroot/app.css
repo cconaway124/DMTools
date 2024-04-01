@@ -111,3 +111,11 @@ button.dmbutton {
 button {
     position: relative;
 }
+
+    button:disabled {
+        background-color: #727273
+    }
+
+        button:disabled:hover {
+            background-color: #909091;
+        }
