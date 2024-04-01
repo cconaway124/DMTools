@@ -12,13 +12,15 @@ namespace DMTools.Database.Entities;
 public partial class Speeds
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int SpeedId { get; set; }
     public int? Speed { get; set; }
     public int? Burrow { get; set; }
     public int? Climb { get; set; }
     public int? Fly { get; set; }
     public int? Swim { get; set; }
-    public int? Hover { get; set; }
-    [ForeignKey(name: "MonsterId")]
-    public Monster Monster { get; set; }
+    public bool? Hover { get; set; }
+    [ForeignKey(name: "Monster")]
+    public int MonsterId { get; set; }
+    public virtual Monster Monster { get; set; }
 }

@@ -10,8 +10,11 @@ namespace DMTools.Database.Entities;
 public partial class DamageTypes
 {
 	[Key]
-	public int DamageTypeId { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int DamageTypeId { get; set; }
 	public int Type { get; set; }
-	[ForeignKey(name: "MonsterId")]
-	public virtual Monster Monster { get; set; }
+	public string Description { get; set; }
+    [ForeignKey(name: "Monster")]
+    public int MonsterId { get; set; }
+    public virtual Monster Monster { get; set; }
 }

@@ -24,14 +24,9 @@ public partial class ConditionImmunity
 		return conditionImm;
     }
 
-    public ConditionImmunity(Dictionary<string, string>[] conditionImmunities)
+    public ConditionImmunity(string description)
     {
-		/*this.conditionImmunities = new string[conditionImmunities.Length];
-
-		for (int i = 0; i < conditionImmunities.Length; i++)
-		{
-			this.conditionImmunities.Add(new ConditionImmunity { Description = conditionImmunities[i]["name"] });
-        }*/
+		this.Description = description;
     }
 
 	public override string ToString()

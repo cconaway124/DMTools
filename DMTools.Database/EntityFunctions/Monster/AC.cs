@@ -84,12 +84,39 @@ public partial class AC
 			{ "plate", 18 },
 			{ "other", 0 },
 		};
+
+		this.ArmorName = armorName;
+		this.AllowsDexMod = (dexBonus > 0) ? 1 : 0;
+		this.ShieldBonus = this.shieldBonus;
+		this.DexBonus = this.dexBonus;
+		this.NaturalArmorBonus = this.naturalArmorBonus;
 	}
+
 
 	public string GetAc
 	{
 		get
 		{
+			if (this.armorName == null)
+			{
+				this.armorName = this.ArmorName;
+			}
+
+			if (this.shieldBonus ==0)
+			{
+				this.shieldBonus = this.ShieldBonus;
+			}
+
+			if (naturalArmorBonus == 0)
+			{
+				this.naturalArmorBonus = this.NaturalArmorBonus ?? 0;
+			}
+
+			if (nameToAc == null)
+			{
+				SetNameToAc(this.DexBonus ?? 0, this.ShieldBonus, this.naturalArmorBonus);
+			}
+
 			if (this.armorName.ToLower() == "other" && !string.IsNullOrEmpty(this.otherArmorDesc))
 				return this.otherArmorDesc;
 
@@ -107,4 +134,26 @@ public partial class AC
 			return $"{ac} ({this.armorName})";
 		}
 	}
+
+    private void SetNameToAc(int dexBonus, int shieldBonus, int naturalArmorBonus)
+    {
+        this.nameToAc = new Dictionary<string, int>
+        {
+            { "none", 10 },
+            { "natural armor", 10 + naturalArmorBonus },
+            { "padded armor",11 + dexBonus + shieldBonus },
+            { "leather armor", 11 },
+            { "studded leather", 12 },
+            { "hide armor", 12 },
+            { "chain shirt", 13 },
+            { "scale mail", 14 },
+            { "breastplate", 14 },
+            { "half plate", 15 },
+            { "ring mail", 14 },
+            { "chain mail", 16 },
+            { "splint", 17 },
+            { "plate", 18 },
+            { "other", 0 },
+        };
+    }
 }

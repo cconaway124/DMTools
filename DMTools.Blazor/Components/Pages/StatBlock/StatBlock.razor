@@ -69,23 +69,23 @@
                 <svg height="5" width="100%" class="tapered-rule">
                     <polyline points="0,0 400,2.5 0,5"></polyline>
                 </svg>
-                <DamageType dTypes="@monster.DamageTypes" />
-                <ConditionImmunities conditionImmunities="@monster.ConditionImmunity" />
+                @* <DamageType dTypes="@monster.DamageTypes" /> *@
+                @* <ConditionImmunities conditionImmunities="@monster.ConditionImmunity" /> *@
                 <Senses senses="monster.Senses" />
-                <Languages languages="monster.Languages" />
+                @* <Languages languages="monster.Languages" /> *@
                 <Cr CR="@monster.Cr" />
             </div> <!-- top stats -->
             <svg height="5" width="100%" class="tapered-rule">
                 <polyline points="0,0 400,2.5 0,5"></polyline>
             </svg>
-            <StatBlockProperties properties="@monster.Abilities" />
+            @* <StatBlockProperties properties="@monster.Abilities" /> *@
         </div>
         <div class="section-right">
-            <Actions actions="@monster.Actions" />
+            @* <Actions actions="@monster.Actions" />
             <Actions actions="@monster.Reactions" />
             <Actions actions="@monster.Legendaries" />
             <Actions actions="@monster.Mythics" />
-            <Actions actions="@monster.Regionals" />
+            <Actions actions="@monster.Regionals" /> *@
         </div> <!-- section right -->
         <hr class="orange-border bottom" />
     </div> <!-- stat block -->

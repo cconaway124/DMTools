@@ -18,6 +18,43 @@ public partial class SavingThrows
         {
             this.stats[statType] = stats.GetAbilityMod(statType) + profBonus;
         }
+
+        this.SetSavingThrows();
+    }
+
+    public void SetSavingThrows()
+    {
+        foreach (KeyValuePair<StatType, int> pair in this.stats)
+        {
+            switch (pair.Key)
+            {
+                case (StatType.Str):
+                    this.Str = pair.Value;
+                    break;
+
+                case (StatType.Dex):
+                    this.Dex = pair.Value;
+                    break;
+
+                case (StatType.Con):
+                    this.Con = pair.Value;
+                    break;
+
+                case (StatType.Int):
+                    this.Int = pair.Value;
+                    break;
+
+                case (StatType.Wis):
+                    this.Wis = pair.Value;
+                    break;
+
+                case (StatType.Cha):
+                    this.Cha = pair.Value;
+                    break;
+
+                default: break;
+            }
+        }
     }
 
     private StatType[] GetSaveTypes(Dictionary<string, string>[] types)
@@ -51,6 +88,43 @@ public partial class SavingThrows
         this.stats.TryGetValue(statType, out int value);
         return value;
     }
+
+    public void SetStats()
+    {
+		if (this.stats == null)
+		{
+			this.stats = new Dictionary<StatType, int>();
+			if (this.Str != null)
+			{
+				this.stats.Add(StatType.Str, this.Str ?? 0);
+			}
+
+			if (this.Dex != null)
+			{
+				this.stats.Add(StatType.Dex, this.Dex ?? 0);
+			}
+
+			if (this.Con != null)
+			{
+				this.stats.Add(StatType.Con, this.Con ?? 0);
+			}
+
+			if (this.Int != null)
+			{
+				this.stats.Add(StatType.Int, this.Int ?? 0);
+			}
+
+			if (this.Wis != null)
+			{
+				this.stats.Add(StatType.Wis, this.Wis ?? 0);
+			}
+
+			if (this.Cha != null)
+			{
+				this.stats.Add(StatType.Cha, this.Cha ?? 0);
+			}
+		}
+	}
 
     public override string ToString()
     {

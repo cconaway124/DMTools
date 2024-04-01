@@ -1,13 +1,13 @@
-﻿@foreach (string str in properties.Actions.Keys) {
+﻿@foreach (MonsterActions action in properties) {
 	<div class="property-block">
-		<h4>@str.</h4>
+		<h4>@action.Name.</h4>
 		<p>
-			@MarkupExtensions.MarkupString(properties.Actions[str])
+			@MarkupExtensions.MarkupString(action.ActionDescription)
 		</p>
 	</div> <!-- property block -->
 }
 
 @code {
 	[Parameter]
-	public MonsterActions properties { get; set; }
+	public ICollection<MonsterActions> properties { get; set; }
 }

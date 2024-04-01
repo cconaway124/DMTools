@@ -9,6 +9,12 @@ public partial class DamageTypes
 
 	public DamageTypes() { }
 
+	public DamageTypes(DamageType damageType, string description)
+	{
+		this.Type = (int)damageType;
+		this.Description = description;
+	}
+
 	public DamageTypes(Dictionary<string, string>[] dTypes)
 	{
         this.damageTypes = new Dictionary<DamageType, List<string>>();
@@ -39,6 +45,17 @@ public partial class DamageTypes
 			else
 				continue;
 		}
+	}
+
+	public List<DamageTypes> ToList()
+	{
+		List<DamageTypes> list = new List<DamageTypes>();
+		foreach (KeyValuePair<DamageType, List<string>> pair in damageTypes)
+		{
+			list.Add(new DamageTypes(pair.Key, string.Join(", ", pair.Value)));
+		}
+
+		return list;
 	}
 
 	public Dictionary<DamageType, List<string>> Dtypes

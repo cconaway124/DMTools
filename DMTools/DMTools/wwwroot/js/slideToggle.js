@@ -22,3 +22,21 @@ function Slide(ele) {
         child.attr('hidden', 'hidden');
     parent.slideToggle(200, 'swing');
 }
+
+function HideUpload(element) {
+    let icon = $(element).children();
+    if (icon !== null) {
+        icon = icon[1];
+        if ($(icon).hasClass("fa-chevron-up")) {
+            $(icon).removeClass("fa-chevron-up");
+            $(icon).addClass("fa-chevron-down");
+            $(element).children()[0].textContent = "Show";
+        }
+        else {
+            $(icon).removeClass("fa-chevron-down");
+            $(icon).addClass("fa-chevron-up");
+            $(element).children()[0].textContent = "Hide";
+        }
+    }
+    $('#monsterUpload').slideToggle();
+}

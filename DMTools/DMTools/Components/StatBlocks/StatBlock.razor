@@ -1,5 +1,6 @@
 ﻿@inject AuthenticationStateProvider authenticationProv
-@inject HttpClient httpClient
+@inject DMTools.Database.DmtoolsContext dmToolsContext
+
 <div class="@((this.monster.DoubleColumns) ? "col-lg-6 col-md-8 col-sm-12" : "col-lg-3 col-md-4 col-sm-6") margin-20">
     <div class="stat-block-header">
         <div class="button-group">
@@ -13,6 +14,9 @@
                 <button class="dmbutton" disabled @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
             }
             <button class="dmbutton" @onclick="() => Delete()"><i class="fa-solid fa-xmark"></i></button>
+            <button class="dmbutton"><i class="fa-solid fa-download no-margin"></i></button>
+            <button class="dmbutton" @onclick="SaveMonster"><i class="fa-solid fa-arrow-up-from-bracket no-margin"></i></button>
+            <button class="dmbutton" @onclick="() => Delete()"><i class="fa-solid fa-xmark no-margin"></i></button>
         </div>
     </div>
     <div class="creature-heading colored-bg" name="nameTag" hidden>
@@ -79,6 +83,8 @@
                     <polyline points="0,0 400,2.5 0,5"></polyline>
                 </svg>
                 <DamageType dTypes="@monster.DamageTypes" />
+                <SavingThrows savingThrows="@monster.Sthrows" />
+                <Skills skills="@monster.Mskills" />
                 <ConditionImmunities conditionImmunities="@monster.ConditionImmunity" />
                 <Senses senses="monster.Senses" />
                 <Languages languages="monster.Languages" />
@@ -107,6 +113,8 @@
     public string Id { get; set; }
     [Parameter]
     public EventCallback OnDeleteButtonClicked { get; set; }
+    [Parameter]
+    public EventCallback OnMonsterUploaded { get; set; }
     [CascadingParameter]
     private Task<AuthenticationState>? authenticationState { get; set; }
 
@@ -132,7 +140,97 @@
             var state = await auth;
             var g = state.User.Claims.First(cl => cl.Type == ClaimTypes.NameIdentifier).Value;
             this.monster.UserGuid = g;
-            var result = await this.httpClient.PostAsJsonAsync("api/v1/monster/create", this.monster);
+            Monster mon = new()
+            {
+                Tag = monster.Tag,
+                Cr = monster.Cr,
+                IsCustomCr = monster.IsCustomCr,
+                CustomCr = monster.CustomCr,
+                ProfBonus = monster.ProfBonus,
+                Type = monster.Type,
+                ArmorClass = monster.ArmorClass,
+                Abilities = monster.Abilities,
+                Actions = monster.Actions,
+                BonusActions = monster.BonusActions,
+                Reactions = monster.Reactions,
+                Legendaries = monster.Legendaries,
+                Mythics = monster.Mythics,
+                Lairs = monster.Lairs,
+                Regionals = monster.Regionals,
+                Sthrows = monster.Sthrows,
+                Mskills = monster.Mskills,
+                DamageTypes = monster.DamageTypes,
+                ConditionImmunity = monster.ConditionImmunity,
+                CustomHp = monster.CustomHp,
+                CustomSpeed = monster.CustomSpeed,
+                IsLegendary = monster.IsLegendary,
+                LegendariesDescription = monster.LegendariesDescription,
+                IsLair = monster.IsLair,
+                LairDescription = monster.LairDescription,
+                LairDescriptionEnd = monster.LairDescriptionEnd,
+                IsMythic = monster.IsMythic,
+                MythicDescription = monster.MythicDescription,
+                IsRegional = monster.IsRegional,
+                RegionalDescription = monster.RegionalDescription,
+                RegionalDescriptionEnd = monster.RegionalDescriptionEnd,
+                ShortName = monster.ShortName,
+                PluralName = monster.PluralName,
+                DoubleColumns = monster.DoubleColumns,
+                SeparationPoint = monster.SeparationPoint,
+                UserGuid = g,
+                Senses = monster.Senses,
+                Name = monster.Name,
+                Size = monster.Size,
+                HitPoints = monster.HitPoints,
+                HitDie = monster.HitDie,
+                Speed = monster.Speed,
+                Stats = monster.Stats,
+                Alignment = monster.Alignment,
+                Speeds = monster.Speeds,
+                Languages = monster.Languages,
+            };
+
+            dmToolsContext.Monster.AddRange(mon);
+            await dmToolsContext.SaveChangesAsync();
+
+            UpdateId(mon.Abilities, mon.MonsterId);
+            UpdateId(mon.Actions, mon.MonsterId);
+            UpdateId(mon.BonusActions, mon.MonsterId);
+            UpdateId(mon.Reactions, mon.MonsterId);
+            UpdateId(mon.Legendaries, mon.MonsterId);
+            UpdateId(mon.Lairs, mon.MonsterId);
+            UpdateId(mon.BonusActions, mon.MonsterId);
+            UpdateId(mon.Mythics, mon.MonsterId);
+            UpdateId(mon.Regionals, mon.MonsterId);
+
+            AddCollection(mon.Abilities);
+            AddCollection(mon.Actions);
+            AddCollection(mon.BonusActions);
+            AddCollection(mon.Reactions);
+            AddCollection(mon.Legendaries);
+            AddCollection(mon.Lairs);
+            AddCollection(mon.Mythics);
+            AddCollection(mon.Regionals);
+
+            await dmToolsContext.SaveChangesAsync();
+
+            await this.OnMonsterUploaded.InvokeAsync(mon);
+        }
+    }
+
+    private void UpdateId(ICollection<MonsterActions> actions, int id)
+    {
+        foreach (var ab in actions)
+        {
+            ab.MonsterId = id;
+        }
+    }
+
+    public void AddCollection(ICollection<MonsterActions> actions)
+    {
+        if (actions != null)
+        {
+            this.dmToolsContext.MonsterActions.AddRange(actions);
         }
     }
 }

@@ -37,35 +37,24 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DexBonus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MonsterId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NaturalArmorBonus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShieldBonus")
+                        .HasColumnType("int");
+
                     b.HasKey("AcId");
 
+                    b.HasIndex("MonsterId")
+                        .IsUnique();
+
                     b.ToTable("ArmorClass", "monster");
-                });
-
-            modelBuilder.Entity("DMTools.Database.Entities.Actions", b =>
-                {
-                    b.Property<int>("ActionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActionId"));
-
-                    b.Property<string>("Action")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ActionRules")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MonsterActionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ActionId");
-
-                    b.HasIndex("MonsterActionId");
-
-                    b.ToTable("Actions", "monster");
                 });
 
             modelBuilder.Entity("DMTools.Database.Entities.ChallengeRating", b =>
@@ -111,7 +100,7 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MonsterId")
+                    b.Property<int>("MonsterId")
                         .HasColumnType("int");
 
                     b.HasKey("ConditionImmunityId");
@@ -129,6 +118,10 @@ namespace DMTools.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DamageTypeId"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("MonsterId")
                         .HasColumnType("int");
 
@@ -137,8 +130,7 @@ namespace DMTools.Database.Migrations
 
                     b.HasKey("DamageTypeId");
 
-                    b.HasIndex("MonsterId")
-                        .IsUnique();
+                    b.HasIndex("MonsterId");
 
                     b.ToTable("DamageTypes", "monster");
                 });
@@ -194,10 +186,12 @@ namespace DMTools.Database.Migrations
                     b.Property<int>("MonsterId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UnderstandsBut")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("LanguageId");
 
-                    b.HasIndex("MonsterId")
-                        .IsUnique();
+                    b.HasIndex("MonsterId");
 
                     b.ToTable("Languages", "monster");
                 });
@@ -213,9 +207,6 @@ namespace DMTools.Database.Migrations
                     b.Property<string>("Alignment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ArmorClassAcId")
-                        .HasColumnType("int");
 
                     b.Property<string>("CustomCr")
                         .IsRequired()
@@ -310,8 +301,6 @@ namespace DMTools.Database.Migrations
 
                     b.HasKey("MonsterId");
 
-                    b.HasIndex("ArmorClassAcId");
-
                     b.ToTable("Monster", "monster");
                 });
 
@@ -331,9 +320,8 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ActionType")
+                        .HasColumnType("int");
 
                     b.Property<int>("MonsterId")
                         .HasColumnType("int");
@@ -347,29 +335,6 @@ namespace DMTools.Database.Migrations
                     b.HasIndex("MonsterId");
 
                     b.ToTable("MonsterActions", "monster");
-                });
-
-            modelBuilder.Entity("DMTools.Database.Entities.Monsters_ConditionImmunity", b =>
-                {
-                    b.Property<int>("Monsters_ConditionImmunitiesId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Monsters_ConditionImmunitiesId"));
-
-                    b.Property<int>("ConditionImmunityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MonsterId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Monsters_ConditionImmunitiesId");
-
-                    b.HasIndex("ConditionImmunityId");
-
-                    b.HasIndex("MonsterId");
-
-                    b.ToTable("Monsters_x_ConditionImmunity", "monster");
                 });
 
             modelBuilder.Entity("DMTools.Database.Entities.SavingThrows", b =>
@@ -395,10 +360,6 @@ namespace DMTools.Database.Migrations
                     b.Property<int>("MonsterId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ProfBonus")
                         .HasColumnType("int");
 
@@ -410,7 +371,8 @@ namespace DMTools.Database.Migrations
 
                     b.HasKey("SavingThrowId");
 
-                    b.HasIndex("MonsterId");
+                    b.HasIndex("MonsterId")
+                        .IsUnique();
 
                     b.ToTable("SavingThrows", "monster");
                 });
@@ -422,6 +384,9 @@ namespace DMTools.Database.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SenseId"));
+
+                    b.Property<bool>("Blind")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("BlindSight")
                         .HasColumnType("int");
@@ -472,8 +437,7 @@ namespace DMTools.Database.Migrations
 
                     b.HasKey("SkillId");
 
-                    b.HasIndex("MonsterId")
-                        .IsUnique();
+                    b.HasIndex("MonsterId");
 
                     b.ToTable("Skills", "monster");
                 });
@@ -495,8 +459,8 @@ namespace DMTools.Database.Migrations
                     b.Property<int?>("Fly")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Hover")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Hover")
+                        .HasColumnType("bit");
 
                     b.Property<int>("MonsterId")
                         .HasColumnType("int");
@@ -583,15 +547,15 @@ namespace DMTools.Database.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DMTools.Database.Entities.Actions", b =>
+            modelBuilder.Entity("DMTools.Database.Entities.AC", b =>
                 {
-                    b.HasOne("DMTools.Database.Entities.MonsterActions", "MonsterActions")
-                        .WithMany()
-                        .HasForeignKey("MonsterActionId")
+                    b.HasOne("DMTools.Database.Entities.Monster", "Monster")
+                        .WithOne("ArmorClass")
+                        .HasForeignKey("DMTools.Database.Entities.AC", "MonsterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("MonsterActions");
+                    b.Navigation("Monster");
                 });
 
             modelBuilder.Entity("DMTools.Database.Entities.ChallengeRating", b =>
@@ -609,7 +573,9 @@ namespace DMTools.Database.Migrations
                 {
                     b.HasOne("DMTools.Database.Entities.Monster", "Monster")
                         .WithMany("ConditionImmunity")
-                        .HasForeignKey("MonsterId");
+                        .HasForeignKey("MonsterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Monster");
                 });
@@ -617,8 +583,8 @@ namespace DMTools.Database.Migrations
             modelBuilder.Entity("DMTools.Database.Entities.DamageTypes", b =>
                 {
                     b.HasOne("DMTools.Database.Entities.Monster", "Monster")
-                        .WithOne("DamageTypes")
-                        .HasForeignKey("DMTools.Database.Entities.DamageTypes", "MonsterId")
+                        .WithMany("DamageTypes")
+                        .HasForeignKey("MonsterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -639,23 +605,12 @@ namespace DMTools.Database.Migrations
             modelBuilder.Entity("DMTools.Database.Entities.Languages", b =>
                 {
                     b.HasOne("DMTools.Database.Entities.Monster", "Monster")
-                        .WithOne("Languages")
-                        .HasForeignKey("DMTools.Database.Entities.Languages", "MonsterId")
+                        .WithMany("Languages")
+                        .HasForeignKey("MonsterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Monster");
-                });
-
-            modelBuilder.Entity("DMTools.Database.Entities.Monster", b =>
-                {
-                    b.HasOne("DMTools.Database.Entities.AC", "ArmorClass")
-                        .WithMany()
-                        .HasForeignKey("ArmorClassAcId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ArmorClass");
                 });
 
             modelBuilder.Entity("DMTools.Database.Entities.MonsterActions", b =>
@@ -669,30 +624,11 @@ namespace DMTools.Database.Migrations
                     b.Navigation("Monster");
                 });
 
-            modelBuilder.Entity("DMTools.Database.Entities.Monsters_ConditionImmunity", b =>
-                {
-                    b.HasOne("DMTools.Database.Entities.ConditionImmunity", "ConditionImmunity")
-                        .WithMany()
-                        .HasForeignKey("ConditionImmunityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DMTools.Database.Entities.Monster", "Monster")
-                        .WithMany()
-                        .HasForeignKey("MonsterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ConditionImmunity");
-
-                    b.Navigation("Monster");
-                });
-
             modelBuilder.Entity("DMTools.Database.Entities.SavingThrows", b =>
                 {
                     b.HasOne("DMTools.Database.Entities.Monster", "Monster")
-                        .WithMany()
-                        .HasForeignKey("MonsterId")
+                        .WithOne("Sthrows")
+                        .HasForeignKey("DMTools.Database.Entities.SavingThrows", "MonsterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -713,8 +649,8 @@ namespace DMTools.Database.Migrations
             modelBuilder.Entity("DMTools.Database.Entities.Skills", b =>
                 {
                     b.HasOne("DMTools.Database.Entities.Monster", "Monster")
-                        .WithOne("Mskills")
-                        .HasForeignKey("DMTools.Database.Entities.Skills", "MonsterId")
+                        .WithMany("Mskills")
+                        .HasForeignKey("MonsterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -745,22 +681,22 @@ namespace DMTools.Database.Migrations
 
             modelBuilder.Entity("DMTools.Database.Entities.Monster", b =>
                 {
+                    b.Navigation("ArmorClass")
+                        .IsRequired();
+
                     b.Navigation("ConditionImmunity");
 
                     b.Navigation("Cr")
                         .IsRequired();
 
-                    b.Navigation("DamageTypes")
-                        .IsRequired();
+                    b.Navigation("DamageTypes");
 
                     b.Navigation("HitDie")
                         .IsRequired();
 
-                    b.Navigation("Languages")
-                        .IsRequired();
+                    b.Navigation("Languages");
 
-                    b.Navigation("Mskills")
-                        .IsRequired();
+                    b.Navigation("Mskills");
 
                     b.Navigation("Senses")
                         .IsRequired();
@@ -769,6 +705,9 @@ namespace DMTools.Database.Migrations
                         .IsRequired();
 
                     b.Navigation("Stats")
+                        .IsRequired();
+
+                    b.Navigation("Sthrows")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

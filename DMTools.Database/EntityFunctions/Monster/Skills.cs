@@ -31,12 +31,33 @@ public partial class Skills
 			StatType type = StrToStatType(stat);
 			int mod = stats.GetAbilityMod(type);
 
-			skills[name] = mod + profBonus;
+			this.skills[name] = mod + profBonus;
 		}
+	}
+
+	public List<Skills> ConvertToList()
+	{
+		List<Skills> skills = new List<Skills>();
+
+		foreach (KeyValuePair<string, int> pair in this.skills)
+		{
+			skills.Add(new Skills
+			{
+				Name = pair.Key,
+				Bonus = pair.Value,
+			});
+		}
+
+		return skills;
 	}
 
 	public override string ToString()
 	{
+		if (this.skills == null)
+		{
+			return $"{this.Name} {(this.Bonus > 0 ? "+" : "-")}{Math.Abs(this.Bonus)}";
+		}
+
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
 		foreach (string key in this.skills.Keys)

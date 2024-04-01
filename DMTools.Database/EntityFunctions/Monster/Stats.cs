@@ -24,7 +24,35 @@ public partial class Stats
     {
         this.statPoints = new int[]
         {
-                str, dex, con, inte, wis, cha,
+            str, dex, con, inte, wis, cha,
+        };
+
+        this.statMods = new int[this.statPoints.Length];
+
+        for (int i = 0; i < this.statPoints.Length; i++)
+        {
+            this.statMods[i] = this.CalculateAbilityMod(this.statPoints[i]);
+
+        }
+
+        this.SetStats();
+    }
+
+    public void SetStats()
+    {
+        this.Str = this.statPoints[(int)StatType.Str];
+        this.Dex = this.statPoints[(int)StatType.Dex];
+        this.Con = this.statPoints[(int)StatType.Con];
+        this.Int = this.statPoints[(int)StatType.Int];
+        this.Wis = this.statPoints[(int)StatType.Wis];
+        this.Cha = this.statPoints[(int)StatType.Cha];
+    }
+
+    private void SetStatArray()
+    {
+        this.statPoints = new int[]
+        {
+            this.Str, this.Dex, this.Con, this.Int, this.Wis, this.Cha,
         };
 
         this.statMods = new int[this.statPoints.Length];
@@ -103,6 +131,9 @@ public partial class Stats
 
     public string ToString(StatType type)
     {
+        if (this.statPoints == null)
+            this.SetStatArray();
+
         int stat = this.statMods[(int)type];
         string sign = (stat >= 0) ? "+" : "-";
         return string.Format("{0} ({1}{2})", this.statPoints[(int)type], sign, Math.Abs(stat));

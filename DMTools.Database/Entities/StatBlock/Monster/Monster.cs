@@ -7,6 +7,7 @@ namespace DMTools.Database.Entities;
 public partial class Monster : StatBlock
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int MonsterId { get; set; }
 
     public string Tag { get; set; }
@@ -21,30 +22,25 @@ public partial class Monster : StatBlock
 
     public string Type { get; set; }
     [NotMapped]
-    public virtual MonsterActions Abilities { get; set; }
+    public virtual ICollection<MonsterActions> Abilities { get; set; }
     [NotMapped]
-    public virtual MonsterActions Actions { get; set; }
+    public virtual ICollection<MonsterActions> Actions { get; set; }
     [NotMapped]
-    public virtual MonsterActions BonusActions { get; set; }
+    public virtual ICollection<MonsterActions> BonusActions { get; set; }
     [NotMapped]
-    public virtual MonsterActions Reactions { get; set; }
+    public virtual ICollection<MonsterActions> Reactions { get; set; }
     [NotMapped]
-    public virtual MonsterActions Legendaries { get; set; }
+    public virtual ICollection<MonsterActions> Legendaries { get; set; }
     [NotMapped]
-    public virtual MonsterActions Mythics { get; set; }
+    public virtual ICollection<MonsterActions> Mythics { get; set; }
     [NotMapped]
-    public virtual MonsterActions Lairs { get; set; }
+    public virtual ICollection<MonsterActions> Lairs { get; set; }
     [NotMapped]
-    public virtual MonsterActions Regionals { get; set; }
-    [NotMapped]
+    public virtual ICollection<MonsterActions> Regionals { get; set; }
     public virtual SavingThrows Sthrows { get; set; }
-
-    public virtual Skills Mskills { get; set; }
-
-    public virtual DamageTypes DamageTypes { get; set; }
-
-    public virtual List<ConditionImmunity> ConditionImmunity { get; set; }
-
+    public virtual ICollection<Skills> Mskills { get; set; }
+    public virtual ICollection<DamageTypes> DamageTypes { get; set; }
+    public virtual ICollection<ConditionImmunity> ConditionImmunity { get; set; }
     public bool CustomHp { get; set; }
 
     public bool CustomSpeed { get; set; }

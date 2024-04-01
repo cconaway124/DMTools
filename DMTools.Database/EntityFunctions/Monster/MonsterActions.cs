@@ -1,27 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DMTools.Shared.Enums;
+using System.ComponentModel.DataAnnotations;
+using static DMTools.Shared.Enums.LibraryEnums;
 
 namespace DMTools.Database.Entities;
 
 public partial class MonsterActions
 {
-    private string actionName;
+    private ActionType actionName;
     private string actionDescription;
     private Dictionary<string, string> actions;
-
-    /// <summary>
-    /// This is your "Legendary Action", "Action", etc.
-    /// </summary>
-    public string ActionName
-    { 
-        get => this.actionName; 
-        set => this.actionName = value; 
-    }
-
-    public string ActionDescription
-    {
-        get => this.actionDescription;
-        set => this.actionDescription = value;
-    }
 
     public Dictionary<string, string> Actions
     {
@@ -31,14 +18,14 @@ public partial class MonsterActions
     public MonsterActions() { }
 
     public MonsterActions(Dictionary<string, string>[] actions,
-        string actionName,
+        ActionType actionType,
         string actionDescription,
         Stats stats,
         int profBonus,
         string shortenedName,
         string pluralName)
     {
-        this.actionName = actionName;
+        this.actionName = actionType;
         this.actionDescription = actionDescription;
         this.actions = this.ConvertToDict(actions);
         
@@ -47,6 +34,24 @@ public partial class MonsterActions
             //this.actions[pair.Key] = StatBlockStringReplacer.ReplaceAngleBrackets(pair.Value);
             this.actions[pair.Key] = StatBlockStringReplacer.ReplaceBracketModifiers(pair.Value, stats, profBonus, shortenedName, pluralName);
         }
+    }
+
+    public List<MonsterActions> ConvertToList()
+    {
+        List<MonsterActions> actions = new List<MonsterActions>();
+        
+        foreach (KeyValuePair<string, string> pair in this.Actions)
+        {
+            actions.Add(new MonsterActions
+            {
+                ActionName = this.actionName.GetDescription(),
+                ActionDescription = pair.Value,
+                Name = pair.Key,
+                ActionType = (int)this.actionName,
+            });
+        }
+
+        return actions;
     }
 
     // need to rethink this, but oh well

@@ -39,6 +39,8 @@ public partial class Speeds
             flySpeed,
             swimSpeed,
         };
+
+        this.SetSpeeds();
     }
 
     /*public string Speed { get => this.speed[(int)SpeedType.speed]; }
@@ -52,8 +54,51 @@ public partial class Speeds
         set => this.hover = value;
     }*/
 
+    public void SetSpeeds()
+    {
+        for (int i = 0; i < this.speed.Length; i++)
+        {
+            bool val = int.TryParse(this.speed[i], out int a);
+            switch ((SpeedType)i)
+            {
+                case SpeedType.speed:
+                    this.Speed = val ? a : null;
+                    break;
+
+                case SpeedType.burrow:
+                    this.Burrow = val ? a : null;
+                    break;
+
+                case SpeedType.climb:
+                    this.Climb = val ? a : null;
+                    break;
+
+                case SpeedType.fly:
+                    this.Fly = val ? a : null;
+                    break;
+
+                case SpeedType.swim:
+                    this.Swim = val ? a : null;
+                    break;
+                default: break;
+            }
+        }
+        this.Hover = this.hover;
+    }
+
     public override string ToString()
     {
+        if (this.speed == null)
+        {
+            this.speed = new string[]
+            {
+                (this.Speed ?? 0).ToString(),
+                (this.Burrow ?? 0).ToString(),
+                (this.Climb ?? 0).ToString(),
+                (this.Fly ?? 0).ToString(),
+                (this.Swim ?? 0).ToString(),
+            };
+        }
         StringBuilder movementStr = new StringBuilder();
         int count = 0;
         for (int i = 0; i < this.speed.Length; i++)

@@ -19,13 +19,12 @@ public partial class DmtoolsContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<AC> ArmorClass { get; set; }
-    public DbSet<Actions> Actions { get; set; }
+    public DbSet<MonsterActions> MonsterActions { get; set; }
     public DbSet<ChallengeRating> ChallengeRating { get; set; }
     public DbSet<ConditionImmunity> ConditionImmunity { get; set; }
-    public DamageTypes DamageTypes { get; set; }
+    public DbSet<DamageTypes> DamageTypes { get; set; }
     public DbSet<Languages> Languages { get; set; }
     public DbSet<Monster> Monster { get; set; }
-    public DbSet<Monsters_ConditionImmunity> Monsters_x_ConditionImmunity { get; set; }
     public DbSet<SavingThrows> SavingThrows { get; set; }
     public DbSet<Senses> Senses { get; set; }
     public DbSet<Skills> Skills { get; set; }

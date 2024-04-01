@@ -13,9 +13,12 @@ namespace DMTools.Database.Entities;
 public partial class Languages
 {
 	[Key]
-	public int LanguageId { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int LanguageId { get; set; }
 	public string LanguageName { get; set; }
 	public int LanguageLevel { get; set; }
-	[ForeignKey(name: "MonsterId")]
-	public virtual Monster Monster { get; set; }
+	public string? UnderstandsBut { get; set; }
+    [ForeignKey(name: "Monster")]
+    public int MonsterId { get; set; }
+    public virtual Monster Monster { get; set; }
 }
