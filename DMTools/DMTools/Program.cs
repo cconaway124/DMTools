@@ -12,11 +12,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-/*builder.Services
+builder.Services
     .AddAuth0WebAppAuthentication(options => {
         options.Domain = builder.Configuration.GetValue<string>("Auth0:Domain");
         options.ClientId = builder.Configuration.GetValue<string>("Auth0:ClientId");
-    });*/
+    });
 
 builder.Services.AddCarter();
 
@@ -54,7 +54,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-/*app.MapGet("/Account/Login", async (HttpContext httpContext, string redirectUri = "/") =>
+app.MapGet("/Account/Login", async (HttpContext httpContext, string redirectUri = "/") =>
 {
     var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
             .WithRedirectUri(redirectUri)
@@ -71,9 +71,9 @@ app.MapGet("/Account/Logout", async (HttpContext httpContext, string redirectUri
 
     await httpContext.SignOutAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
     await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-});*/
+});
 
-//app.UseAuthentication();
+app.UseAuthentication();
 app.MapCarter();
 
 app.MapRazorComponents<App>()
