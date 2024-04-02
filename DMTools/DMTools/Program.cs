@@ -14,8 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddAuth0WebAppAuthentication(options => {
-        options.Domain = builder.Configuration.GetValue<string>("Auth0:Domain");
-        options.ClientId = builder.Configuration.GetValue<string>("Auth0:ClientId");
+        options.Domain = "dev-c1ucbhc8zhti5v23.us.auth0.com";
+        options.ClientId = "w1VO0sejbwQvB2SIfPYfKDywVLyYJ3MH";
     });
 
 builder.Services.AddCarter();
@@ -38,7 +38,7 @@ builder.Services.AddRazorComponents()
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (true)
+if (builder.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
 }
@@ -73,7 +73,7 @@ app.MapGet("/Account/Logout", async (HttpContext httpContext, string redirectUri
     await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 });
 
-app.UseAuthentication();
+//app.UseAuthentication();
 app.MapCarter();
 
 app.MapRazorComponents<App>()
