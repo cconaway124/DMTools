@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DMTools.Database.Migrations
 {
     [DbContext(typeof(DmtoolsContext))]
-    [Migration("20240331041314_fixfuckyDB6")]
-    partial class fixfuckyDB6
+    [Migration("20240412161928_AllDisShit")]
+    partial class AllDisShit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,16 @@ namespace DMTools.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DexBonus")
+                        .HasColumnType("int");
+
                     b.Property<int>("MonsterId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NaturalArmorBonus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShieldBonus")
                         .HasColumnType("int");
 
                     b.HasKey("AcId");

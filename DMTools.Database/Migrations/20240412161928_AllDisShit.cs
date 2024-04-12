@@ -5,44 +5,13 @@
 namespace DMTools.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class RecreateDB : Migration
+    public partial class AllDisShit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
                 name: "monster");
-
-            migrationBuilder.CreateTable(
-                name: "ArmorClass",
-                schema: "monster",
-                columns: table => new
-                {
-                    AcId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ArmorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AllowsDexMod = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ArmorClass", x => x.AcId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    UserEmail = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    UserGuid = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
-                });
 
             migrationBuilder.CreateTable(
                 name: "Monster",
@@ -75,7 +44,6 @@ namespace DMTools.Database.Migrations
                     UserGuid = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Size = table.Column<int>(type: "int", nullable: false),
-                    ArmorClassAcId = table.Column<int>(type: "int", nullable: false),
                     HitPoints = table.Column<int>(type: "int", nullable: false),
                     Speed = table.Column<int>(type: "int", nullable: false),
                     Alignment = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -83,12 +51,47 @@ namespace DMTools.Database.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Monster", x => x.MonsterId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    UserEmail = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    UserGuid = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ArmorClass",
+                schema: "monster",
+                columns: table => new
+                {
+                    AcId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ArmorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AllowsDexMod = table.Column<int>(type: "int", nullable: false),
+                    ShieldBonus = table.Column<int>(type: "int", nullable: false),
+                    NaturalArmorBonus = table.Column<int>(type: "int", nullable: true),
+                    DexBonus = table.Column<int>(type: "int", nullable: true),
+                    MonsterId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArmorClass", x => x.AcId);
                     table.ForeignKey(
-                        name: "FK_Monster_ArmorClass_ArmorClassAcId",
-                        column: x => x.ArmorClassAcId,
+                        name: "FK_ArmorClass_Monster_MonsterId",
+                        column: x => x.MonsterId,
                         principalSchema: "monster",
-                        principalTable: "ArmorClass",
-                        principalColumn: "AcId",
+                        principalTable: "Monster",
+                        principalColumn: "MonsterId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -124,7 +127,7 @@ namespace DMTools.Database.Migrations
                     ConditionImmunityId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MonsterId = table.Column<int>(type: "int", nullable: true)
+                    MonsterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -134,7 +137,8 @@ namespace DMTools.Database.Migrations
                         column: x => x.MonsterId,
                         principalSchema: "monster",
                         principalTable: "Monster",
-                        principalColumn: "MonsterId");
+                        principalColumn: "MonsterId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -145,6 +149,7 @@ namespace DMTools.Database.Migrations
                     DamageTypeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MonsterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -193,6 +198,7 @@ namespace DMTools.Database.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LanguageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LanguageLevel = table.Column<int>(type: "int", nullable: false),
+                    UnderstandsBut = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MonsterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -214,11 +220,11 @@ namespace DMTools.Database.Migrations
                 {
                     MonsterActionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MonsterId = table.Column<int>(type: "int", nullable: false),
                     ActionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ActionDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ActionDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ActionType = table.Column<int>(type: "int", nullable: false),
+                    MonsterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -246,7 +252,6 @@ namespace DMTools.Database.Migrations
                     Int = table.Column<int>(type: "int", nullable: true),
                     Wis = table.Column<int>(type: "int", nullable: true),
                     Cha = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MonsterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -274,6 +279,7 @@ namespace DMTools.Database.Migrations
                     Truesight = table.Column<int>(type: "int", nullable: true),
                     Telepathy = table.Column<int>(type: "int", nullable: true),
                     PassivePerception = table.Column<int>(type: "int", nullable: false),
+                    Blind = table.Column<bool>(type: "bit", nullable: false),
                     MonsterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -323,7 +329,7 @@ namespace DMTools.Database.Migrations
                     Climb = table.Column<int>(type: "int", nullable: true),
                     Fly = table.Column<int>(type: "int", nullable: true),
                     Swim = table.Column<int>(type: "int", nullable: true),
-                    Hover = table.Column<int>(type: "int", nullable: true),
+                    Hover = table.Column<bool>(type: "bit", nullable: true),
                     MonsterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -365,63 +371,12 @@ namespace DMTools.Database.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Monsters_x_ConditionImmunity",
-                schema: "monster",
-                columns: table => new
-                {
-                    Monsters_ConditionImmunitiesId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MonsterId = table.Column<int>(type: "int", nullable: false),
-                    ConditionImmunityId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Monsters_x_ConditionImmunity", x => x.Monsters_ConditionImmunitiesId);
-                    table.ForeignKey(
-                        name: "FK_Monsters_x_ConditionImmunity_ConditionImmunity_ConditionImmunityId",
-                        column: x => x.ConditionImmunityId,
-                        principalSchema: "monster",
-                        principalTable: "ConditionImmunity",
-                        principalColumn: "ConditionImmunityId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Monsters_x_ConditionImmunity_Monster_MonsterId",
-                        column: x => x.MonsterId,
-                        principalSchema: "monster",
-                        principalTable: "Monster",
-                        principalColumn: "MonsterId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Actions",
-                schema: "monster",
-                columns: table => new
-                {
-                    ActionId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Action = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ActionRules = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MonsterActionId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Actions", x => x.ActionId);
-                    table.ForeignKey(
-                        name: "FK_Actions_MonsterActions_MonsterActionId",
-                        column: x => x.MonsterActionId,
-                        principalSchema: "monster",
-                        principalTable: "MonsterActions",
-                        principalColumn: "MonsterActionId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
-                name: "IX_Actions_MonsterActionId",
+                name: "IX_ArmorClass_MonsterId",
                 schema: "monster",
-                table: "Actions",
-                column: "MonsterActionId");
+                table: "ArmorClass",
+                column: "MonsterId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChallengeRating_MonsterId",
@@ -440,8 +395,7 @@ namespace DMTools.Database.Migrations
                 name: "IX_DamageTypes_MonsterId",
                 schema: "monster",
                 table: "DamageTypes",
-                column: "MonsterId",
-                unique: true);
+                column: "MonsterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HitDie_MonsterId",
@@ -454,14 +408,7 @@ namespace DMTools.Database.Migrations
                 name: "IX_Languages_MonsterId",
                 schema: "monster",
                 table: "Languages",
-                column: "MonsterId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Monster_ArmorClassAcId",
-                schema: "monster",
-                table: "Monster",
-                column: "ArmorClassAcId");
+                column: "MonsterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MonsterActions_MonsterId",
@@ -470,22 +417,11 @@ namespace DMTools.Database.Migrations
                 column: "MonsterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Monsters_x_ConditionImmunity_ConditionImmunityId",
-                schema: "monster",
-                table: "Monsters_x_ConditionImmunity",
-                column: "ConditionImmunityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Monsters_x_ConditionImmunity_MonsterId",
-                schema: "monster",
-                table: "Monsters_x_ConditionImmunity",
-                column: "MonsterId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SavingThrows_MonsterId",
                 schema: "monster",
                 table: "SavingThrows",
-                column: "MonsterId");
+                column: "MonsterId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Senses_MonsterId",
@@ -498,8 +434,7 @@ namespace DMTools.Database.Migrations
                 name: "IX_Skills_MonsterId",
                 schema: "monster",
                 table: "Skills",
-                column: "MonsterId",
-                unique: true);
+                column: "MonsterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Speeds_MonsterId",
@@ -520,11 +455,15 @@ namespace DMTools.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Actions",
+                name: "ArmorClass",
                 schema: "monster");
 
             migrationBuilder.DropTable(
                 name: "ChallengeRating",
+                schema: "monster");
+
+            migrationBuilder.DropTable(
+                name: "ConditionImmunity",
                 schema: "monster");
 
             migrationBuilder.DropTable(
@@ -540,7 +479,7 @@ namespace DMTools.Database.Migrations
                 schema: "monster");
 
             migrationBuilder.DropTable(
-                name: "Monsters_x_ConditionImmunity",
+                name: "MonsterActions",
                 schema: "monster");
 
             migrationBuilder.DropTable(
@@ -567,19 +506,7 @@ namespace DMTools.Database.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "MonsterActions",
-                schema: "monster");
-
-            migrationBuilder.DropTable(
-                name: "ConditionImmunity",
-                schema: "monster");
-
-            migrationBuilder.DropTable(
                 name: "Monster",
-                schema: "monster");
-
-            migrationBuilder.DropTable(
-                name: "ArmorClass",
                 schema: "monster");
         }
     }
