@@ -17,6 +17,8 @@
 		<ProjectReference Include="..\DMTools.Client\DMTools.Client.csproj" />
 		<PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
 		<PackageReference Include="Carter" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Configuration.ConfigurationBuilders.AzureAppConfiguration" Version="3.0.0" />
+		<PackageReference Include="Microsoft.Configuration.ConfigurationBuilders.Environment" Version="3.0.0" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
 		<PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="7.5.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -30,6 +32,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
 	</ItemGroup>
 
 </Project>

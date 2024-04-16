@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using System.Reflection.PortableExecutable;
 using DMTools.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,8 +33,25 @@ public partial class DmtoolsContext : DbContext
     public DbSet<Stats> stats { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=dmtoolsdbserver.database.windows.net,1433;Initial Catalog=DMTools;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";");
+    {
+        string password = Environment.GetEnvironmentVariable("DbAdminPassword");
+        if (password == null)
+        {
+            using (Stream stream = File.Open("C:\\Users\\chase\\Desktop\\dbPassword.txt", FileMode.Open))
+            {
+                StreamReader reader = new StreamReader(stream);
+                password = reader.ReadToEnd();
+                reader.Close();
+            }
+
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new Exception("No password");
+            }
+        }
+
+        optionsBuilder.UseSqlServer($"Server=tcp:dmtoolsdbserver.database.windows.net,1433;Initial Catalog=dmtoolsdb;Persist Security Info=False;User ID=CloudSA044b5b56;Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"); 
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
