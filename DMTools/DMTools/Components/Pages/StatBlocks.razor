@@ -204,8 +204,10 @@
 
     public async Task DeleteMonster(object monster)
     {
+
         this.Session.RemoveUserMonster(monster as Monster);
         this.monsters.Remove(monster as Monster);
+        await JS.InvokeVoidAsync("AddListToSessionStorage", [this.monsters]);
     }
 
     public async Task AddMonsterOnUpload(object monster)
