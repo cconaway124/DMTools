@@ -39,7 +39,7 @@ public partial class AC
 
 	private static Dictionary<ArmorType, bool> allowsDexMod = new Dictionary<ArmorType, bool>
 	{
-		{ ArmorType.None, false },
+		{ ArmorType.None, true },
 		{ ArmorType.Light, true },
 		{ ArmorType.Medium, true },
 		{ ArmorType.MageArmor, true },
@@ -102,7 +102,7 @@ public partial class AC
 				this.armorName = this.ArmorName;
 			}
 
-			if (this.shieldBonus ==0)
+			if (this.shieldBonus == 0)
 			{
 				this.shieldBonus = this.ShieldBonus;
 			}
@@ -139,7 +139,7 @@ public partial class AC
     {
         this.nameToAc = new Dictionary<string, int>
         {
-            { "none", 10 },
+            { "none", 10 + dexBonus },
             { "natural armor", 10 + naturalArmorBonus },
             { "padded armor",11 + dexBonus + shieldBonus },
             { "leather armor", 11 },

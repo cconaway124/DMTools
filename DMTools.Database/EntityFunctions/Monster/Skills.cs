@@ -58,7 +58,7 @@ public partial class Skills
 
 	public override string ToString()
 	{
-		if (this.skills == null)
+		if (this.skills == null || this.skills.Count == 0)
 		{
 			return $"{this.Name} {(this.Bonus > 0 ? "+" : "-")}{Math.Abs(this.Bonus)}";
 		}

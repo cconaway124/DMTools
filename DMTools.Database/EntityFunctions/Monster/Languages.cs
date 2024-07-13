@@ -101,14 +101,9 @@ public partial class Languages
     public static string ToString(IEnumerable<Languages> languages)
     {
         StringBuilder sb = new StringBuilder();
-        int count = 0;
-        foreach (Languages language in languages.Where(lang => lang.LanguageLevel > 0))
-        {
-            if (count == 0)
-                sb.Append(language.LanguageName + ", ");
-            else
-                sb.Append(", " + language.LanguageName);
-        }
+
+        string lang = string.Join(", ", languages.Where(lang => lang.LanguageLevel > 0).Select(i => i.LanguageName));
+        sb.Append(lang);
 
         var understandsBut = languages.FirstOrDefault(lang => lang.LanguageLevel == 0);
 
@@ -118,15 +113,9 @@ public partial class Languages
         }
 
         sb.Append($" {understandsBut.UnderstandsBut} ");
-        count = 0;
-        foreach (Languages language in languages.Where(lang => lang.LanguageLevel == 0))
-        {
-            if (count == 0)
-                sb.Append(language.LanguageName + ", ");
-            else
-                sb.Append(", " + language.LanguageName);
-        }
-
+        
+        lang = string.Join(", ", languages.Where(lang => lang.LanguageLevel == 0).Select(i => i.LanguageName));
+        sb.Append(lang);
         return sb.ToString();
     }
 }

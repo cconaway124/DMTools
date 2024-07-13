@@ -104,11 +104,11 @@ public partial class Senses
         {
             this.senses = new string[]
             {
-                (this.BlindSight ?? 0).ToString(),
-                (this.Darkvision ?? 0).ToString(),
-                (this.Tremorsense ?? 0).ToString(),
-                (this.Truesight ?? 0).ToString(),
-                (this.Telepathy ?? 0).ToString(),
+                $"{(this.BlindSight ?? 0)}",
+                $"{(this.Darkvision ?? 0)}",
+                $"{(this.Tremorsense ?? 0)}",
+                $"{(this.Truesight ?? 0)}",
+                $"{(this.Telepathy ?? 0)}",
                 this.PassivePerception.ToString(),
             };
 
@@ -125,7 +125,7 @@ public partial class Senses
                 continue;
             }
 
-            if (i != 0 && i != 1)
+            if (senseStr.Length != 0 && i <= this.senses.Length - 1)
             {
                 senseStr.Append(", ");
             }
