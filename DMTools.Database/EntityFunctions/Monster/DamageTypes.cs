@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using static DMTools.Shared.Enums.LibraryEnums;
 
 namespace DMTools.Database.Entities;
@@ -65,16 +66,16 @@ public partial class DamageTypes
 
 	public string Immune
 	{
-		get => string.Join(", ", this.damageTypes[DamageType.Immune]);
+		get => (this.damageTypes != null) ? string.Join(", ", this.damageTypes[DamageType.Immune]) : string.Empty;
 	}
 
 	public string Resistant
 	{
-		get => string.Join(", ", this.damageTypes[DamageType.Resistant]);
+		get => (this.damageTypes != null) ? string.Join(", ", this.damageTypes[DamageType.Resistant]) : string.Empty;
 	}
 
 	public string Vulnerable
 	{
-		get => string.Join(", ", this.damageTypes[DamageType.Vulnerable]);
+		get => (this.damageTypes != null) ? string.Join(", ", this.damageTypes[DamageType.Vulnerable]) : string.Empty;
 	}
 }

@@ -11,7 +11,7 @@ namespace DMTools.Database.Entities;
 
 public partial class Skills
 {
-    private Dictionary<string, int> skills;
+	private Dictionary<string, int> skills = new();
 
 	public Skills() { }
 

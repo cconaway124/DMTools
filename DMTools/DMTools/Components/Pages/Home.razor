@@ -2,10 +2,13 @@
 @inject DMTools.Database.DmtoolsContext dmToolsContext
 
 <PageTitle>Home</PageTitle>
-
+<script src="https://kit.fontawesome.com/373bef5a8d.js" crossorigin="anonymous" type="text/javascript"></script>
 @code {
     [CascadingParameter]
     private Task<AuthenticationState>? authenticationState { get; set; }
+
+    [CascadingParameter]
+    public ISessionService Session { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

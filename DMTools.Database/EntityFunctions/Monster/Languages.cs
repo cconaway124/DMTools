@@ -71,7 +71,7 @@ public partial class Languages
 
     public int LanguageCount
     {
-        get => this.languages.Count;
+        get => (this.languages ?? new()).Count;
     }
 
     public override string ToString()

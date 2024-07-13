@@ -1,10 +1,14 @@
 ﻿@page "/statblocks"
 @rendermode InteractiveServer
+
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using System.Text.Json;
+
 @inject IJSRuntime JS
 @inject DMTools.Database.DmtoolsContext dmToolsContext
 
 <PageTitle>Stat Blocks</PageTitle>
-
+<script src="https://kit.fontawesome.com/373bef5a8d.js" crossorigin="anonymous" type="text/javascript"></script>
 <link rel="stylesheet" href="stat_block.css" />
 <script src="/lib/jquery/jquery.js"></script>
 <script defer src="js/slideToggle.js"></script>
@@ -70,6 +74,8 @@
     }
 </div>
 
+<script src="/js/monsterStorage.js"></script>
+
 
 <footer class="page-footer" target="_blank">
     This site directly uses the files downloaded from <a class="stat-block-link" href="https://tetra-cube.com/dnd/dnd-statblock.html">this stat block generator</a>.
@@ -77,7 +83,10 @@
 </footer>
 
 @code {
-    List<DMTools.Database.Entities.StatBlock> monsters = new List<DMTools.Database.Entities.StatBlock>();
+    [CascadingParameter]
+    public ISessionService Session { get; set; }
+
+    public List<DMTools.Database.Entities.Monster> monsters { get; set; } = new List<DMTools.Database.Entities.Monster>();
 
     public string SearchText { get; set; } = "";
     public string FromDbSearchText { get; set; } = "";
@@ -107,10 +116,9 @@
             {
                 string id = (auth.User.Claims.FirstOrDefault(cl => cl.Type == ClaimTypes.NameIdentifier)).Value;
                 var mons = this.dmToolsContext.Monster
-                   .Where(mon =>
-                       mon.UserGuid ==
-                           id)
-                   .Select(mon => new { mon.MonsterId, mon.Name }).ToList();
+                   .Where(mon => mon.UserGuid == id)
+                   .Select(mon => new { mon.MonsterId, mon.Name })
+                   .ToList();
                 foreach (var result in mons)
                 {
                     this.monsterIds.Add((result.MonsterId, result.Name));
@@ -118,7 +126,34 @@
             }
         }
 
+        if (this.Session == null) this.Session = new SessionService();
+        if (!this.Session.IsInitialized) this.Session.InitializeList(this.monsters);
+
+
+        if (this.Session.HasMonsters) this.monsters = this.Session.Monsters.ToList();
+
         await base.OnParametersSetAsync();
+        return;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (!firstRender) return;
+
+        try
+        {
+            List<Monster> mons = await JS.InvokeAsync<List<Monster>>("GetMonsterList");
+
+            if (mons != null && mons.Any()) 
+            {
+                this.monsters = mons;
+            }
+            StateHasChanged();
+        }
+        catch (Exception ex) { }
+
         return;
     }
 
@@ -145,7 +180,7 @@
                     throw new ArgumentException("Statblock could not be created.");
                 }
 
-                UploadedBlocks(statBlock);
+                UploadedBlocks(statBlock as Monster);
             }
             catch (Exception)
             {
@@ -155,9 +190,11 @@
         this.isLoading = false;
     }
 
-    public void UploadedBlocks(DMTools.Database.Entities.StatBlock monster)
+    public async void UploadedBlocks(DMTools.Database.Entities.Monster monster)
     {
+        Session.AddUserMonster(monster);
         monsters.Add(monster);
+        await JS.InvokeVoidAsync("AddListToSessionStorage", [this.monsters]);
     }
 
     public async Task RegisterSlide(int counter)
@@ -167,6 +204,7 @@
 
     public async Task DeleteMonster(object monster)
     {
+        this.Session.RemoveUserMonster(monster as Monster);
         this.monsters.Remove(monster as Monster);
     }
 
@@ -229,10 +267,15 @@
             if (monster == null)
                 continue;
 
-            this.monsters.Add(monster);
+            this.UploadedBlocks(monster);
         }
 
         this.selectedMonsterIds.Clear();
         return;
+    }
+
+    protected class JsonMonster
+    {
+        public Dictionary<int, Monster> Monsters { get; set; } = new();
     }
 }

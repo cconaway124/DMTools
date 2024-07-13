@@ -262,3 +262,8 @@ input[type="checkbox"] {
         button:disabled:hover {
             background-color: #909091;
         }
+
+i {
+    width: fit-content !important;
+    height: fit-content !important;
+}

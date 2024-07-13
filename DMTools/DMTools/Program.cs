@@ -9,6 +9,8 @@ using Carter;
 using DMTools.Database;
 using DMTools.Security;
 using Microsoft.EntityFrameworkCore;
+using DMTools.Services;
+using DMTools.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,12 +23,14 @@ builder.Services
 builder.Services.AddCarter();
 
 builder.Services.AddCascadingAuthenticationState();
+builder.Services.AddCascadingValue(sp => new SessionService());
 builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
 
 builder.Services.AddDbContext<DmtoolsContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IAuthenticator, Authenticator>();
 builder.Services.AddScoped<IUserFunctions, UserFunctions>();
+builder.Services.AddScoped<ISessionService, SessionService>();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration.GetValue<string>("BaseAddress")) });
 

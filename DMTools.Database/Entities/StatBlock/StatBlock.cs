@@ -10,25 +10,27 @@ namespace DMTools.Database.Entities;
 
 public abstract class StatBlock
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     public SizeEnum Size { get; set; }
 
-    public AC ArmorClass { get; set; }
+    public AC ArmorClass { get; set; } = new();
 
     public int HitPoints { get; set; }
 
-    public HitDie HitDie { get; set; }
+    public HitDie HitDie { get; set; } = new();
 
     public int Speed { get; set; }
 
-    public Stats Stats { get; set; }
+    public Stats Stats { get; set; } = new();
 
-    public Senses Senses { get; set; }
+    public Senses Senses { get; set; } = new();
 
-    public string Alignment { get; set; }
+    public string Alignment { get; set; } = string.Empty;
 
-    public Speeds Speeds { get; set; }
+    public Speeds Speeds { get; set; } = new();
 
-    public ICollection<Languages> Languages { get; set; }
+    public ICollection<Languages> Languages { get; set; } = new List<Languages>();
+
+    public StatBlock() { }
 }
