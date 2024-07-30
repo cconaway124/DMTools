@@ -108,21 +108,32 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        if (authenticationState is not null)
+        for (int i = 0; i < 10; i++)
         {
-            var auth = await authenticationState;
-            this.IsAuthenticated = (auth.User.Identity ?? new ClaimsIdentity()).IsAuthenticated;
-            if ((auth.User.Identity ?? new ClaimsIdentity()).IsAuthenticated)
+            try
             {
-                string id = (auth.User.Claims.FirstOrDefault(cl => cl.Type == ClaimTypes.NameIdentifier)).Value;
-                var mons = this.dmToolsContext.Monster
-                   .Where(mon => mon.UserGuid == id)
-                   .Select(mon => new { mon.MonsterId, mon.Name })
-                   .ToList();
-                foreach (var result in mons)
+                if (authenticationState is not null)
                 {
-                    this.monsterIds.Add((result.MonsterId, result.Name));
+                    var auth = await authenticationState;
+                    this.IsAuthenticated = (auth.User.Identity ?? new ClaimsIdentity()).IsAuthenticated;
+                    if ((auth.User.Identity ?? new ClaimsIdentity()).IsAuthenticated)
+                    {
+                        string id = (auth.User.Claims.FirstOrDefault(cl => cl.Type == ClaimTypes.NameIdentifier)).Value;
+                        var mons = this.dmToolsContext.Monster
+                           .Where(mon => mon.UserGuid == id)
+                           .Select(mon => new { mon.MonsterId, mon.Name })
+                           .ToList();
+                        foreach (var result in mons)
+                        {
+                            this.monsterIds.Add((result.MonsterId, result.Name));
+                        }
+                    }
                 }
+                break;
+            }
+            catch (Exception ex)
+            {
+                // log here
             }
         }
 

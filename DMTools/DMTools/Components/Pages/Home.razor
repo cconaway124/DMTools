@@ -12,24 +12,35 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var state = await authenticationState;
-        if (state is not null)
+        for (int i = 0; i < 10; i++)
         {
-            if (state.User.Identity.IsAuthenticated)
+            try
             {
-                string guid = state.User.Claims.First(cl => cl.Type == ClaimTypes.NameIdentifier).Value;
-                User user = dmToolsContext.Users.Where(u => u.UserGuid == guid).FirstOrDefault();
-                if (user == null)
+                var state = await authenticationState;
+                if (state is not null)
                 {
-                    user = new User
+                    if (state.User.Identity.IsAuthenticated)
+                    {
+                        string guid = state.User.Claims.First(cl => cl.Type == ClaimTypes.NameIdentifier).Value;
+                        User user = dmToolsContext.Users.Where(u => u.UserGuid == guid).FirstOrDefault();
+                        if (user == null)
                         {
-                            UserGuid = guid,
-                            UserName = state.User.Identity.Name,
-                            UserEmail = state.User.Identity.Name,
-                        };
-                    dmToolsContext.Users.Add(user);
-                    dmToolsContext.SaveChangesAsync();
+                            user = new User
+                                {
+                                    UserGuid = guid,
+                                    UserName = state.User.Identity.Name,
+                                    UserEmail = state.User.Identity.Name,
+                                };
+                            dmToolsContext.Users.Add(user);
+                            dmToolsContext.SaveChangesAsync();
+                        }
+                    }
                 }
+                break;
+            }
+            catch (Exception ex)
+            {
+                // log here
             }
         }
         await base.OnInitializedAsync();
