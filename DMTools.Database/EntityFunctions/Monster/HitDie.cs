@@ -10,10 +10,16 @@ public partial class HitDie
     private string hitDieType;
     private string conMod;
     private int avgHp;
+    private int customHp;
 
-    public HitDie() { }
+    public HitDie() : this(0, SizeEnum.None, 0) { }
 
     public HitDie(int numHitDie, SizeEnum size, int conMod)
+        : this(numHitDie, size, conMod, false, 0)
+    {
+    }
+
+    public HitDie(int numHitDie, SizeEnum size, int conMod, bool customHp, int hp)
     {
         this.numHitDie = numHitDie;
         var tuple = this.SetHitDie(size);
@@ -26,6 +32,8 @@ public partial class HitDie
         this.AverageHp = this.avgHp;
         this.ConMod = this.conMod;
         this.Count = this.numHitDie;
+
+        this.customHp = customHp ? hp : 0;
     }
 
     private (string, int) SetHitDie(SizeEnum size)
@@ -63,6 +71,11 @@ public partial class HitDie
 
     public override string ToString()
     {
+        if (this.customHp != 0)
+        {
+            return customHp.ToString();
+        }
+
         if (avgHp == 0)
         {
             this.avgHp = this.AverageHp;

@@ -62,6 +62,9 @@ namespace DMTools.StatBlocks.Types
                 return null;
             }
 
+            int.TryParse(jsonStatBlock.hpText, out int hp);
+            jsonStatBlock.hitPoints = hp;
+
             return jsonStatBlock;
         }
 

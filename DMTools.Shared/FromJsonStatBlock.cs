@@ -10,7 +10,7 @@ public class FromJsonStatBlock
 
     public int hitPoints { get; set; }
 
-    public int hitDice { get; set; }
+    public int? hitDice { get; set; }
 
     public string strPoints { get; set; }
 

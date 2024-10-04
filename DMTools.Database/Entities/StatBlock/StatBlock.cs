@@ -18,7 +18,7 @@ public abstract class StatBlock
 
     public int HitPoints { get; set; }
 
-    public HitDie HitDie { get; set; } = new();
+    public HitDie? HitDie { get; set; }
 
     public int Speed { get; set; }
 

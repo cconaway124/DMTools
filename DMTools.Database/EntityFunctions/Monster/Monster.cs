@@ -35,7 +35,7 @@ public partial class Monster : StatBlock
             jsonStatBlock.wisPoints,
             jsonStatBlock.chaPoints);
         this.ArmorClass = new AC(jsonStatBlock.otherArmorDesc, jsonStatBlock.shieldBonus, jsonStatBlock.armorName, this.Stats.DexMod, jsonStatBlock.natArmorBonus);
-        this.HitDie = new HitDie(jsonStatBlock.hitDice, this.Size, this.Stats.ConMod);
+        this.HitDie = new HitDie(jsonStatBlock.hitDice ?? 0, this.Size, this.Stats.ConMod, jsonStatBlock.customHp, jsonStatBlock.hitPoints);
         this.Senses = new Senses(
             jsonStatBlock.blindsight,
             jsonStatBlock.blind,
