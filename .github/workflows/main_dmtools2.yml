@@ -47,9 +47,9 @@ jobs:
       - name: Azure Login
         uses: Azure/login@v2.2.0
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5897113B49794251A392FBCBE43909A5 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FB550046F32545C9969999D4FA615562 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9EA597F98EDD431A99291B492F665013 }}
+          client-id: ${{ secrets.AZURE_CLIENT_OD }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
             
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
